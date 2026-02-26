@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AURA — Advanced UI Experience Platform</title>
+  <meta name="description" content="Premium UI components, smooth animations, and production-ready effects for modern web development." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════ NAVIGATION ═══════════════════════ -->
+  <nav class="navbar">
+    <div class="container nav-inner">
+      <a href="#" class="logo">AURA <span>UI</span></a>
+
+      <ul class="nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#components">Components</a></li>
+        <li><a href="#preview">Preview</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+      </ul>
+
+      <button class="nav-cta">Get Started</button>
+
+      <!-- Mobile hamburger -->
+      <button class="nav-hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Nav Overlay -->
+  <div class="mobile-nav">
+    <a href="#features">Features</a>
+    <a href="#components">Components</a>
+    <a href="#preview">Preview</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#testimonials">Reviews</a>
+    <a href="#cta" class="btn btn-primary">Get Started</a>
+  </div>
+
+  <!-- ═══════════════════════ HERO ═══════════════════════ -->
+  <section class="hero">
+    <!-- Aurora gradient orbs -->
+    <div class="hero-aurora">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+    </div>
+    <!-- Grid overlay -->
+    <div class="hero-grid"></div>
+    <!-- Particle canvas -->
+    <canvas id="heroCanvas"></canvas>
+
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="dot"></span> Now in Public Beta
+      </div>
+      <h1>Build Stunning<br /><span class="grad-text" id="typewriter">Components</span></h1>
+      <p class="hero-desc">
+        Premium UI effects &amp; production-ready components inspired by the best design systems.
+        Copy, paste, ship.
+      </p>
+      <div class="hero-actions">
+        <a href="#components" class="btn btn-primary">
+          <span class="btn-icon">✦</span> Explore Components
+        </a>
+        <a href="#preview" class="btn btn-secondary">
+          <span class="btn-icon">▶</span> Live Preview
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-beam"></div>
+  </section>
+
+  <!-- ═══════════════════════ MARQUEE (Tech Logos) ═══════════════════════ -->
+  <div class="marquee-section">
+    <p class="marquee-label">Trusted by teams using</p>
+    <div class="marquee-track">
+      <span class="marquee-item"><span class="icon">⚛️</span> React</span>
+      <span class="marquee-item"><span class="icon">💚</span> Vue</span>
+      <span class="marquee-item"><span class="icon">🅰️</span> Angular</span>
+      <span class="marquee-item"><span class="icon">⚡</span> Svelte</span>
+      <span class="marquee-item"><span class="icon">▲</span> Next.js</span>
+      <span class="marquee-item"><span class="icon">🌊</span> Tailwind</span>
+      <span class="marquee-item"><span class="icon">🎨</span> Figma</span>
+      <span class="marquee-item"><span class="icon">🔷</span> TypeScript</span>
+      <span class="marquee-item"><span class="icon">📦</span> Vite</span>
+      <span class="marquee-item"><span class="icon">🚀</span> Astro</span>
+      <!-- duplicated for seamless infinite scroll -->
+      <span class="marquee-item"><span class="icon">⚛️</span> React</span>
+      <span class="marquee-item"><span class="icon">💚</span> Vue</span>
+      <span class="marquee-item"><span class="icon">🅰️</span> Angular</span>
+      <span class="marquee-item"><span class="icon">⚡</span> Svelte</span>
+      <span class="marquee-item"><span class="icon">▲</span> Next.js</span>
+      <span class="marquee-item"><span class="icon">🌊</span> Tailwind</span>
+      <span class="marquee-item"><span class="icon">🎨</span> Figma</span>
+      <span class="marquee-item"><span class="icon">🔷</span> TypeScript</span>
+      <span class="marquee-item"><span class="icon">📦</span> Vite</span>
+      <span class="marquee-item"><span class="icon">🚀</span> Astro</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════ FEATURED COLLECTIONS ═══════════════════════ -->
+  <section class="section" id="featured">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Collections</span>
+        <h2 class="section-title">Featured Collections</h2>
+        <p class="section-subtitle">Curated sets of premium components handpicked for your next project.</p>
+      </div>
+
+      <div class="featured-grid">
+        <div class="spotlight-card reveal">
+          <div class="spotlight-card-img">
+            <div class="gradient-fill"></div>
+            <span class="card-icon">💎</span>
+          </div>
+          <div class="spotlight-card-body">
+            <h3>Glassmorphic Cards</h3>
+            <p>Beautiful translucent cards with backdrop blur. Perfect for modern apps with depth and sophistication.</p>
+          </div>
+        </div>
+
+        <div class="spotlight-card reveal">
+          <div class="spotlight-card-img">
+            <div class="gradient-fill"></div>
+            <span class="card-icon">🔮</span>
+          </div>
+          <div class="spotlight-card-body">
+            <h3>Neon Buttons</h3>
+            <p>Eye-catching button components with vibrant neon glow. Animated hover states &amp; smooth transitions.</p>
+          </div>
+        </div>
+
+        <div class="spotlight-card reveal">
+          <div class="spotlight-card-img">
+            <div class="gradient-fill"></div>
+            <span class="card-icon">🌌</span>
+          </div>
+          <div class="spotlight-card-body">
+            <h3>Gradient Backgrounds</h3>
+            <p>Dynamic animated gradients that bring life to your designs. Optimized for all devices.</p>
+          </div>
+        </div>
+
+        <div class="spotlight-card reveal">
+          <div class="spotlight-card-img">
+            <div class="gradient-fill"></div>
+            <span class="card-icon">✨</span>
+          </div>
+          <div class="spotlight-card-body">
+            <h3>Text Animations</h3>
+            <p>Smooth, elegant text animations that capture attention. From subtle reveals to bold effects.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ FILTER BAR ═══════════════════════ -->
+  <div class="filter-bar" id="components">
+    <div class="container">
+      <div class="filter-inner">
+        <div class="search-wrap">
+          <span class="search-icon">🔍</span>
+          <input type="text" class="search-input" id="searchInput" placeholder="Search components…" />
+        </div>
+        <div class="filter-pills">
+          <button class="pill active" data-filter="all">All</button>
+          <button class="pill" data-filter="text">Text</button>
+          <button class="pill" data-filter="cards">Cards</button>
+          <button class="pill" data-filter="backgrounds">Backgrounds</button>
+          <button class="pill" data-filter="buttons">Buttons</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════ COMPONENT GRID ═══════════════════════ -->
+  <section class="section">
+    <div class="container">
+      <div class="component-grid" id="componentGrid">
+        <!-- Dynamically rendered by script.js -->
+      </div>
+      <div class="load-more-wrap">
+        <button class="load-more-btn" id="loadMoreBtn">Load More</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ CODE + LIVE PREVIEW ═══════════════════════ -->
+  <section class="section" id="preview">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Developer Experience</span>
+        <h2 class="section-title">Code &amp; Preview</h2>
+        <p class="section-subtitle">See the code and live result side by side. Copy with one click.</p>
+      </div>
+
+      <div class="code-preview-grid reveal">
+        <!-- Code block -->
+        <div class="code-block">
+          <div class="code-header">
+            <div class="code-dots"><span></span><span></span><span></span></div>
+            <h4>gradient-button.html</h4>
+            <button class="code-copy-btn" id="codePreviewCopy">Copy</button>
+          </div>
+<pre id="codeContent"><span class="tag">&lt;button</span> <span class="attr">class</span>=<span class="string">"btn-glow"</span><span class="tag">&gt;</span>
+  Click Me
+<span class="tag">&lt;/button&gt;</span>
+
+<span class="tag">&lt;style&gt;</span>
+<span class="keyword">.btn-glow</span> {
+  <span class="attr">padding</span>: <span class="value">1rem 2.5rem</span>;
+  <span class="attr">background</span>: <span class="value">linear-gradient(135deg, #8b5cf6, #3b82f6)</span>;
+  <span class="attr">border</span>: <span class="value">none</span>;
+  <span class="attr">border-radius</span>: <span class="value">10px</span>;
+  <span class="attr">color</span>: <span class="value">white</span>;
+  <span class="attr">font-weight</span>: <span class="value">700</span>;
+  <span class="attr">font-size</span>: <span class="value">1rem</span>;
+  <span class="attr">cursor</span>: <span class="value">pointer</span>;
+  <span class="attr">transition</span>: <span class="value">all 0.35s cubic-bezier(0.34,1.56,0.64,1)</span>;
+}
+
+<span class="keyword">.btn-glow:hover</span> {
+  <span class="attr">transform</span>: <span class="value">translateY(-4px) scale(1.05)</span>;
+  <span class="attr">box-shadow</span>: <span class="value">0 16px 48px rgba(139,92,246,0.45)</span>;
+}
+<span class="tag">&lt;/style&gt;</span></pre>
+        </div>
+
+        <!-- Live preview -->
+        <div class="live-preview">
+          <div class="bg-glow"></div>
+          <button class="demo-btn">Click Me</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ FEATURES (Bento Grid) ═══════════════════════ -->
+  <section class="section" id="features">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Why AURA</span>
+        <h2 class="section-title">Built for Developers Who Demand Excellence</h2>
+        <p class="section-subtitle">Every component is crafted with performance, accessibility, and aesthetics in mind.</p>
+      </div>
+
+      <div class="bento-grid">
+        <div class="bento-card bento-wide reveal">
+          <div class="bento-icon">⚡</div>
+          <h3>Lightning Performance</h3>
+          <p>Zero dependencies. Pure CSS animations with GPU acceleration. Bundle size under 5 KB gzipped. Your Lighthouse score stays at 100.</p>
+        </div>
+
+        <div class="bento-card reveal">
+          <div class="bento-icon">✨</div>
+          <h3>Smooth 60fps</h3>
+          <p>Every animation is optimized for 60fps using CSS transforms and will-change. Buttery smooth on all devices.</p>
+        </div>
+
+        <div class="bento-card reveal">
+          <div class="bento-icon">🎨</div>
+          <h3>Easy Theming</h3>
+          <p>CSS custom properties make theming effortless. Change your entire color palette in seconds.</p>
+        </div>
+
+        <div class="bento-card bento-wide reveal">
+          <div class="bento-icon">📱</div>
+          <h3>Responsive by Default</h3>
+          <p>Mobile-first design that adapts flawlessly from 320px phones to 4K ultrawide monitors. Every breakpoint is accounted for.</p>
+        </div>
+
+        <div class="bento-card reveal">
+          <div class="bento-icon">♿</div>
+          <h3>Accessible</h3>
+          <p>WCAG 2.1 AA compliant. Keyboard navigable, screen reader friendly, with prefers-reduced-motion support.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ STATS ═══════════════════════ -->
+  <section class="section">
+    <div class="container">
+      <div class="stats-strip">
+        <div class="stat-item reveal">
+          <div class="stat-number" data-target="2500" data-suffix="+">0</div>
+          <div class="stat-label">Components</div>
+        </div>
+        <div class="stat-item reveal">
+          <div class="stat-number" data-target="48000" data-suffix="+">0</div>
+          <div class="stat-label">Downloads</div>
+        </div>
+        <div class="stat-item reveal">
+          <div class="stat-number" data-target="12000" data-suffix="+">0</div>
+          <div class="stat-label">Developers</div>
+        </div>
+        <div class="stat-item reveal">
+          <div class="stat-number" data-target="99" data-suffix="%">0</div>
+          <div class="stat-label">Satisfaction</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ TESTIMONIALS ═══════════════════════ -->
+  <section class="section" id="testimonials">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Testimonials</span>
+        <h2 class="section-title">Loved by Developers</h2>
+        <p class="section-subtitle">Hear what our community has to say about AURA.</p>
+      </div>
+    </div>
+
+    <div class="testimonials-track-wrapper">
+      <div class="testimonials-track">
+        <!-- Card 1 -->
+        <div class="testimonial-card">
+          <div class="testimonial-header">
+            <div class="testimonial-avatar">SC</div>
+            <div class="testimonial-info">
+              <h4>Sarah Chen</h4>
+              <p>Lead Dev @ TechCorp</p>
+            </div>
+          </div>
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"AURA transformed our design workflow. The components are beautiful and incredibly easy to integrate. Saved us weeks."</p>
+        </div>
+        <!-- Card 2 -->
+        <div class="testimonial-card">
+          <div class="testimonial-header">
+            <div class="testimonial-avatar">MJ</div>
+            <div class="testimonial-info">
+              <h4>Marcus Johnson</h4>
+              <p>Frontend Architect @ StartupX</p>
+            </div>
+          </div>
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"The attention to detail is remarkable. Performance is stellar and animations are smooth as butter. Highly recommended!"</p>
+        </div>
+        <!-- Card 3 -->
+        <div class="testimonial-card">
+          <div class="testimonial-header">
+            <div class="testimonial-avatar">ER</div>
+            <div class="testimonial-info">
+              <h4>Emily Rodriguez</h4>
+              <p>UX Designer @ CreativeHub</p>
+            </div>
+          </div>
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Finally, a component library that understands design AND development. The glassmorphic effects are absolutely stunning!"</p>
+        </div>
+        <!-- Card 4 -->
+        <div class="testimonial-card">
+          <div class="testimonial-header">
+            <div class="testimonial-avatar">DK</div>
+            <div class="testimonial-info">
+              <h4>David Kim</h4>
+              <p>Full Stack Dev @ WebFlow</p>
+            </div>
+          </div>
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Zero dependencies and blazing fast load times. AURA's vanilla JavaScript approach is perfect for performance-critical apps."</p>
+        </div>
+        <!-- Card 5 -->
+        <div class="testimonial-card">
+          <div class="testimonial-header">
+            <div class="testimonial-avatar">AL</div>
+            <div class="testimonial-info">
+              <h4>Aisha Lawal</h4>
+              <p>Product Lead @ NovaTech</p>
+            </div>
+          </div>
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"We shipped our entire marketing site using AURA components. The design quality rivals tools costing 10x more."</p>
+        </div>
+        <!-- Card 6 -->
+        <div class="testimonial-card">
+          <div class="testimonial-header">
+            <div class="testimonial-avatar">JP</div>
+            <div class="testimonial-info">
+              <h4>James Park</h4>
+              <p>CTO @ CloudBase</p>
+            </div>
+          </div>
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"The bento-grid layouts and aurora effects are chef's kiss. Our conversion rate increased 34% after the redesign."</p>
+        </div>
+        <!-- Duplicate for infinite scroll -->
+        <div class="testimonial-card">
+          <div class="testimonial-header">
+            <div class="testimonial-avatar">SC</div>
+            <div class="testimonial-info"><h4>Sarah Chen</h4><p>Lead Dev @ TechCorp</p></div>
+          </div>
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"AURA transformed our design workflow. The components are beautiful and incredibly easy to integrate. Saved us weeks."</p>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-header">
+            <div class="testimonial-avatar">MJ</div>
+            <div class="testimonial-info"><h4>Marcus Johnson</h4><p>Frontend Architect @ StartupX</p></div>
+          </div>
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"The attention to detail is remarkable. Performance is stellar and animations are smooth as butter. Highly recommended!"</p>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-header">
+            <div class="testimonial-avatar">ER</div>
+            <div class="testimonial-info"><h4>Emily Rodriguez</h4><p>UX Designer @ CreativeHub</p></div>
+          </div>
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Finally, a component library that understands design AND development. The glassmorphic effects are absolutely stunning!"</p>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-header">
+            <div class="testimonial-avatar">DK</div>
+            <div class="testimonial-info"><h4>David Kim</h4><p>Full Stack Dev @ WebFlow</p></div>
+          </div>
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Zero dependencies and blazing fast load times. AURA's vanilla JavaScript approach is perfect for performance-critical apps."</p>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-header">
+            <div class="testimonial-avatar">AL</div>
+            <div class="testimonial-info"><h4>Aisha Lawal</h4><p>Product Lead @ NovaTech</p></div>
+          </div>
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"We shipped our entire marketing site using AURA components. The design quality rivals tools costing 10x more."</p>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-header">
+            <div class="testimonial-avatar">JP</div>
+            <div class="testimonial-info"><h4>James Park</h4><p>CTO @ CloudBase</p></div>
+          </div>
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"The bento-grid layouts and aurora effects are chef's kiss. Our conversion rate increased 34% after the redesign."</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ PRICING ═══════════════════════ -->
+  <section class="section" id="pricing">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Pricing</span>
+        <h2 class="section-title">Simple, Transparent Pricing</h2>
+        <p class="section-subtitle">Choose the plan that fits your needs. No hidden fees, cancel anytime.</p>
+      </div>
+
+      <div class="pricing-grid">
+        <!-- Free -->
+        <div class="price-card reveal">
+          <h3>Starter</h3>
+          <div class="price">$0 <span>/ forever</span></div>
+          <p class="price-desc">Perfect for personal projects</p>
+          <ul class="price-features">
+            <li><span class="check">✓</span> 25 Core components</li>
+            <li><span class="check">✓</span> CSS &amp; JS source</li>
+            <li><span class="check">✓</span> Community support</li>
+            <li><span class="check">✓</span> MIT License</li>
+          </ul>
+          <button class="btn btn-ghost">Get Started</button>
+        </div>
+
+        <!-- Pro (Most Popular) -->
+        <div class="price-card popular reveal">
+          <h3>Pro</h3>
+          <div class="price">$29 <span>/ month</span></div>
+          <p class="price-desc">For teams building at scale</p>
+          <ul class="price-features">
+            <li><span class="check">✓</span> All 2,500+ components</li>
+            <li><span class="check">✓</span> Figma file access</li>
+            <li><span class="check">✓</span> Priority support</li>
+            <li><span class="check">✓</span> Private Slack channel</li>
+            <li><span class="check">✓</span> Monthly updates</li>
+          </ul>
+          <button class="btn btn-primary">Upgrade to Pro</button>
+        </div>
+
+        <!-- Enterprise -->
+        <div class="price-card reveal">
+          <h3>Enterprise</h3>
+          <div class="price">Custom</div>
+          <p class="price-desc">For large organizations</p>
+          <ul class="price-features">
+            <li><span class="check">✓</span> Everything in Pro</li>
+            <li><span class="check">✓</span> Custom components</li>
+            <li><span class="check">✓</span> Dedicated engineer</li>
+            <li><span class="check">✓</span> SLA guarantee</li>
+            <li><span class="check">✓</span> SSO &amp; audit logs</li>
+          </ul>
+          <button class="btn btn-secondary">Contact Sales</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ CTA ═══════════════════════ -->
+  <section class="section" id="cta">
+    <div class="container">
+      <div class="cta-block reveal">
+        <div class="cta-glow cta-glow-1"></div>
+        <div class="cta-glow cta-glow-2"></div>
+        <h2>Ready to Build Something Amazing?</h2>
+        <p class="cta-desc">Join 12,000+ developers creating stunning interfaces with AURA.</p>
+        <div class="cta-actions">
+          <a href="#" class="btn btn-primary"><span class="btn-icon">🚀</span> Get Started Free</a>
+          <a href="#" class="btn btn-secondary"><span class="btn-icon">📖</span> Documentation</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ FOOTER ═══════════════════════ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo">AURA <span>UI</span></div>
+          <p>Advanced UI Experience Platform for modern web development. Built with precision, designed for excellence.</p>
+          <div class="footer-socials">
+            <a href="#" aria-label="GitHub">⌨</a>
+            <a href="#" aria-label="Twitter">𝕏</a>
+            <a href="#" aria-label="Discord">💬</a>
+            <a href="#" aria-label="YouTube">▶</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Product</h4>
+          <ul>
+            <li><a href="#components">Components</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#">Changelog</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="#">Documentation</a></li>
+            <li><a href="#">Tutorials</a></li>
+            <li><a href="#">Community</a></li>
+            <li><a href="#">Support</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 AURA. All rights reserved. Built with passion for developers.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast notification -->
+  <div class="toast" id="toast"></div>
+
+  <!-- Scroll to top button -->
+  <button class="scroll-top" aria-label="Scroll to top">↑</button>
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>

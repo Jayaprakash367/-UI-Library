@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AURA UI — Premium Component Library</title>
+  <meta name="description" content="AURA - Premium UI components with smooth animations and production-ready effects" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="components.css" />
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container nav-inner">
+      <a href="platform.html" class="logo">AURA <span>UI</span></a>
+      <ul class="nav-links">
+        <li><a href="platform.html#features">Features</a></li>
+        <li><a href="#components">Components</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+      </ul>
+      <button class="nav-cta">Get Started</button>
+      <button class="nav-hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav">
+    <a href="platform.html#features">Features</a>
+    <a href="#components">Components</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#testimonials">Reviews</a>
+    <a href="#cta" class="btn btn-primary">Get Started</a>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero components-hero">
+    <div class="hero-aurora">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+    </div>
+    <div class="hero-grid"></div>
+    <canvas id="heroCanvas"></canvas>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="dot"></span> 2,500+ Components
+      </div>
+      <h1>Premium <span class="grad-text">UI Components</span></h1>
+      <p class="hero-desc">
+        Production-ready components inspired by Aceternity UI, shadcn/ui, and Motion.dev.
+        Copy, paste, ship. Zero dependencies.
+      </p>
+      <div class="hero-actions">
+        <a href="#components" class="btn btn-primary">
+          <span class="btn-icon">✦</span> Browse Components
+        </a>
+        <a href="platform.html" class="btn btn-secondary">
+          <span class="btn-icon">←</span> Back to Platform
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Category Filter -->
+  <div class="filter-bar" id="components">
+    <div class="container">
+      <div class="filter-inner">
+        <div class="search-wrap">
+          <span class="search-icon">🔍</span>
+          <input type="text" class="search-input" id="searchInput" placeholder="Search components..." />
+        </div>
+        <div class="filter-pills">
+          <button class="pill active" data-filter="all">All</button>
+          <button class="pill" data-filter="buttons">Buttons</button>
+          <button class="pill" data-filter="cards">Cards</button>
+          <button class="pill" data-filter="text">Text</button>
+          <button class="pill" data-filter="backgrounds">Backgrounds</button>
+          <button class="pill" data-filter="loaders">Loaders</button>
+          <button class="pill" data-filter="inputs">Inputs</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Component Grid -->
+  <section class="section">
+    <div class="container">
+      <div class="component-grid" id="componentGrid">
+        <!-- Components rendered by JavaScript -->
+      </div>
+      <div class="load-more-wrap">
+        <button class="load-more-btn" id="loadMoreBtn">Load More</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Component Preview Modal -->
+  <div class="component-modal" id="componentModal">
+    <div class="modal-overlay" id="modalOverlay"></div>
+    <div class="modal-content">
+      <button class="modal-close" id="modalClose">✕</button>
+      <div class="modal-header">
+        <h2 id="modalTitle">Component Name</h2>
+        <p id="modalDesc">Component description</p>
+      </div>
+      
+      <!-- Preview Tabs -->
+      <div class="preview-tabs">
+        <button class="tab-btn active" data-tab="preview">Preview</button>
+        <button class="tab-btn" data-tab="html">HTML</button>
+        <button class="tab-btn" data-tab="css">CSS</button>
+        <button class="tab-btn" data-tab="js">JavaScript</button>
+      </div>
+
+      <!-- Tab Contents -->
+      <div class="tab-content active" id="tab-preview">
+        <div class="preview-container" id="livePreview"></div>
+      </div>
+      <div class="tab-content" id="tab-html">
+        <div class="code-wrapper">
+          <button class="copy-code-btn" data-target="htmlCode">Copy</button>
+          <pre id="htmlCode"></pre>
+        </div>
+      </div>
+      <div class="tab-content" id="tab-css">
+        <div class="code-wrapper">
+          <button class="copy-code-btn" data-target="cssCode">Copy</button>
+          <pre id="cssCode"></pre>
+        </div>
+      </div>
+      <div class="tab-content" id="tab-js">
+        <div class="code-wrapper">
+          <button class="copy-code-btn" data-target="jsCode">Copy</button>
+          <pre id="jsCode"></pre>
+        </div>
+      </div>
+
+      <!-- Use Button -->
+      <div class="modal-footer">
+        <button class="btn btn-primary" id="copyAllBtn">
+          <span class="btn-icon">📋</span> Copy All Code
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Live Demo Container (for modal previews) -->
+  <div id="demoContainer" style="display: none;"></div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <!-- Scroll to top -->
+  <button class="scroll-top" aria-label="Scroll to top">↑</button>
+
+  <script src="components.js"></script>
+</body>
+</html>
