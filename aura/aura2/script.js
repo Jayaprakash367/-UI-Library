@@ -298,6 +298,15 @@
     });
     card.querySelector('.btn-code').addEventListener('click', e => {
       e.stopPropagation();
+
+      // Close every other open panel first
+      document.querySelectorAll('.comp-card.code-open').forEach(otherCard => {
+        if (otherCard === card) return;
+        otherCard.classList.remove('code-open');
+        otherCard.querySelector('.comp-code-panel').setAttribute('aria-hidden', 'true');
+        otherCard.querySelector('.btn-code').innerHTML = '<span>&lt;/&gt;</span> Code';
+      });
+
       const isOpen = card.classList.toggle('code-open');
       const panel  = card.querySelector('.comp-code-panel');
       panel.setAttribute('aria-hidden', !isOpen);
