@@ -3,73 +3,85 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="AURA UI — Open-source component library. Copy-paste ready UI components for dark-themed web apps.">
-  <title>AURA UI — Component Library</title>
+  <meta name="description" content="AURA UI — Enterprise-grade component library. Production-ready, copy-paste UI components for modern web applications.">
+  <title>AURA UI — Enterprise Component Library</title>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
   <!-- Styles -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- ═══════════════════════════════════════════
-       PAGE LOADER  (removed by animations.js after window.load)
-       ═══════════════════════════════════════════ -->
+  <!-- PAGE LOADER -->
   <div id="pageLoader" role="status" aria-label="Loading AURA UI" aria-live="polite">
     <div class="loader-brand">
-      <div class="loader-logo-icon" aria-hidden="true">✦</div>
+      <div class="loader-logo-icon" aria-hidden="true">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+          <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/>
+          <line x1="12" y1="22" x2="12" y2="15.5"/>
+          <line x1="22" y1="8.5" x2="12" y2="15.5"/>
+          <line x1="2" y1="8.5" x2="12" y2="15.5"/>
+        </svg>
+      </div>
       <span class="loader-tag">AURA UI</span>
     </div>
-    <div class="loader-ring" aria-hidden="true"></div>
+    <div class="loader-bar-track"><div class="loader-bar-fill"></div></div>
   </div>
 
-  <!-- ═══════════════════════════════════════════
-       PARTICLE CANVAS  (drawn by animations.js)
-       ═══════════════════════════════════════════ -->
+  <!-- NOISE + GRID OVERLAY (design texture) -->
+  <div class="noise-overlay" aria-hidden="true"></div>
+  <div class="dot-grid-overlay" aria-hidden="true"></div>
+
+  <!-- PARTICLE CANVAS -->
   <canvas id="particleCanvas" aria-hidden="true"></canvas>
 
-  <!-- ═══════════════════════════════════════════
-       CUSTOM CURSOR  (styled by animations.js)
-       ═══════════════════════════════════════════ -->
-  <div id="cursorRing"  aria-hidden="true"></div>
-  <div id="cursorDot"   aria-hidden="true"></div>
+  <!-- CUSTOM CURSOR -->
+  <div id="cursorRing" aria-hidden="true"></div>
+  <div id="cursorDot" aria-hidden="true"></div>
 
-  <!-- ═══════════════════════════════════════════
-       NAVBAR
-       ═══════════════════════════════════════════ -->
+  <!-- NAVBAR — Enterprise Style -->
   <nav class="navbar" role="navigation" aria-label="Main navigation">
     <div class="navbar-inner">
-
-      <!-- Logo -->
       <a href="#" class="nav-logo" aria-label="AURA UI Home">
-        <span class="nav-logo-icon" aria-hidden="true">✦</span>
+        <span class="nav-logo-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5">
+            <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/>
+            <line x1="12" y1="22" x2="12" y2="15.5"/>
+            <line x1="22" y1="8.5" x2="12" y2="15.5"/>
+            <line x1="2" y1="8.5" x2="12" y2="15.5"/>
+          </svg>
+        </span>
         <span class="nav-logo-text"><span>AURA</span> UI</span>
+        <span class="nav-version-badge">v2.0</span>
       </a>
 
-      <!-- Desktop links -->
       <ul class="nav-links" role="list">
-        <li><a href="#hero"       data-nav="hero">Home</a></li>
+        <li><a href="#hero" data-nav="hero">Home</a></li>
         <li><a href="#components" data-nav="components">Components</a></li>
-        <li><a href="#about"      data-nav="about">About</a></li>
+        <li><a href="#showcase" data-nav="showcase">Showcase</a></li>
+        <li><a href="#about" data-nav="about">About</a></li>
       </ul>
 
-      <!-- Actions -->
       <div class="nav-actions">
-        <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle light/dark mode">☀</button>
-        <a href="#components" class="btn btn-primary btn-sm">Browse Library</a>
-
-        <!-- Hamburger (mobile) -->
+        <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle light/dark mode">
+          <svg class="theme-icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg class="theme-icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+        </button>
+        <a href="https://github.com" class="nav-gh-link" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        </a>
+        <a href="#components" class="btn btn-primary btn-sm nav-cta-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg>
+          Get Started
+        </a>
         <button id="navHamburger" class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileNav">
-          <span></span>
-          <span></span>
-          <span></span>
+          <span></span><span></span><span></span>
         </button>
       </div>
-
     </div>
   </nav>
 
@@ -77,221 +89,290 @@
   <nav id="mobileNav" class="mobile-nav" aria-label="Mobile navigation">
     <a href="#hero">Home</a>
     <a href="#components">Components</a>
+    <a href="#showcase">Showcase</a>
     <a href="#about">About</a>
     <a href="#components" class="btn btn-primary btn-sm">Browse Library</a>
   </nav>
 
-  <!-- ═══════════════════════════════════════════
-       HERO
-       ═══════════════════════════════════════════ -->
+  <!-- HERO -->
   <section class="hero" id="hero" data-section="hero" aria-labelledby="heroTitle">
-    <!-- Aurora background orbs -->
-    <div class="hero-orbs" aria-hidden="true">
-      <div class="hero-orb hero-orb-1"></div>
-      <div class="hero-orb hero-orb-2"></div>
-      <div class="hero-orb hero-orb-3"></div>
+    <div class="hero-mesh" aria-hidden="true">
+      <div class="hero-mesh-orb hero-mesh-orb-1"></div>
+      <div class="hero-mesh-orb hero-mesh-orb-2"></div>
+      <div class="hero-mesh-orb hero-mesh-orb-3"></div>
+      <div class="hero-mesh-orb hero-mesh-orb-4"></div>
     </div>
+    <div class="hero-grid-pattern" aria-hidden="true"></div>
+    <div class="hero-radial" aria-hidden="true"></div>
+    <div class="hero-beam-line" aria-hidden="true"></div>
 
     <div class="hero-inner">
-      <!-- Eyebrow badge -->
       <div class="hero-eyebrow" role="status">
         <span class="hero-eyebrow-dot" aria-hidden="true"></span>
-        Open Source · Free Forever
+        <span class="hero-eyebrow-text">Trusted by 10,000+ Developers</span>
+        <span class="hero-eyebrow-arrow" aria-hidden="true">&rarr;</span>
       </div>
 
-      <!-- Headline -->
       <h1 class="hero-title" id="heroTitle">
-        Build Stunning<br>
-        <span class="hero-title-grad">UI Components</span>
+        <span class="hero-title-line">Ship Beautiful</span>
+        <span class="hero-title-line hero-title-grad">Interfaces Faster</span>
       </h1>
 
-      <!-- Sub text -->
       <p class="hero-sub">
-        Copy-paste ready dark UI components — buttons, cards, animations, 
-        backgrounds and more. Zero dependencies, pure HTML + CSS + JS.
+        Enterprise-grade UI components with zero dependencies. Built for performance,
+        accessibility, and design excellence. Copy, paste, ship.
       </p>
 
-      <!-- CTA row -->
       <div class="hero-cta">
-        <a href="#components" class="btn btn-primary">
-          <span>⬡</span> Browse Components
+        <a href="#components" class="btn btn-primary btn-lg">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Browse Components
         </a>
-        <a href="https://github.com" class="btn btn-ghost" target="_blank" rel="noopener">
-          <span>⌥</span> View on GitHub
+        <a href="https://github.com" class="btn btn-ghost btn-lg" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          Star on GitHub
         </a>
       </div>
 
-      <!-- Stats row -->
-      <div class="hero-stat-row" aria-label="Library statistics">
-        <div class="hero-stat">
-          <strong id="heroComponentCount">20+</strong>
-          <span>Components</span>
+      <div class="hero-metrics" aria-label="Library statistics">
+        <div class="hero-metric">
+          <div class="hero-metric-value" id="heroComponentCount">20+</div>
+          <div class="hero-metric-label">Components</div>
         </div>
-        <div class="hero-stat">
-          <strong>6</strong>
-          <span>Categories</span>
+        <div class="hero-metric-divider"></div>
+        <div class="hero-metric">
+          <div class="hero-metric-value">6</div>
+          <div class="hero-metric-label">Categories</div>
         </div>
-        <div class="hero-stat">
-          <strong>0</strong>
-          <span>Dependencies</span>
+        <div class="hero-metric-divider"></div>
+        <div class="hero-metric">
+          <div class="hero-metric-value">0</div>
+          <div class="hero-metric-label">Dependencies</div>
         </div>
-        <div class="hero-stat">
-          <strong>Free</strong>
-          <span>Open Source</span>
+        <div class="hero-metric-divider"></div>
+        <div class="hero-metric">
+          <div class="hero-metric-value">MIT</div>
+          <div class="hero-metric-label">Licensed</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════════
-       STICKY SEARCH + FILTER BAR
-       ═══════════════════════════════════════════ -->
-  <div class="search-filter-bar" role="search" aria-label="Search and filter components">
-    <div class="search-filter-inner">
-
-      <!-- Search input -->
-      <div class="search-wrap">
-        <span class="search-wrap-icon" aria-hidden="true">🔍</span>
-        <input
-          id="searchInput"
-          type="search"
-          class="search-input"
-          placeholder="Search components…"
-          aria-label="Search components"
-          autocomplete="off"
-          spellcheck="false"
-        >
+  <!-- TRUST MARQUEE -->
+  <div class="trust-marquee" aria-label="Trusted technologies">
+    <p class="trust-label">Works seamlessly with</p>
+    <div class="marquee-track">
+      <div class="marquee-inner">
+        <span class="marquee-item"><span class="mi-icon">&#9883;</span> React</span>
+        <span class="marquee-item"><span class="mi-icon">&#9829;</span> Vue</span>
+        <span class="marquee-item"><span class="mi-icon">&#9650;</span> Angular</span>
+        <span class="marquee-item"><span class="mi-icon">&#9889;</span> Svelte</span>
+        <span class="marquee-item"><span class="mi-icon">&#9650;</span> Next.js</span>
+        <span class="marquee-item"><span class="mi-icon">&#9898;</span> Tailwind</span>
+        <span class="marquee-item"><span class="mi-icon">&#9670;</span> TypeScript</span>
+        <span class="marquee-item"><span class="mi-icon">&#9654;</span> Vite</span>
+        <span class="marquee-item"><span class="mi-icon">&#9733;</span> Astro</span>
+        <span class="marquee-item"><span class="mi-icon">&#9883;</span> React</span>
+        <span class="marquee-item"><span class="mi-icon">&#9829;</span> Vue</span>
+        <span class="marquee-item"><span class="mi-icon">&#9650;</span> Angular</span>
+        <span class="marquee-item"><span class="mi-icon">&#9889;</span> Svelte</span>
+        <span class="marquee-item"><span class="mi-icon">&#9650;</span> Next.js</span>
+        <span class="marquee-item"><span class="mi-icon">&#9898;</span> Tailwind</span>
+        <span class="marquee-item"><span class="mi-icon">&#9670;</span> TypeScript</span>
+        <span class="marquee-item"><span class="mi-icon">&#9654;</span> Vite</span>
+        <span class="marquee-item"><span class="mi-icon">&#9733;</span> Astro</span>
       </div>
-
-      <!-- Category filter pills (populated by JS) -->
-      <div id="filterPills" class="filter-pills" role="group" aria-label="Filter by category"></div>
-
-      <!-- Result count -->
-      <span id="resultCount" class="result-count" aria-live="polite" aria-atomic="true">
-        <span>0</span> components
-      </span>
-
     </div>
   </div>
 
-  <!-- ═══════════════════════════════════════════
-       COMPONENT LIBRARY SECTION
-       ═══════════════════════════════════════════ -->
+  <!-- FEATURES BENTO GRID -->
+  <section class="features-section" id="showcase" data-section="showcase">
+    <div class="container">
+      <div class="section-label-wrap">
+        <span class="section-label">Why AURA UI</span>
+      </div>
+      <h2 class="section-heading">Built for Developers Who<br><span class="grad-text">Demand Excellence</span></h2>
+      <p class="section-subtext">Every component is crafted with performance, accessibility, and design precision in mind.</p>
+
+      <div class="bento-grid">
+        <div class="bento-card bento-wide">
+          <div class="bento-card-glow"></div>
+          <div class="bento-icon-wrap"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+          <h3>Lightning Performance</h3>
+          <p>Zero dependencies. Pure CSS animations with GPU acceleration. Every component ships under 5KB gzipped.</p>
+        </div>
+        <div class="bento-card">
+          <div class="bento-card-glow"></div>
+          <div class="bento-icon-wrap"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <h3>Production Ready</h3>
+          <p>Battle-tested components. WCAG 2.1 compliant, keyboard navigable, screen-reader friendly.</p>
+        </div>
+        <div class="bento-card">
+          <div class="bento-card-glow"></div>
+          <div class="bento-icon-wrap"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+          <h3>Responsive First</h3>
+          <p>Mobile-first design that adapts flawlessly from 320px to 4K ultrawide monitors.</p>
+        </div>
+        <div class="bento-card">
+          <div class="bento-card-glow"></div>
+          <div class="bento-icon-wrap"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></div>
+          <h3>Copy &amp; Paste</h3>
+          <p>No install, no build step. Copy the code, paste it in your project. Works with any framework.</p>
+        </div>
+        <div class="bento-card bento-wide">
+          <div class="bento-card-glow"></div>
+          <div class="bento-icon-wrap"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg></div>
+          <h3>60fps Smooth Animations</h3>
+          <p>Every animation is optimized using CSS transforms, will-change, and requestAnimationFrame. Buttery smooth.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STICKY SEARCH + FILTER BAR -->
+  <div class="search-filter-bar" role="search" aria-label="Search and filter components">
+    <div class="search-filter-inner">
+      <div class="search-wrap">
+        <svg class="search-wrap-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input id="searchInput" type="search" class="search-input" placeholder="Search components..." aria-label="Search components" autocomplete="off" spellcheck="false">
+        <kbd class="search-kbd">/</kbd>
+      </div>
+      <div id="filterPills" class="filter-pills" role="group" aria-label="Filter by category"></div>
+      <span id="resultCount" class="result-count" aria-live="polite" aria-atomic="true">
+        <span>0</span> components
+      </span>
+    </div>
+  </div>
+
+  <!-- COMPONENT LIBRARY SECTION -->
   <main id="components" data-section="components" aria-label="Component library">
     <section class="components-section">
       <div class="container">
-
-        <!-- Tag sidebar (hidden on mobile, shown on desktop via CSS) -->
         <aside class="tag-panel" aria-label="Filter by tag">
-          <div class="tag-panel-title">Tags</div>
+          <div class="tag-panel-header">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/></svg>
+            <span class="tag-panel-title">Filters</span>
+          </div>
           <div id="tagList" class="tag-list" role="list"></div>
         </aside>
-
-        <!-- Main grid area -->
         <div class="grid-area">
           <div class="section-header">
-            <h2 class="section-title">
-              All <span>Components</span>
-            </h2>
+            <h2 class="section-title">All <span>Components</span></h2>
             <span class="section-meta" aria-hidden="true">Click a card to preview</span>
           </div>
-
-          <!-- Component cards (rendered by script.js) -->
-          <div
-            id="compGrid"
-            class="comp-grid"
-            role="list"
-            aria-label="Component cards"
-            aria-live="polite"
-          ></div>
-
-          <!-- Load More -->
+          <div id="compGrid" class="comp-grid" role="list" aria-label="Component cards" aria-live="polite"></div>
           <div class="load-more-wrap">
-            <button id="loadMoreBtn" class="btn btn-ghost" style="display:none;" aria-label="Load more components">
+            <button id="loadMoreBtn" class="btn btn-ghost btn-load-more" aria-label="Load more components">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="7 13 12 18 17 13"/><polyline points="7 6 12 11 17 6"/></svg>
               Load More
             </button>
           </div>
         </div>
-
       </div>
     </section>
   </main>
 
-  <!-- ═══════════════════════════════════════════
-       ABOUT SECTION
-       ═══════════════════════════════════════════ -->
-  <section id="about" data-section="about" class="components-section" aria-labelledby="aboutTitle">
-    <div class="container" style="max-width:700px;text-align:center;padding-block:2rem 5rem;">
-      <div class="hero-eyebrow" style="display:inline-flex;margin-bottom:1.5rem;">
-        <span class="hero-eyebrow-dot"></span>About AURA UI
+  <!-- ABOUT SECTION -->
+  <section id="about" data-section="about" class="about-section" aria-labelledby="aboutTitle">
+    <div class="about-glow" aria-hidden="true"></div>
+    <div class="container about-container">
+      <div class="section-label-wrap">
+        <span class="section-label">About AURA UI</span>
       </div>
-      <h2 id="aboutTitle" class="hero-title" style="font-size:clamp(28px,4vw,44px);margin-bottom:1rem;">
-        Why <span class="hero-title-grad">AURA UI?</span>
+      <h2 id="aboutTitle" class="section-heading about-title">
+        Why Teams Choose<br><span class="grad-text">AURA UI</span>
       </h2>
-      <p style="font-size:16px;color:var(--text-secondary);line-height:1.8;max-width:560px;margin:0 auto;">
-        AURA UI is a curated collection of dark-themed UI components built with vanilla HTML, CSS, and JavaScript. 
-        Every component is copy-paste ready with zero dependencies — just grab the code and drop it into your project.
-        Inspired by Aceternity UI, shadcn/ui, and Motion.dev.
+      <p class="about-text">
+        AURA UI is a curated collection of production-grade UI components built with
+        vanilla HTML, CSS, and JavaScript. Every component is copy-paste ready with
+        zero dependencies — grab the code and integrate it into any project in seconds.
       </p>
+      <p class="about-text about-text-secondary">
+        Inspired by the best: Aceternity UI, shadcn/ui, and Motion.dev.
+        Designed for developers who refuse to compromise on quality.
+      </p>
+      <div class="about-features">
+        <div class="about-feature"><div class="about-feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><span>Zero build step required</span></div>
+        <div class="about-feature"><div class="about-feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><span>Framework agnostic</span></div>
+        <div class="about-feature"><div class="about-feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><span>Dark &amp; light themes</span></div>
+        <div class="about-feature"><div class="about-feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><span>WCAG 2.1 accessible</span></div>
+      </div>
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════════
-       CODE MODAL
-       ═══════════════════════════════════════════ -->
+  <!-- CODE MODAL -->
   <div id="codeModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <div class="modal-box">
       <div class="modal-header">
         <span id="modalTitle" class="modal-title">Component Code</span>
-        <button id="modalCloseBtn" class="modal-close" aria-label="Close modal">✕</button>
+        <button id="modalCloseBtn" class="modal-close" aria-label="Close modal">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
       </div>
       <div class="modal-body">
         <pre id="modalCode" tabindex="0" aria-label="Component code"></pre>
       </div>
       <div class="modal-footer">
-        <button id="modalCopyBtn" class="btn btn-primary btn-sm">⎘ Copy Code</button>
+        <button id="modalCopyBtn" class="btn btn-primary btn-sm">Copy Code</button>
         <button id="modalCloseBtn2" class="btn btn-ghost btn-sm" onclick="document.getElementById('codeModal').classList.remove('open');document.body.style.overflow=''">Close</button>
       </div>
     </div>
   </div>
 
-  <!-- ═══════════════════════════════════════════
-       FOOTER
-       ═══════════════════════════════════════════ -->
+  <!-- FOOTER -->
   <footer role="contentinfo">
+    <div class="footer-glow" aria-hidden="true"></div>
     <div class="footer-inner">
-      <div class="footer-brand">
-        <span class="nav-logo-icon" style="width:28px;height:28px;font-size:14px;" aria-hidden="true">✦</span>
-        <span style="font-size:16px;font-weight:800;color:var(--text-primary);">
-          <span style="background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">AURA</span> UI
-        </span>
+      <div class="footer-grid">
+        <div class="footer-brand-col">
+          <div class="footer-brand">
+            <span class="nav-logo-icon footer-logo-icon" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/><line x1="12" y1="22" x2="12" y2="15.5"/><line x1="22" y1="8.5" x2="12" y2="15.5"/><line x1="2" y1="8.5" x2="12" y2="15.5"/></svg>
+            </span>
+            <span class="footer-brand-text"><span>AURA</span> UI</span>
+          </div>
+          <p class="footer-brand-desc">Enterprise-grade UI components for modern web applications. Open source, free forever.</p>
+        </div>
+        <div class="footer-link-col">
+          <h4>Product</h4>
+          <a href="#components">Components</a>
+          <a href="#showcase">Showcase</a>
+          <a href="#about">About</a>
+          <a href="#">Changelog</a>
+        </div>
+        <div class="footer-link-col">
+          <h4>Resources</h4>
+          <a href="#">Documentation</a>
+          <a href="#">Installation</a>
+          <a href="#">Examples</a>
+          <a href="#">API Reference</a>
+        </div>
+        <div class="footer-link-col">
+          <h4>Community</h4>
+          <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
+          <a href="#">Discord</a>
+          <a href="#">Twitter</a>
+          <a href="#">Discussions</a>
+        </div>
       </div>
-
-      <nav class="footer-links" aria-label="Footer navigation">
-        <a href="#hero">Home</a>
-        <a href="#components">Components</a>
-        <a href="#about">About</a>
-        <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
-      </nav>
-
-      <p class="footer-copy">
-        Built with ♥ by <span>AURA UI</span> · MIT License
-      </p>
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; 2026 <span>AURA UI</span>. All rights reserved. MIT License.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+        </div>
+      </div>
     </div>
   </footer>
 
-  <!-- ═══════════════════════════════════════════
-       SCROLL-TO-TOP
-       ═══════════════════════════════════════════ -->
-  <button id="scrollTop" class="scroll-top" aria-label="Scroll to top">↑</button>
+  <!-- SCROLL-TO-TOP -->
+  <button id="scrollTop" class="scroll-top" aria-label="Scroll to top">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
 
-  <!-- ═══════════════════════════════════════════
-       SCRIPTS  (order matters: data → engine)
-       ═══════════════════════════════════════════ -->
+  <!-- SCRIPTS -->
   <script src="data.js"></script>
   <script src="script.js"></script>
-  <!-- Premium animations — loaded last so DOM + data are ready -->
   <script src="animations.js"></script>
-
 </body>
 </html>

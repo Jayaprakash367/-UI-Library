@@ -166,12 +166,13 @@
       '.hero-title',
       '.hero-sub',
       '.hero-cta',
-      '.hero-stat-row',
+      '.hero-metrics',
       '.section-header',
       '.tag-panel',
-      '#about .hero-eyebrow',
-      '#about .hero-title',
-      '#about p',
+      '.bento-card',
+      '.about-section .section-heading',
+      '.about-text',
+      '.about-features',
       '.footer-inner',
     ];
 
@@ -391,8 +392,8 @@
         creating a depth illusion. Uses rAF throttle.
      ══════════════════════════════════════════════════════════ */
   function initParallax() {
-    const heroOrbs = document.querySelector('.hero-orbs');
-    if (!heroOrbs) return;
+    const heroMesh = document.querySelector('.hero-mesh');
+    if (!heroMesh) return;
 
     let ticking = false;
 
@@ -403,7 +404,7 @@
         const sy = window.scrollY;
         /* only while hero is in viewport range */
         if (sy < 900) {
-          heroOrbs.style.transform = `translateY(${sy * 0.32}px)`;
+          heroMesh.style.transform = `translateY(${sy * 0.32}px)`;
         }
         ticking = false;
       });
@@ -423,7 +424,6 @@
     attachCardHover();
 
     function attachCardHover() {
-  function attachCardHover() {
       grid.querySelectorAll('.comp-card:not([data-hover-init])').forEach(card => {
         card.dataset.hoverInit = '1';
 
@@ -464,7 +464,6 @@
           card.style.transition = 'transform .5s cubic-bezier(0.34,1.56,0.64,1), border-color .35s ease, box-shadow .35s ease';
         });
       });
-    }
     }
   }
 
