@@ -6,7 +6,6 @@
 
 (function () {
   'use strict';
-
   /* ─── CONFIG ────────────────────────────────────── */
   const PAGE_SIZE       = 12;       // cards per page load
   const SEARCH_DEBOUNCE = 200;      // ms
