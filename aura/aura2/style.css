@@ -3,6 +3,15 @@
    Premium dark-first theme · Glassmorphism · Responsive · Scalable
    ═══════════════════════════════════════════════════════════════ */
 
+/* ─── SKIP LINK (Accessibility) ──────────────────── */
+.skip-link {
+  position: absolute; top: -100%; left: 16px; z-index: 9999;
+  padding: 8px 20px; background: #7c3aed; color: #fff;
+  font-size: 13px; font-weight: 700; border-radius: 0 0 10px 10px;
+  text-decoration: none; transition: top .2s ease;
+}
+.skip-link:focus { top: 0; outline: 2px solid #fff; outline-offset: 2px; }
+
 /* ─── RESET ──────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
@@ -12,6 +21,14 @@ button { cursor: pointer; font-family: inherit; }
 a { text-decoration: none; color: inherit; }
 ul { list-style: none; }
 ::selection { background: rgba(124,58,237,.35); color: #fff; }
+
+/* ─── FOCUS VISIBLE (Keyboard Navigation) ─────────── */
+:focus { outline: none; }
+:focus-visible {
+  outline: 2px solid #7c3aed;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
 
 /* ─── CSS VARIABLES ──────────────────────────────── */
 :root {
@@ -31,35 +48,35 @@ ul { list-style: none; }
   --nav-h: 64px;
 }
 
-/* ─── DARK THEME (default) ───────────────────────── */
+/* ─── DARK THEME V4 (default) ────────────────────── */
 [data-theme="dark"] {
-  --bg: #050810;
-  --bg-elevated: #0a0f1e;
-  --bg-card: #0d1225;
-  --bg-card-hover: #111830;
-  --bg-input: #0f1629;
-  --bg-code: #0a0e1a;
-  --border: rgba(255,255,255,.06);
-  --border-hover: rgba(124,58,237,.4);
-  --text: #f1f5f9;
-  --text-secondary: rgba(255,255,255,.55);
-  --text-muted: rgba(255,255,255,.3);
-  --accent: #7c3aed;
-  --accent-light: #a78bfa;
-  --accent-2: #2563eb;
-  --accent-3: #06b6d4;
-  --success: #10b981;
-  --warning: #f59e0b;
-  --error: #ef4444;
-  --grad-1: linear-gradient(135deg, #7c3aed, #2563eb);
-  --grad-2: linear-gradient(135deg, #a78bfa, #60a5fa);
-  --grad-3: linear-gradient(135deg, #7c3aed, #2563eb, #06b6d4);
-  --shadow-sm: 0 2px 8px rgba(0,0,0,.3);
-  --shadow-md: 0 8px 30px rgba(0,0,0,.4);
-  --shadow-lg: 0 20px 60px rgba(0,0,0,.5);
-  --shadow-glow: 0 0 40px rgba(124,58,237,.25);
-  --glass: rgba(255,255,255,.04);
-  --glass-border: rgba(255,255,255,.08);
+  --bg:             #050816;
+  --bg-elevated:    #0b1220;
+  --bg-card:        #0d1528;
+  --bg-card-hover:  #111d35;
+  --bg-input:       #0f1a30;
+  --bg-code:        #080e1c;
+  --border:         rgba(255,255,255,0.08);
+  --border-hover:   rgba(108,99,255,0.45);
+  --text:           #ffffff;
+  --text-secondary: #94A3B8;
+  --text-muted:     rgba(148,163,184,0.65);
+  --accent:         #6C63FF;   /* V4 primary indigo-violet */
+  --accent-light:   #8B5CF6;   /* V4 secondary violet */
+  --accent-2:       #00D4FF;   /* V4 electric cyan */
+  --accent-3:       #a78bfa;
+  --success:        #22C55E;
+  --warning:        #F59E0B;
+  --error:          #EF4444;
+  --grad-1: linear-gradient(135deg, #6C63FF, #8B5CF6);
+  --grad-2: linear-gradient(135deg, #8B5CF6, #00D4FF);
+  --grad-3: linear-gradient(135deg, #6C63FF, #8B5CF6, #00D4FF);
+  --shadow-sm:   0 2px 8px rgba(0,0,0,.35);
+  --shadow-md:   0 8px 30px rgba(0,0,0,.45);
+  --shadow-lg:   0 20px 60px rgba(0,0,0,.55);
+  --shadow-glow: 0 0 40px rgba(108,99,255,.3);
+  --glass:        rgba(255,255,255,0.04);
+  --glass-border: rgba(255,255,255,0.08);
   color-scheme: dark;
 }
 
@@ -135,22 +152,6 @@ body {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* ═══════════════════════════════════════════════════
-   CUSTOM CURSOR
-   ═══════════════════════════════════════════════════ */
-#cursorRing {
-  position: fixed; width: 36px; height: 36px; border: 1.5px solid var(--accent-light);
-  border-radius: 50%; pointer-events: none; z-index: 9998;
-  transform: translate(-50%,-50%); transition: width .2s, height .2s, border-color .2s, opacity .2s;
-  opacity: 0;
-}
-#cursorDot {
-  position: fixed; width: 6px; height: 6px; background: var(--accent);
-  border-radius: 50%; pointer-events: none; z-index: 9998;
-  transform: translate(-50%,-50%); opacity: 0;
-}
-body:hover #cursorRing, body:hover #cursorDot { opacity: 1; }
-@media (hover: none) { #cursorRing, #cursorDot { display: none !important; } }
 
 /* ═══════════════════════════════════════════════════
    NAVBAR

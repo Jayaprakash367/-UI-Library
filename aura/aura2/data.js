@@ -2536,6 +2536,1567 @@ function updateSlider(el) {
 input:checked ~ .tog-sl { background: linear-gradient(135deg, #7c3aed, #2563eb); border-color: transparent; }
 input:checked ~ .tog-sl::before { transform: translateX(22px); }
 </style>`
+  },
+
+  /* ─────────────────────── ONBOARDING / SAAS FLOWS ─────────────────────── */
+
+  {
+    id: 'onboarding-stepper',
+    title: 'Onboarding Stepper',
+    category: 'onboarding',
+    tags: ['stepper', 'wizard', 'progress', 'multi-step'],
+    desc: 'Multi-step onboarding wizard with active, complete and upcoming states.',
+    featured: true,
+    isNew: true,
+    preview: `
+      <style>
+        body{margin:0;display:flex;align-items:center;justify-content:center;
+          height:100vh;background:#0b0f1a;font-family:Inter,sans-serif;}
+        .stepper{width:320px;}
+        .step-row{display:flex;align-items:flex-start;gap:14px;margin-bottom:0;}
+        .step-left{display:flex;flex-direction:column;align-items:center;gap:0;}
+        .step-circle{width:36px;height:36px;border-radius:50%;display:flex;
+          align-items:center;justify-content:center;font-size:13px;font-weight:800;
+          flex-shrink:0;transition:all .3s ease;}
+        .step-circle.done{background:linear-gradient(135deg,#10b981,#059669);color:#fff;}
+        .step-circle.active{background:linear-gradient(135deg,#7c3aed,#2563eb);color:#fff;
+          box-shadow:0 0 20px rgba(124,58,237,.4);}
+        .step-circle.pending{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.3);}
+        .step-line{width:2px;flex:1;min-height:24px;margin:4px 0;border-radius:2px;}
+        .step-line.done{background:linear-gradient(to bottom,#10b981,#7c3aed);}
+        .step-line.pending{background:rgba(255,255,255,.07);}
+        .step-body{padding:4px 0 24px;}
+        .step-title{font-size:14px;font-weight:700;color:#fff;margin-bottom:3px;}
+        .step-title.done{color:rgba(255,255,255,.5);}
+        .step-title.active{color:#fff;}
+        .step-title.pending{color:rgba(255,255,255,.3);}
+        .step-desc{font-size:12px;color:rgba(255,255,255,.4);line-height:1.5;}
+        .step-active-card{background:rgba(124,58,237,.08);border:1px solid rgba(124,58,237,.2);
+          border-radius:10px;padding:12px 14px;margin-top:8px;}
+        .step-active-card p{font-size:12px;color:rgba(255,255,255,.55);margin:0 0 10px;}
+        .step-btn{padding:7px 18px;font-size:12px;font-weight:700;
+          background:linear-gradient(135deg,#7c3aed,#2563eb);
+          border:none;border-radius:6px;color:#fff;cursor:pointer;transition:opacity .2s;}
+        .step-btn:hover{opacity:.85;}
+      </style>
+      <div class="stepper">
+        <div class="step-row">
+          <div class="step-left">
+            <div class="step-circle done">✓</div>
+            <div class="step-line done"></div>
+          </div>
+          <div class="step-body"><div class="step-title done">Create account</div><div class="step-desc">Your profile is set up</div></div>
+        </div>
+        <div class="step-row">
+          <div class="step-left">
+            <div class="step-circle active">2</div>
+            <div class="step-line pending"></div>
+          </div>
+          <div class="step-body">
+            <div class="step-title active">Connect workspace</div>
+            <div class="step-active-card"><p>Invite your team or connect your existing tools to get started.</p><button class="step-btn">Continue →</button></div>
+          </div>
+        </div>
+        <div class="step-row">
+          <div class="step-left"><div class="step-circle pending">3</div></div>
+          <div class="step-body"><div class="step-title pending">Launch project</div><div class="step-desc">Start building something great</div></div>
+        </div>
+      </div>`,
+    code: `<div class="stepper">
+  <div class="step-row">
+    <div class="step-left">
+      <div class="step-circle done">✓</div>
+      <div class="step-line done"></div>
+    </div>
+    <div class="step-body">
+      <div class="step-title done">Create account</div>
+      <div class="step-desc">Your profile is set up</div>
+    </div>
+  </div>
+  <div class="step-row">
+    <div class="step-left">
+      <div class="step-circle active">2</div>
+      <div class="step-line pending"></div>
+    </div>
+    <div class="step-body">
+      <div class="step-title active">Connect workspace</div>
+      <div class="step-active-card">
+        <p>Invite your team or connect your existing tools.</p>
+        <button class="step-btn">Continue →</button>
+      </div>
+    </div>
+  </div>
+  <div class="step-row">
+    <div class="step-left"><div class="step-circle pending">3</div></div>
+    <div class="step-body">
+      <div class="step-title pending">Launch project</div>
+    </div>
+  </div>
+</div>
+
+<style>
+.stepper { width: 320px; }
+.step-row { display: flex; align-items: flex-start; gap: 14px; }
+.step-left { display: flex; flex-direction: column; align-items: center; }
+.step-circle {
+  width: 36px; height: 36px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 800; flex-shrink: 0;
+}
+.step-circle.done   { background: linear-gradient(135deg,#10b981,#059669); color: #fff; }
+.step-circle.active { background: linear-gradient(135deg,#7c3aed,#2563eb); color: #fff; box-shadow: 0 0 20px rgba(124,58,237,.4); }
+.step-circle.pending{ background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); color: rgba(255,255,255,.3); }
+.step-line { width: 2px; flex: 1; min-height: 24px; margin: 4px 0; border-radius: 2px; }
+.step-line.done    { background: linear-gradient(to bottom,#10b981,#7c3aed); }
+.step-line.pending { background: rgba(255,255,255,.07); }
+.step-body { padding: 4px 0 24px; }
+.step-title { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 3px; }
+.step-title.done    { color: rgba(255,255,255,.5); }
+.step-title.pending { color: rgba(255,255,255,.3); }
+.step-active-card { background: rgba(124,58,237,.08); border: 1px solid rgba(124,58,237,.2); border-radius: 10px; padding: 12px 14px; margin-top: 8px; }
+.step-btn { padding: 7px 18px; font-size: 12px; font-weight: 700; background: linear-gradient(135deg,#7c3aed,#2563eb); border: none; border-radius: 6px; color: #fff; cursor: pointer; }
+</style>`
+  },
+
+  {
+    id: 'onboarding-checklist',
+    title: 'Activation Checklist',
+    category: 'onboarding',
+    tags: ['checklist', 'gamification', 'activation', 'progress'],
+    desc: 'Gamified onboarding checklist with animated completion and progress bar.',
+    featured: true,
+    isNew: true,
+    preview: `
+      <style>
+        @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
+        body{margin:0;display:flex;align-items:center;justify-content:center;
+          height:100vh;background:#0b0f1a;font-family:Inter,sans-serif;}
+        .checklist{width:300px;background:#0f1629;border:1px solid rgba(255,255,255,.07);
+          border-radius:16px;padding:20px;}
+        .cl-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;}
+        .cl-title{font-size:14px;font-weight:800;color:#fff;}
+        .cl-pct{font-size:12px;font-weight:700;color:#a78bfa;}
+        .cl-bar-wrap{height:4px;background:rgba(255,255,255,.06);border-radius:4px;margin-bottom:16px;}
+        .cl-bar{height:100%;width:60%;background:linear-gradient(90deg,#7c3aed,#2563eb);border-radius:4px;
+          transition:width .6s cubic-bezier(.34,1.56,.64,1);}
+        .cl-item{display:flex;align-items:center;gap:12px;padding:10px 0;
+          border-bottom:1px solid rgba(255,255,255,.04);cursor:pointer;}
+        .cl-item:last-child{border-bottom:none;}
+        .cl-check{width:20px;height:20px;border-radius:50%;flex-shrink:0;display:flex;
+          align-items:center;justify-content:center;font-size:11px;transition:all .3s ease;}
+        .cl-check.done{background:linear-gradient(135deg,#10b981,#059669);color:#fff;}
+        .cl-check.todo{border:2px solid rgba(255,255,255,.15);background:transparent;}
+        .cl-check.todo:hover{border-color:#7c3aed;}
+        .cl-label{font-size:13px;font-weight:600;transition:all .2s;}
+        .cl-label.done{color:rgba(255,255,255,.35);text-decoration:line-through;}
+        .cl-label.todo{color:rgba(255,255,255,.75);}
+        .cl-pts{margin-left:auto;font-size:10px;font-weight:700;
+          color:#a78bfa;background:rgba(124,58,237,.12);padding:2px 7px;border-radius:50px;}
+      </style>
+      <div class="checklist">
+        <div class="cl-header"><span class="cl-title">🚀 Get Started</span><span class="cl-pct">3/5 done</span></div>
+        <div class="cl-bar-wrap"><div class="cl-bar"></div></div>
+        <div class="cl-item"><div class="cl-check done">✓</div><span class="cl-label done">Create your account</span><span class="cl-pts">+10</span></div>
+        <div class="cl-item"><div class="cl-check done">✓</div><span class="cl-label done">Complete your profile</span><span class="cl-pts">+20</span></div>
+        <div class="cl-item"><div class="cl-check done">✓</div><span class="cl-label done">Add your first project</span><span class="cl-pts">+30</span></div>
+        <div class="cl-item"><div class="cl-check todo"></div><span class="cl-label todo">Invite a team member</span><span class="cl-pts">+25</span></div>
+        <div class="cl-item"><div class="cl-check todo"></div><span class="cl-label todo">Connect an integration</span><span class="cl-pts">+40</span></div>
+      </div>`,
+    code: `<div class="checklist">
+  <div class="cl-header">
+    <span class="cl-title">🚀 Get Started</span>
+    <span class="cl-pct" id="cl-pct">0/5 done</span>
+  </div>
+  <div class="cl-bar-wrap"><div class="cl-bar" id="cl-bar"></div></div>
+  <div class="cl-item" data-done="true">
+    <div class="cl-check done">✓</div>
+    <span class="cl-label done">Create your account</span>
+    <span class="cl-pts">+10</span>
+  </div>
+  <div class="cl-item" data-done="false">
+    <div class="cl-check todo"></div>
+    <span class="cl-label todo">Invite a team member</span>
+    <span class="cl-pts">+25</span>
+  </div>
+</div>
+
+<style>
+.checklist { width: 300px; background: #0f1629; border: 1px solid rgba(255,255,255,.07); border-radius: 16px; padding: 20px; }
+.cl-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+.cl-title { font-size: 14px; font-weight: 800; color: #fff; }
+.cl-pct { font-size: 12px; font-weight: 700; color: #a78bfa; }
+.cl-bar-wrap { height: 4px; background: rgba(255,255,255,.06); border-radius: 4px; margin-bottom: 16px; }
+.cl-bar { height: 100%; background: linear-gradient(90deg,#7c3aed,#2563eb); border-radius: 4px; transition: width .6s cubic-bezier(.34,1.56,.64,1); }
+.cl-item { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,.04); cursor: pointer; }
+.cl-check { width: 20px; height: 20px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 11px; }
+.cl-check.done { background: linear-gradient(135deg,#10b981,#059669); color: #fff; }
+.cl-check.todo { border: 2px solid rgba(255,255,255,.15); }
+.cl-label.done { color: rgba(255,255,255,.35); text-decoration: line-through; }
+.cl-label.todo { color: rgba(255,255,255,.75); font-size: 13px; font-weight: 600; }
+.cl-pts { margin-left: auto; font-size: 10px; font-weight: 700; color: #a78bfa; background: rgba(124,58,237,.12); padding: 2px 7px; border-radius: 50px; }
+</style>`
+  },
+
+  {
+    id: 'welcome-modal',
+    title: 'Welcome Modal',
+    category: 'onboarding',
+    tags: ['modal', 'welcome', 'first-run', 'dialog'],
+    desc: 'Branded first-run welcome dialog with animated entry and feature highlights.',
+    featured: true,
+    isNew: true,
+    preview: `
+      <style>
+        @media(prefers-reduced-motion:reduce){*{animation:none!important;}}
+        body{margin:0;display:flex;align-items:center;justify-content:center;
+          height:100vh;background:rgba(5,8,16,.85);font-family:Inter,sans-serif;
+          backdrop-filter:blur(4px);}
+        @keyframes modalIn{from{opacity:0;transform:scale(.92) translateY(16px);}to{opacity:1;transform:scale(1) translateY(0);}}
+        .wm{width:320px;background:#0f1629;border:1px solid rgba(255,255,255,.09);
+          border-radius:20px;overflow:hidden;animation:modalIn .4s cubic-bezier(.34,1.56,.64,1) forwards;}
+        .wm-cover{height:100px;background:linear-gradient(135deg,#7c3aed,#2563eb,#06b6d4);
+          display:flex;align-items:center;justify-content:center;position:relative;}
+        .wm-logo{width:52px;height:52px;border-radius:14px;background:rgba(255,255,255,.15);
+          backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;
+          font-size:24px;border:1px solid rgba(255,255,255,.2);}
+        .wm-body{padding:20px 22px;}
+        .wm h2{font-size:18px;font-weight:900;color:#fff;margin-bottom:6px;}
+        .wm p{font-size:13px;color:rgba(255,255,255,.55);line-height:1.6;margin-bottom:16px;}
+        .wm-feats{display:flex;flex-direction:column;gap:8px;margin-bottom:18px;}
+        .wm-feat{display:flex;gap:10px;align-items:center;}
+        .wm-feat-icon{width:28px;height:28px;border-radius:8px;
+          background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.2);
+          display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;}
+        .wm-feat-text{font-size:12px;font-weight:600;color:rgba(255,255,255,.7);}
+        .wm-actions{display:flex;gap:8px;}
+        .wm-btn-primary{flex:1;padding:10px;background:linear-gradient(135deg,#7c3aed,#2563eb);
+          border:none;border-radius:10px;color:#fff;font-size:13px;font-weight:700;cursor:pointer;}
+        .wm-btn-skip{padding:10px 14px;background:transparent;border:1px solid rgba(255,255,255,.1);
+          border-radius:10px;color:rgba(255,255,255,.45);font-size:12px;cursor:pointer;}
+        .wm-btn-skip:hover{color:rgba(255,255,255,.7);}
+      </style>
+      <div class="wm">
+        <div class="wm-cover"><div class="wm-logo">✦</div></div>
+        <div class="wm-body">
+          <h2>Welcome to AURA ✨</h2>
+          <p>You're all set! Here's what you can do right away.</p>
+          <div class="wm-feats">
+            <div class="wm-feat"><div class="wm-feat-icon">⚡</div><span class="wm-feat-text">Browse 100+ production-ready components</span></div>
+            <div class="wm-feat"><div class="wm-feat-icon">📋</div><span class="wm-feat-text">Copy code with one click — no setup needed</span></div>
+            <div class="wm-feat"><div class="wm-feat-icon">🎨</div><span class="wm-feat-text">Dark & light theme support built-in</span></div>
+          </div>
+          <div class="wm-actions">
+            <button class="wm-btn-primary">Get Started →</button>
+            <button class="wm-btn-skip">Skip</button>
+          </div>
+        </div>
+      </div>`,
+    code: `<!-- Welcome Modal -->
+<div class="modal-backdrop" id="welcomeModal" role="dialog" aria-modal="true" aria-labelledby="wm-title">
+  <div class="wm">
+    <div class="wm-cover">
+      <div class="wm-logo" aria-hidden="true">✦</div>
+    </div>
+    <div class="wm-body">
+      <h2 id="wm-title">Welcome to AURA ✨</h2>
+      <p>You're all set! Here's what you can do right away.</p>
+      <div class="wm-feats">
+        <div class="wm-feat"><div class="wm-feat-icon">⚡</div><span>Browse 100+ production-ready components</span></div>
+        <div class="wm-feat"><div class="wm-feat-icon">📋</div><span>Copy code with one click</span></div>
+        <div class="wm-feat"><div class="wm-feat-icon">🎨</div><span>Dark & light themes built-in</span></div>
+      </div>
+      <div class="wm-actions">
+        <button class="wm-btn-primary" onclick="document.getElementById('welcomeModal').style.display='none'">Get Started →</button>
+        <button class="wm-btn-skip"   onclick="document.getElementById('welcomeModal').style.display='none'">Skip</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+@keyframes modalIn { from { opacity:0; transform: scale(.92) translateY(16px); } to { opacity:1; transform: scale(1) translateY(0); } }
+@media (prefers-reduced-motion: reduce) { .wm { animation: none; } }
+.modal-backdrop { position: fixed; inset: 0; background: rgba(5,8,16,.85); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; z-index: 2000; }
+.wm { width: 340px; background: #0f1629; border: 1px solid rgba(255,255,255,.09); border-radius: 20px; overflow: hidden; animation: modalIn .4s cubic-bezier(.34,1.56,.64,1) forwards; }
+.wm-cover { height: 100px; background: linear-gradient(135deg,#7c3aed,#2563eb,#06b6d4); display: flex; align-items: center; justify-content: center; }
+.wm-logo { width: 52px; height: 52px; border-radius: 14px; background: rgba(255,255,255,.15); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; font-size: 24px; border: 1px solid rgba(255,255,255,.2); }
+.wm-body { padding: 20px 22px; }
+.wm h2 { font-size: 18px; font-weight: 900; color: #fff; margin-bottom: 6px; }
+.wm p { font-size: 13px; color: rgba(255,255,255,.55); line-height: 1.6; margin-bottom: 16px; }
+.wm-feats { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
+.wm-feat { display: flex; gap: 10px; align-items: center; font-size: 12px; font-weight: 600; color: rgba(255,255,255,.7); }
+.wm-feat-icon { width: 28px; height: 28px; border-radius: 8px; background: rgba(124,58,237,.15); border: 1px solid rgba(124,58,237,.2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.wm-actions { display: flex; gap: 8px; }
+.wm-btn-primary { flex: 1; padding: 10px; background: linear-gradient(135deg,#7c3aed,#2563eb); border: none; border-radius: 10px; color: #fff; font-size: 13px; font-weight: 700; cursor: pointer; }
+.wm-btn-skip { padding: 10px 14px; background: transparent; border: 1px solid rgba(255,255,255,.1); border-radius: 10px; color: rgba(255,255,255,.45); font-size: 12px; cursor: pointer; }
+</style>`
+  },
+
+  {
+    id: 'progress-ring',
+    title: 'Progress Ring',
+    category: 'onboarding',
+    tags: ['progress', 'circular', 'svg', 'animated'],
+    desc: 'Circular SVG progress ring with animated fill and centre counter.',
+    featured: false,
+    isNew: true,
+    preview: `
+      <style>
+        @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
+        body{margin:0;display:flex;align-items:center;justify-content:center;gap:32px;
+          height:100vh;background:#0b0f1a;font-family:Inter,sans-serif;flex-wrap:wrap;}
+        .ring-wrap{display:flex;flex-direction:column;align-items:center;gap:10px;}
+        .ring-svg{transform:rotate(-90deg);}
+        .ring-track{fill:none;stroke:rgba(255,255,255,.06);stroke-width:8;}
+        .ring-fill{fill:none;stroke-width:8;stroke-linecap:round;
+          stroke-dasharray:220;stroke-dashoffset:220;
+          transition:stroke-dashoffset 1.4s cubic-bezier(.34,1.56,.64,1);}
+        .ring-fill.violet{stroke:url(#rg1);}
+        .ring-fill.cyan{stroke:url(#rg2);}
+        .ring-fill.green{stroke:url(#rg3);}
+        .ring-label{font-size:22px;font-weight:900;color:#fff;text-anchor:middle;dominant-baseline:central;transform:rotate(90deg);}
+        .ring-sub{font-size:10px;font-weight:600;color:rgba(255,255,255,.4);text-anchor:middle;dominant-baseline:central;transform:rotate(90deg);y:14;}
+        .ring-name{font-size:12px;font-weight:600;color:rgba(255,255,255,.5);}
+      </style>
+      <script>
+        document.addEventListener('DOMContentLoaded',()=>{
+          document.querySelectorAll('.ring-fill').forEach(el=>{
+            const pct=parseFloat(el.dataset.pct)||0;
+            const offset=220-(220*(pct/100));
+            setTimeout(()=>{el.style.strokeDashoffset=offset;},200);
+          });
+        });
+      </script>
+      <div class="ring-wrap">
+        <svg class="ring-svg" width="90" height="90" viewBox="0 0 90 90">
+          <defs>
+            <linearGradient id="rg1" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#7c3aed"/><stop offset="100%" stop-color="#2563eb"/>
+            </linearGradient>
+          </defs>
+          <circle class="ring-track" cx="45" cy="45" r="35"/>
+          <circle class="ring-fill violet" cx="45" cy="45" r="35" data-pct="72"/>
+          <text class="ring-label" x="45" y="42">72%</text>
+          <text class="ring-sub" x="45" y="58" font-size="10" fill="rgba(255,255,255,.4)" text-anchor="middle" transform="rotate(90,45,45)">Tasks</text>
+        </svg>
+        <span class="ring-name">Completion</span>
+      </div>
+      <div class="ring-wrap">
+        <svg class="ring-svg" width="90" height="90" viewBox="0 0 90 90">
+          <defs>
+            <linearGradient id="rg3" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#10b981"/><stop offset="100%" stop-color="#059669"/>
+            </linearGradient>
+          </defs>
+          <circle class="ring-track" cx="45" cy="45" r="35"/>
+          <circle class="ring-fill green" cx="45" cy="45" r="35" data-pct="45"/>
+          <text class="ring-label" x="45" y="42">45%</text>
+        </svg>
+        <span class="ring-name">Health</span>
+      </div>`,
+    code: `<div class="ring-wrap">
+  <svg class="ring-svg" width="120" height="120" viewBox="0 0 120 120" aria-label="72% complete">
+    <defs>
+      <linearGradient id="ring-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#7c3aed"/>
+        <stop offset="100%" stop-color="#2563eb"/>
+      </linearGradient>
+    </defs>
+    <circle class="ring-track" cx="60" cy="60" r="50"/>
+    <circle class="ring-fill" cx="60" cy="60" r="50" data-pct="72"/>
+    <text class="ring-label" x="60" y="56">72%</text>
+    <text class="ring-sub"   x="60" y="74">Complete</text>
+  </svg>
+</div>
+
+<style>
+.ring-svg { transform: rotate(-90deg); }
+.ring-track { fill: none; stroke: rgba(255,255,255,.06); stroke-width: 10; }
+.ring-fill  { fill: none; stroke: url(#ring-grad); stroke-width: 10; stroke-linecap: round;
+  stroke-dasharray: 314; stroke-dashoffset: 314;
+  transition: stroke-dashoffset 1.4s cubic-bezier(.34,1.56,.64,1); }
+@media (prefers-reduced-motion: reduce) { .ring-fill { transition: none; } }
+.ring-label { font-size: 22px; font-weight: 900; fill: #fff; text-anchor: middle; dominant-baseline: central; transform: rotate(90deg); }
+.ring-sub   { font-size: 11px; fill: rgba(255,255,255,.45); text-anchor: middle; dominant-baseline: central; transform: rotate(90deg); }
+</style>
+
+<script>
+document.querySelectorAll('.ring-fill').forEach(el => {
+  const pct = parseFloat(el.dataset.pct) || 0;
+  const r   = parseFloat(el.getAttribute('r'));
+  const circ = 2 * Math.PI * r;
+  el.style.strokeDasharray  = circ;
+  el.style.strokeDashoffset = circ;
+  setTimeout(() => { el.style.strokeDashoffset = circ - (circ * pct / 100); }, 200);
+});
+</script>`
+  },
+
+  {
+    id: 'trial-banner',
+    title: 'Trial Banner',
+    category: 'onboarding',
+    tags: ['banner', 'trial', 'upgrade', 'sticky'],
+    desc: 'Sticky top banner with live countdown timer urging users to upgrade.',
+    featured: false,
+    isNew: true,
+    preview: `
+      <style>
+        @media(prefers-reduced-motion:reduce){*{animation:none!important;}}
+        body{margin:0;background:#0b0f1a;font-family:Inter,sans-serif;}
+        @keyframes shimBanner{0%{background-position:0 50%}100%{background-position:200% 50%}}
+        .trial-banner{
+          display:flex;align-items:center;justify-content:center;gap:16px;
+          padding:10px 20px;
+          background:linear-gradient(90deg,#4c1d95,#1d4ed8,#0e7490,#4c1d95);
+          background-size:200% 100%;
+          animation:shimBanner 6s linear infinite;
+          flex-wrap:wrap;}
+        .tb-text{font-size:13px;font-weight:600;color:rgba(255,255,255,.9);}
+        .tb-countdown{display:flex;gap:6px;align-items:center;}
+        .tb-seg{text-align:center;}
+        .tb-num{display:block;font-size:16px;font-weight:900;color:#fff;line-height:1;}
+        .tb-lbl{font-size:9px;color:rgba(255,255,255,.5);font-weight:600;text-transform:uppercase;letter-spacing:.06em;}
+        .tb-colon{font-size:16px;font-weight:900;color:rgba(255,255,255,.4);line-height:1.1;}
+        .tb-btn{padding:6px 18px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);
+          border-radius:50px;color:#fff;font-size:12px;font-weight:700;cursor:pointer;
+          backdrop-filter:blur(4px);transition:background .2s;}
+        .tb-btn:hover{background:rgba(255,255,255,.25);}
+        .tb-close{width:24px;height:24px;background:rgba(255,255,255,.1);border:none;
+          border-radius:50%;color:rgba(255,255,255,.6);font-size:14px;cursor:pointer;
+          display:flex;align-items:center;justify-content:center;}
+      </style>
+      <script>
+        function tick(){
+          const end=new Date();end.setHours(23,59,59,0);
+          const diff=Math.max(0,end-Date.now());
+          const h=Math.floor(diff/36e5).toString().padStart(2,'0');
+          const m=Math.floor((diff%36e5)/6e4).toString().padStart(2,'0');
+          const s=Math.floor((diff%6e4)/1e3).toString().padStart(2,'0');
+          document.getElementById('tb-h').textContent=h;
+          document.getElementById('tb-m').textContent=m;
+          document.getElementById('tb-s').textContent=s;
+        }
+        tick();setInterval(tick,1000);
+      </script>
+      <div class="trial-banner">
+        <span class="tb-text">⚡ Free trial ends today — Upgrade now and save 40%</span>
+        <div class="tb-countdown">
+          <div class="tb-seg"><span class="tb-num" id="tb-h">08</span><span class="tb-lbl">hrs</span></div>
+          <span class="tb-colon">:</span>
+          <div class="tb-seg"><span class="tb-num" id="tb-m">42</span><span class="tb-lbl">min</span></div>
+          <span class="tb-colon">:</span>
+          <div class="tb-seg"><span class="tb-num" id="tb-s">17</span><span class="tb-lbl">sec</span></div>
+        </div>
+        <button class="tb-btn">Upgrade →</button>
+        <button class="tb-close" aria-label="Dismiss">✕</button>
+      </div>`,
+    code: `<div class="trial-banner" role="banner" aria-label="Trial upgrade prompt">
+  <span class="tb-text">⚡ Free trial ends today — Upgrade now and save 40%</span>
+  <div class="tb-countdown" aria-live="polite" aria-label="Time remaining">
+    <div class="tb-seg"><span class="tb-num" id="tb-h">08</span><span class="tb-lbl">hrs</span></div>
+    <span class="tb-colon" aria-hidden="true">:</span>
+    <div class="tb-seg"><span class="tb-num" id="tb-m">42</span><span class="tb-lbl">min</span></div>
+    <span class="tb-colon" aria-hidden="true">:</span>
+    <div class="tb-seg"><span class="tb-num" id="tb-s">17</span><span class="tb-lbl">sec</span></div>
+  </div>
+  <button class="tb-btn">Upgrade →</button>
+  <button class="tb-close" aria-label="Dismiss banner">✕</button>
+</div>
+
+<style>
+@keyframes shimBanner { 0% { background-position: 0 50%; } 100% { background-position: 200% 50%; } }
+@media (prefers-reduced-motion: reduce) { .trial-banner { animation: none; } }
+.trial-banner {
+  display: flex; align-items: center; justify-content: center; gap: 16px;
+  padding: 10px 20px; flex-wrap: wrap;
+  background: linear-gradient(90deg, #4c1d95, #1d4ed8, #0e7490, #4c1d95);
+  background-size: 200% 100%;
+  animation: shimBanner 6s linear infinite;
+}
+.tb-text { font-size: 13px; font-weight: 600; color: rgba(255,255,255,.9); }
+.tb-num  { display: block; font-size: 16px; font-weight: 900; color: #fff; line-height: 1; }
+.tb-lbl  { font-size: 9px; color: rgba(255,255,255,.5); font-weight: 600; text-transform: uppercase; }
+.tb-btn  { padding: 6px 18px; background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.25); border-radius: 50px; color: #fff; font-size: 12px; font-weight: 700; cursor: pointer; }
+.tb-close{ width: 24px; height: 24px; background: rgba(255,255,255,.1); border: none; border-radius: 50%; color: rgba(255,255,255,.6); cursor: pointer; }
+</style>
+
+<script>
+function tick() {
+  const end = new Date(); end.setHours(23,59,59,0);
+  const diff = Math.max(0, end - Date.now());
+  document.getElementById('tb-h').textContent = String(Math.floor(diff/36e5)).padStart(2,'0');
+  document.getElementById('tb-m').textContent = String(Math.floor((diff%36e5)/6e4)).padStart(2,'0');
+  document.getElementById('tb-s').textContent = String(Math.floor((diff%6e4)/1e3)).padStart(2,'0');
+}
+tick(); setInterval(tick, 1000);
+document.querySelector('.tb-close').addEventListener('click', e => e.target.closest('.trial-banner').remove());
+</script>`
+  },
+
+  {
+    id: 'empty-state-hero',
+    title: 'Empty State',
+    category: 'onboarding',
+    tags: ['empty-state', 'zero-data', 'first-run', 'illustration'],
+    desc: 'Illustrated empty state component for first-run zero-data screens.',
+    featured: false,
+    isNew: true,
+    preview: `
+      <style>
+        @media(prefers-reduced-motion:reduce){*{animation:none!important;}}
+        body{margin:0;display:flex;align-items:center;justify-content:center;
+          height:100vh;background:#0b0f1a;font-family:Inter,sans-serif;}
+        @keyframes floatIll{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+        .empty{text-align:center;padding:20px;max-width:280px;}
+        .empty-ill{position:relative;margin:0 auto 20px;width:120px;height:120px;
+          animation:floatIll 4s ease-in-out infinite;}
+        .empty-ill-ring{position:absolute;inset:0;border-radius:50%;
+          border:2px dashed rgba(124,58,237,.2);animation:floatIll 4s ease-in-out infinite reverse;}
+        .empty-ill-inner{position:absolute;inset:12px;border-radius:50%;
+          background:linear-gradient(135deg,rgba(124,58,237,.12),rgba(37,99,235,.08));
+          border:1px solid rgba(124,58,237,.2);display:flex;align-items:center;justify-content:center;}
+        .empty-ill-icon{font-size:36px;}
+        .empty-title{font-size:17px;font-weight:800;color:#fff;margin-bottom:8px;}
+        .empty-desc{font-size:13px;color:rgba(255,255,255,.45);line-height:1.65;margin-bottom:20px;}
+        .empty-btn{padding:10px 24px;background:linear-gradient(135deg,#7c3aed,#2563eb);
+          border:none;border-radius:10px;color:#fff;font-size:13px;font-weight:700;cursor:pointer;
+          transition:transform .3s cubic-bezier(.34,1.56,.64,1);}
+        .empty-btn:hover{transform:translateY(-2px);}
+        .empty-hint{margin-top:10px;font-size:11px;color:rgba(255,255,255,.25);}
+      </style>
+      <div class="empty" role="status">
+        <div class="empty-ill">
+          <div class="empty-ill-ring"></div>
+          <div class="empty-ill-inner"><span class="empty-ill-icon">📂</span></div>
+        </div>
+        <div class="empty-title">No projects yet</div>
+        <p class="empty-desc">You haven't created any projects. Start by adding your first one — it only takes a minute.</p>
+        <button class="empty-btn">+ Create First Project</button>
+        <p class="empty-hint">No credit card required</p>
+      </div>`,
+    code: `<div class="empty-state" role="status" aria-label="No content available">
+  <div class="empty-ill" aria-hidden="true">
+    <div class="empty-ill-ring"></div>
+    <div class="empty-ill-inner">
+      <span class="empty-ill-icon">📂</span>
+    </div>
+  </div>
+  <h3 class="empty-title">No projects yet</h3>
+  <p class="empty-desc">You haven't created any projects yet. Start by adding your first one.</p>
+  <button class="empty-btn">+ Create First Project</button>
+  <p class="empty-hint">No credit card required</p>
+</div>
+
+<style>
+@keyframes floatIll { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@media (prefers-reduced-motion: reduce) { .empty-ill, .empty-ill-ring { animation: none; } }
+.empty-state { text-align: center; padding: 40px 20px; max-width: 320px; margin: 0 auto; }
+.empty-ill { position: relative; width: 120px; height: 120px; margin: 0 auto 20px; animation: floatIll 4s ease-in-out infinite; }
+.empty-ill-ring { position: absolute; inset: 0; border-radius: 50%; border: 2px dashed rgba(124,58,237,.25); animation: floatIll 4s ease-in-out infinite reverse; }
+.empty-ill-inner { position: absolute; inset: 12px; border-radius: 50%; background: linear-gradient(135deg,rgba(124,58,237,.12),rgba(37,99,235,.08)); border: 1px solid rgba(124,58,237,.2); display: flex; align-items: center; justify-content: center; }
+.empty-ill-icon { font-size: 36px; }
+.empty-title { font-size: 17px; font-weight: 800; color: #fff; margin-bottom: 8px; }
+.empty-desc  { font-size: 13px; color: rgba(255,255,255,.45); line-height: 1.65; margin-bottom: 20px; }
+.empty-btn   { padding: 10px 24px; background: linear-gradient(135deg,#7c3aed,#2563eb); border: none; border-radius: 10px; color: #fff; font-size: 13px; font-weight: 700; cursor: pointer; transition: transform .3s ease; }
+.empty-btn:hover { transform: translateY(-2px); }
+.empty-hint  { margin-top: 10px; font-size: 11px; color: rgba(255,255,255,.25); }
+</style>`
+  },
+
+  {
+    id: 'feature-spotlight',
+    title: 'Feature Spotlight',
+    category: 'onboarding',
+    tags: ['tooltip', 'coach-mark', 'feature-discovery', 'onboarding'],
+    desc: 'Pulsing coach mark tooltip for in-app feature discovery and walkthroughs.',
+    featured: false,
+    isNew: true,
+    preview: `
+      <style>
+        @media(prefers-reduced-motion:reduce){*{animation:none!important;}}
+        body{margin:0;display:flex;align-items:center;justify-content:center;
+          height:100vh;background:#0b0f1a;font-family:Inter,sans-serif;}
+        @keyframes coachPulse{0%{transform:scale(1);opacity:.6;}100%{transform:scale(2.4);opacity:0;}}
+        .spotlight-demo{position:relative;display:inline-flex;padding:40px;}
+        .target-btn{padding:11px 24px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+          border-radius:10px;color:rgba(255,255,255,.7);font-size:13px;font-weight:600;cursor:pointer;}
+        .coach-anchor{position:absolute;top:14px;right:14px;}
+        .coach-pulse{position:relative;width:14px;height:14px;}
+        .coach-dot{position:absolute;inset:3px;background:#7c3aed;border-radius:50%;}
+        .coach-ring{position:absolute;inset:0;border-radius:50%;border:2px solid #7c3aed;
+          animation:coachPulse 1.6s ease-out infinite;}
+        .coach-ring2{position:absolute;inset:0;border-radius:50%;border:2px solid #7c3aed;
+          animation:coachPulse 1.6s ease-out .5s infinite;}
+        .coach-tooltip{position:absolute;bottom:calc(100% + 12px);right:0;
+          width:210px;background:#1a2035;border:1px solid rgba(124,58,237,.3);
+          border-radius:12px;padding:14px 16px;box-shadow:0 8px 40px rgba(0,0,0,.5);}
+        .coach-tooltip::after{content:'';position:absolute;bottom:-7px;right:3px;
+          width:12px;height:12px;background:#1a2035;border-right:1px solid rgba(124,58,237,.3);
+          border-bottom:1px solid rgba(124,58,237,.3);transform:rotate(45deg);}
+        .ct-badge{display:inline-block;padding:2px 8px;font-size:10px;font-weight:700;
+          background:rgba(124,58,237,.2);color:#a78bfa;border-radius:50px;margin-bottom:8px;}
+        .ct-title{font-size:13px;font-weight:800;color:#fff;margin-bottom:4px;}
+        .ct-desc{font-size:11px;color:rgba(255,255,255,.5);line-height:1.55;margin-bottom:10px;}
+        .ct-actions{display:flex;gap:6px;}
+        .ct-skip{font-size:11px;color:rgba(255,255,255,.35);cursor:pointer;background:none;border:none;padding:0;}
+        .ct-next{font-size:11px;font-weight:700;color:#fff;background:linear-gradient(135deg,#7c3aed,#2563eb);
+          border:none;border-radius:6px;padding:5px 12px;cursor:pointer;}
+        .ct-counter{font-size:10px;color:rgba(255,255,255,.3);margin-left:auto;}
+      </style>
+      <div class="spotlight-demo">
+        <button class="target-btn">AI Summarise</button>
+        <div class="coach-anchor">
+          <div class="coach-pulse">
+            <div class="coach-dot"></div>
+            <div class="coach-ring"></div>
+            <div class="coach-ring2"></div>
+          </div>
+          <div class="coach-tooltip">
+            <span class="ct-badge">✨ New</span>
+            <div class="ct-title">AI Summarise is here!</div>
+            <p class="ct-desc">Instantly condense any document or thread into a 3-line brief using GPT-4.</p>
+            <div class="ct-actions">
+              <button class="ct-skip">Skip tour</button>
+              <button class="ct-next">Next tip →</button>
+              <span class="ct-counter">1 / 4</span>
+            </div>
+          </div>
+        </div>
+      </div>`,
+    code: `<div style="position:relative; display:inline-block;">
+  <!-- Your target element -->
+  <button class="target-btn">AI Summarise</button>
+
+  <!-- Coach mark -->
+  <div class="coach-anchor" role="tooltip" id="coach-1">
+    <div class="coach-pulse" aria-hidden="true">
+      <div class="coach-dot"></div>
+      <div class="coach-ring"></div>
+      <div class="coach-ring2"></div>
+    </div>
+    <div class="coach-tooltip">
+      <span class="ct-badge">✨ New</span>
+      <div class="ct-title">AI Summarise is here!</div>
+      <p class="ct-desc">Instantly condense any document into a 3-line brief.</p>
+      <div class="ct-actions">
+        <button class="ct-skip" onclick="document.getElementById('coach-1').remove()">Skip</button>
+        <button class="ct-next">Next →</button>
+        <span class="ct-counter">1 / 4</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+@keyframes coachPulse { 0% { transform: scale(1); opacity: .6; } 100% { transform: scale(2.4); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .coach-ring, .coach-ring2 { animation: none; } }
+.coach-anchor { position: absolute; top: -6px; right: -6px; }
+.coach-pulse  { position: relative; width: 14px; height: 14px; }
+.coach-dot    { position: absolute; inset: 3px; background: #7c3aed; border-radius: 50%; }
+.coach-ring   { position: absolute; inset: 0; border-radius: 50%; border: 2px solid #7c3aed; animation: coachPulse 1.6s ease-out infinite; }
+.coach-ring2  { position: absolute; inset: 0; border-radius: 50%; border: 2px solid #7c3aed; animation: coachPulse 1.6s ease-out .5s infinite; }
+.coach-tooltip { position: absolute; bottom: calc(100% + 12px); right: 0; width: 220px; background: #1a2035; border: 1px solid rgba(124,58,237,.3); border-radius: 12px; padding: 14px 16px; box-shadow: 0 8px 40px rgba(0,0,0,.5); }
+.ct-badge  { display: inline-block; padding: 2px 8px; font-size: 10px; font-weight: 700; background: rgba(124,58,237,.2); color: #a78bfa; border-radius: 50px; margin-bottom: 8px; }
+.ct-title  { font-size: 13px; font-weight: 800; color: #fff; margin-bottom: 4px; }
+.ct-desc   { font-size: 11px; color: rgba(255,255,255,.5); line-height: 1.55; margin-bottom: 10px; }
+.ct-actions{ display: flex; gap: 6px; align-items: center; }
+.ct-skip   { font-size: 11px; color: rgba(255,255,255,.35); cursor: pointer; background: none; border: none; }
+.ct-next   { font-size: 11px; font-weight: 700; color: #fff; background: linear-gradient(135deg,#7c3aed,#2563eb); border: none; border-radius: 6px; padding: 5px 12px; cursor: pointer; }
+.ct-counter{ font-size: 10px; color: rgba(255,255,255,.3); margin-left: auto; }
+</style>`
+  },
+
+  {
+    id: 'user-avatar-group',
+    title: 'Avatar Group',
+    category: 'onboarding',
+    tags: ['avatar', 'team', 'social-proof', 'stacked'],
+    desc: 'Stacked avatar group with overflow count and social-proof CTA.',
+    featured: false,
+    isNew: false,
+    preview: `
+      <style>
+        body{margin:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+          gap:28px;height:100vh;background:#0b0f1a;font-family:Inter,sans-serif;}
+        .avatar-group{display:flex;align-items:center;}
+        .av{width:40px;height:40px;border-radius:50%;border:2.5px solid #0b0f1a;
+          display:flex;align-items:center;justify-content:center;
+          font-size:13px;font-weight:800;color:#fff;margin-left:-10px;flex-shrink:0;
+          transition:transform .2s ease;}
+        .av:first-child{margin-left:0;}
+        .av:hover{transform:translateY(-4px);z-index:10;}
+        .av-1{background:linear-gradient(135deg,#7c3aed,#4c1d95);}
+        .av-2{background:linear-gradient(135deg,#2563eb,#1e40af);}
+        .av-3{background:linear-gradient(135deg,#10b981,#065f46);}
+        .av-4{background:linear-gradient(135deg,#f59e0b,#b45309);}
+        .av-5{background:linear-gradient(135deg,#06b6d4,#0e7490);}
+        .av-more{background:rgba(255,255,255,.08);border-color:#0b0f1a;
+          font-size:12px;color:rgba(255,255,255,.6);border:2.5px solid #0b0f1a;}
+        .ag-text{font-size:13px;color:rgba(255,255,255,.5);margin-top:10px;}
+        .ag-text strong{color:#fff;}
+        .ag-proof{display:flex;flex-direction:column;align-items:center;gap:6px;
+          padding:16px 24px;background:#0f1629;border:1px solid rgba(255,255,255,.07);border-radius:16px;}
+        .ag-stars{color:#f59e0b;font-size:14px;letter-spacing:2px;}
+        .ag-sub{font-size:12px;color:rgba(255,255,255,.4);}
+      </style>
+      <div class="ag-proof">
+        <div class="avatar-group" aria-label="Team members">
+          <div class="av av-1" title="Alex">A</div>
+          <div class="av av-2" title="Blake">B</div>
+          <div class="av av-3" title="Casey">C</div>
+          <div class="av av-4" title="Dana">D</div>
+          <div class="av av-5" title="Evan">E</div>
+          <div class="av av-more">+48k</div>
+        </div>
+        <div class="ag-stars">★★★★★</div>
+        <p class="ag-sub">Loved by <strong style="color:#fff">50,000+</strong> developers worldwide</p>
+      </div>`,
+    code: `<div class="ag-proof">
+  <div class="avatar-group" aria-label="50000 developers use this">
+    <div class="av av-1" title="Alex"    aria-label="Alex">A</div>
+    <div class="av av-2" title="Blake"   aria-label="Blake">B</div>
+    <div class="av av-3" title="Casey"   aria-label="Casey">C</div>
+    <div class="av av-4" title="Dana"    aria-label="Dana">D</div>
+    <div class="av av-5" title="Evan"    aria-label="Evan">E</div>
+    <div class="av av-more" aria-label="48000 more">+48k</div>
+  </div>
+  <div class="ag-stars" aria-label="5 star rating">★★★★★</div>
+  <p class="ag-sub">Loved by <strong>50,000+</strong> developers worldwide</p>
+</div>
+
+<style>
+.avatar-group { display: flex; align-items: center; }
+.av { width: 40px; height: 40px; border-radius: 50%; border: 2.5px solid #0b0f1a;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 800; color: #fff; margin-left: -10px;
+  transition: transform .2s ease; cursor: default; }
+.av:first-child { margin-left: 0; }
+.av:hover { transform: translateY(-4px); z-index: 10; }
+.av-1 { background: linear-gradient(135deg,#7c3aed,#4c1d95); }
+.av-2 { background: linear-gradient(135deg,#2563eb,#1e40af); }
+.av-3 { background: linear-gradient(135deg,#10b981,#065f46); }
+.av-4 { background: linear-gradient(135deg,#f59e0b,#b45309); }
+.av-5 { background: linear-gradient(135deg,#06b6d4,#0e7490); }
+.av-more { background: rgba(255,255,255,.08); font-size: 12px; color: rgba(255,255,255,.6); }
+.ag-proof { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.ag-stars  { color: #f59e0b; font-size: 14px; letter-spacing: 2px; }
+.ag-sub    { font-size: 13px; color: rgba(255,255,255,.5); }
+</style>`
+  },
+
+  {
+    id: 'onboarding-checklist-mini',
+    title: 'Quick Start Widget',
+    category: 'onboarding',
+    tags: ['checklist', 'sidebar', 'widget', 'compact'],
+    desc: 'Compact collapsible quick-start widget for dashboards and sidebars.',
+    featured: false,
+    isNew: true,
+    preview: `
+      <style>
+        @media(prefers-reduced-motion:reduce){*{transition:none!important;}}
+        body{margin:0;display:flex;align-items:center;justify-content:center;
+          height:100vh;background:#0b0f1a;font-family:Inter,sans-serif;}
+        .qs-widget{width:240px;background:#0f1629;border:1px solid rgba(255,255,255,.07);
+          border-radius:14px;overflow:hidden;}
+        .qs-head{display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer;
+          user-select:none;border-bottom:1px solid rgba(255,255,255,.05);}
+        .qs-ring-mini{width:32px;height:32px;flex-shrink:0;}
+        .qs-ring-mini svg{transform:rotate(-90deg);}
+        .qs-head-text{flex:1;}
+        .qs-head-label{font-size:12px;font-weight:800;color:#fff;}
+        .qs-head-sub{font-size:10px;color:rgba(255,255,255,.35);margin-top:1px;}
+        .qs-chevron{color:rgba(255,255,255,.3);font-size:11px;transition:transform .25s;}
+        .qs-chevron.open{transform:rotate(180deg);}
+        .qs-body{padding:0 14px;}
+        .qs-item{display:flex;align-items:center;gap:8px;padding:8px 0;
+          border-bottom:1px solid rgba(255,255,255,.04);font-size:12px;cursor:pointer;}
+        .qs-item:last-child{border-bottom:none;}
+        .qs-dot{width:16px;height:16px;border-radius:50%;flex-shrink:0;
+          display:flex;align-items:center;justify-content:center;font-size:9px;}
+        .qs-dot.done{background:rgba(16,185,129,.2);color:#34d399;}
+        .qs-dot.todo{border:1.5px solid rgba(255,255,255,.15);color:transparent;}
+        .qs-name{flex:1;color:rgba(255,255,255,.65);}
+        .qs-name.done{text-decoration:line-through;color:rgba(255,255,255,.3);}
+        .qs-arrow{color:rgba(255,255,255,.2);font-size:11px;}
+      </style>
+      <div class="qs-widget">
+        <div class="qs-head">
+          <div class="qs-ring-mini">
+            <svg width="32" height="32" viewBox="0 0 32 32">
+              <circle cx="16" cy="16" r="12" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="4"/>
+              <circle cx="16" cy="16" r="12" fill="none" stroke="url(#qg)" stroke-width="4"
+                stroke-linecap="round" stroke-dasharray="75" stroke-dashoffset="28"/>
+              <defs><linearGradient id="qg" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#7c3aed"/><stop offset="100%" stop-color="#2563eb"/>
+              </linearGradient></defs>
+            </svg>
+          </div>
+          <div class="qs-head-text">
+            <div class="qs-head-label">Quick Start</div>
+            <div class="qs-head-sub">3 of 5 complete</div>
+          </div>
+          <span class="qs-chevron open">▼</span>
+        </div>
+        <div class="qs-body">
+          <div class="qs-item"><div class="qs-dot done">✓</div><span class="qs-name done">Create account</span></div>
+          <div class="qs-item"><div class="qs-dot done">✓</div><span class="qs-name done">Set up workspace</span></div>
+          <div class="qs-item"><div class="qs-dot done">✓</div><span class="qs-name done">Add team members</span></div>
+          <div class="qs-item"><div class="qs-dot todo"></div><span class="qs-name">Connect integrations</span><span class="qs-arrow">›</span></div>
+          <div class="qs-item"><div class="qs-dot todo"></div><span class="qs-name">Launch first project</span><span class="qs-arrow">›</span></div>
+        </div>
+      </div>`,
+    code: `<div class="qs-widget">
+  <div class="qs-head" onclick="this.nextElementSibling.classList.toggle('hidden')">
+    <div class="qs-ring-mini" aria-hidden="true"><!-- SVG ring here --></div>
+    <div class="qs-head-text">
+      <div class="qs-head-label">Quick Start</div>
+      <div class="qs-head-sub">3 of 5 complete</div>
+    </div>
+    <span class="qs-chevron">▼</span>
+  </div>
+  <div class="qs-body">
+    <div class="qs-item"><div class="qs-dot done">✓</div><span class="qs-name done">Create account</span></div>
+    <div class="qs-item"><div class="qs-dot todo"></div><span class="qs-name">Connect integrations</span><span class="qs-arrow">›</span></div>
+  </div>
+</div>
+
+<style>
+.qs-widget { width: 240px; background: #0f1629; border: 1px solid rgba(255,255,255,.07); border-radius: 14px; overflow: hidden; }
+.qs-head   { display: flex; align-items: center; gap: 10px; padding: 12px 14px; cursor: pointer; border-bottom: 1px solid rgba(255,255,255,.05); }
+.qs-head-label { font-size: 12px; font-weight: 800; color: #fff; }
+.qs-head-sub   { font-size: 10px; color: rgba(255,255,255,.35); }
+.qs-chevron    { color: rgba(255,255,255,.3); font-size: 11px; transition: transform .25s; }
+.qs-item  { display: flex; align-items: center; gap: 8px; padding: 8px 14px; border-bottom: 1px solid rgba(255,255,255,.04); cursor: pointer; }
+.qs-dot   { width: 16px; height: 16px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 9px; }
+.qs-dot.done { background: rgba(16,185,129,.2); color: #34d399; }
+.qs-dot.todo { border: 1.5px solid rgba(255,255,255,.15); }
+.qs-name  { flex: 1; font-size: 12px; color: rgba(255,255,255,.65); }
+.qs-name.done { text-decoration: line-through; color: rgba(255,255,255,.3); }
+</style>`
+  },
+
+  {
+    id: 'notification-toast',
+    title: 'Toast Notifications',
+    category: 'onboarding',
+    tags: ['toast', 'notification', 'alert', 'dismissable'],
+    desc: 'Premium stacked toast notification system with success, error and info variants.',
+    featured: false,
+    isNew: false,
+    preview: `
+      <style>
+        @media(prefers-reduced-motion:reduce){*{animation:none!important;}}
+        body{margin:0;display:flex;align-items:center;justify-content:center;
+          height:100vh;background:#0b0f1a;font-family:Inter,sans-serif;}
+        @keyframes toastIn{from{opacity:0;transform:translateY(12px) scale(.96);}
+          to{opacity:1;transform:translateY(0) scale(1);}}
+        .toast-demo{display:flex;flex-direction:column;gap:8px;width:290px;}
+        .toast-item{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;
+          border-radius:12px;border-left:3px solid transparent;
+          animation:toastIn .35s cubic-bezier(.34,1.56,.64,1) forwards;}
+        .toast-success{background:rgba(16,185,129,.08);border-color:#10b981;border:1px solid rgba(16,185,129,.2);border-left:3px solid #10b981;}
+        .toast-error{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);border-left:3px solid #ef4444;}
+        .toast-info{background:rgba(124,58,237,.08);border:1px solid rgba(124,58,237,.2);border-left:3px solid #7c3aed;}
+        .toast-icon{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;
+          justify-content:center;font-size:11px;flex-shrink:0;margin-top:1px;}
+        .ti-success{background:rgba(16,185,129,.2);color:#34d399;}
+        .ti-error{background:rgba(239,68,68,.2);color:#f87171;}
+        .ti-info{background:rgba(124,58,237,.2);color:#a78bfa;}
+        .toast-body{flex:1;}
+        .toast-title{font-size:13px;font-weight:700;color:#fff;margin-bottom:2px;}
+        .toast-msg{font-size:11px;color:rgba(255,255,255,.5);line-height:1.5;}
+        .toast-close{color:rgba(255,255,255,.25);background:none;border:none;font-size:14px;
+          cursor:pointer;padding:0;line-height:1;align-self:center;}
+        .toast-close:hover{color:rgba(255,255,255,.6);}
+        .toast-item:nth-child(2){animation-delay:.1s;}
+        .toast-item:nth-child(3){animation-delay:.2s;}
+      </style>
+      <div class="toast-demo" role="region" aria-label="Notifications">
+        <div class="toast-item toast-success" role="alert">
+          <div class="toast-icon ti-success">✓</div>
+          <div class="toast-body">
+            <div class="toast-title">Saved successfully</div>
+            <div class="toast-msg">Your changes have been saved and synced.</div>
+          </div>
+          <button class="toast-close" aria-label="Dismiss">✕</button>
+        </div>
+        <div class="toast-item toast-error" role="alert">
+          <div class="toast-icon ti-error">✕</div>
+          <div class="toast-body">
+            <div class="toast-title">Upload failed</div>
+            <div class="toast-msg">File exceeds the 10 MB limit. Try compressing it.</div>
+          </div>
+          <button class="toast-close" aria-label="Dismiss">✕</button>
+        </div>
+        <div class="toast-item toast-info" role="status">
+          <div class="toast-icon ti-info">✦</div>
+          <div class="toast-body">
+            <div class="toast-title">Update available</div>
+            <div class="toast-msg">A new version of the app is ready to install.</div>
+          </div>
+          <button class="toast-close" aria-label="Dismiss">✕</button>
+        </div>
+      </div>`,
+    code: `<!-- Toast container — place near </body> -->
+<div class="toast-stack" role="region" aria-label="Notifications" aria-live="polite" id="toastStack"></div>
+
+<style>
+@keyframes toastIn { from { opacity:0; transform: translateY(12px) scale(.96); } to { opacity:1; transform: translateY(0) scale(1); } }
+@keyframes toastOut { to { opacity:0; transform: translateY(-8px) scale(.95); } }
+@media (prefers-reduced-motion: reduce) { .toast-item { animation: none; } }
+.toast-stack { position: fixed; bottom: 24px; right: 24px; z-index: 3000; display: flex; flex-direction: column; gap: 8px; }
+.toast-item  { display: flex; align-items: flex-start; gap: 12px; padding: 12px 14px; border-radius: 12px; min-width: 280px; max-width: 340px; animation: toastIn .35s cubic-bezier(.34,1.56,.64,1) forwards; }
+.toast-item.exit { animation: toastOut .25s forwards; }
+.toast-success { background: rgba(16,185,129,.08); border: 1px solid rgba(16,185,129,.2); border-left: 3px solid #10b981; }
+.toast-error   { background: rgba(239,68,68,.08);  border: 1px solid rgba(239,68,68,.2);  border-left: 3px solid #ef4444; }
+.toast-info    { background: rgba(124,58,237,.08); border: 1px solid rgba(124,58,237,.2); border-left: 3px solid #7c3aed; }
+.toast-title   { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 2px; }
+.toast-msg     { font-size: 11px; color: rgba(255,255,255,.5); line-height: 1.5; }
+.toast-close   { color: rgba(255,255,255,.25); background: none; border: none; font-size: 14px; cursor: pointer; align-self: center; margin-left: auto; }
+</style>
+
+<script>
+function showToast(title, msg, type = 'info', duration = 4000) {
+  const stack = document.getElementById('toastStack');
+  const el    = document.createElement('div');
+  el.className = \`toast-item toast-\${type}\`;
+  el.setAttribute('role', type === 'error' ? 'alert' : 'status');
+  el.innerHTML = \`<div class="toast-body"><div class="toast-title">\${title}</div><div class="toast-msg">\${msg}</div></div><button class="toast-close" aria-label="Dismiss">✕</button>\`;
+  stack.appendChild(el);
+  el.querySelector('.toast-close').onclick = () => dismiss(el);
+  setTimeout(() => dismiss(el), duration);
+}
+function dismiss(el) {
+  el.classList.add('exit');
+  el.addEventListener('animationend', () => el.remove(), { once: true });
+}
+// Usage:
+// showToast('Saved!', 'Your changes were saved.', 'success');
+</script>`
+  },
+
+  /* ─────────────────────── CHECKOUT / E-COMMERCE ─────────────────────── */
+
+  {
+    id: 'checkout-stepper',
+    title: 'Checkout Steps',
+    category: 'checkout',
+    tags: ['checkout', 'stepper', 'e-commerce', 'cart'],
+    desc: '3-step checkout progress indicator: Cart → Payment → Confirmation.',
+    featured: true,
+    isNew: true,
+    preview: `
+      <style>
+        body{margin:0;display:flex;align-items:center;justify-content:center;
+          height:100vh;background:#0b0f1a;font-family:Inter,sans-serif;}
+        .cs-wrap{width:320px;}
+        .cs-steps{display:flex;align-items:center;margin-bottom:20px;}
+        .cs-step{display:flex;flex-direction:column;align-items:center;gap:6px;flex:1;}
+        .cs-num{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;
+          justify-content:center;font-size:12px;font-weight:800;transition:all .3s;}
+        .cs-num.done{background:linear-gradient(135deg,#10b981,#059669);color:#fff;}
+        .cs-num.active{background:linear-gradient(135deg,#7c3aed,#2563eb);color:#fff;
+          box-shadow:0 0 20px rgba(124,58,237,.4);}
+        .cs-num.pending{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+          color:rgba(255,255,255,.3);}
+        .cs-label{font-size:10px;font-weight:700;text-align:center;white-space:nowrap;}
+        .cs-label.done{color:rgba(255,255,255,.45);}
+        .cs-label.active{color:#a78bfa;}
+        .cs-label.pending{color:rgba(255,255,255,.25);}
+        .cs-connector{flex:1;height:2px;background:rgba(255,255,255,.07);border-radius:2px;margin:0 6px;margin-bottom:22px;}
+        .cs-connector.done{background:linear-gradient(90deg,#10b981,#7c3aed);}
+        .cs-panel{background:#0f1629;border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:20px;}
+        .cs-panel-title{font-size:15px;font-weight:800;color:#fff;margin-bottom:14px;}
+        .cs-row{display:flex;gap:10px;margin-bottom:10px;}
+        .cs-input{flex:1;padding:10px 12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);
+          border-radius:8px;color:#fff;font-size:12px;font-family:Inter,sans-serif;outline:none;}
+        .cs-input::placeholder{color:rgba(255,255,255,.2);}
+        .cs-input:focus{border-color:#7c3aed;}
+        .cs-pay-btn{width:100%;padding:11px;background:linear-gradient(135deg,#7c3aed,#2563eb);
+          border:none;border-radius:10px;color:#fff;font-size:13px;font-weight:800;cursor:pointer;margin-top:6px;}
+        .cs-pay-btn:hover{opacity:.9;}
+        .cs-secure{display:flex;align-items:center;justify-content:center;gap:5px;
+          margin-top:8px;font-size:10px;color:rgba(255,255,255,.3);}
+      </style>
+      <div class="cs-wrap">
+        <div class="cs-steps">
+          <div class="cs-step"><div class="cs-num done">✓</div><span class="cs-label done">Cart</span></div>
+          <div class="cs-connector done"></div>
+          <div class="cs-step"><div class="cs-num active">2</div><span class="cs-label active">Payment</span></div>
+          <div class="cs-connector"></div>
+          <div class="cs-step"><div class="cs-num pending">3</div><span class="cs-label pending">Confirm</span></div>
+        </div>
+        <div class="cs-panel">
+          <div class="cs-panel-title">💳 Payment Details</div>
+          <div class="cs-row"><input class="cs-input" placeholder="Card number" style="flex:2"/><input class="cs-input" placeholder="MM/YY"/></div>
+          <div class="cs-row"><input class="cs-input" placeholder="Cardholder name" style="flex:2"/><input class="cs-input" placeholder="CVV"/></div>
+          <button class="cs-pay-btn">Pay $49.00 →</button>
+          <div class="cs-secure">🔒 256-bit SSL encrypted · Powered by Stripe</div>
+        </div>
+      </div>`,
+    code: `<div class="cs-wrap">
+  <!-- Step indicators -->
+  <div class="cs-steps" role="list" aria-label="Checkout progress">
+    <div class="cs-step" role="listitem" aria-current="false">
+      <div class="cs-num done" aria-label="Step 1 complete">✓</div>
+      <span class="cs-label done">Cart</span>
+    </div>
+    <div class="cs-connector done" aria-hidden="true"></div>
+    <div class="cs-step" role="listitem" aria-current="step">
+      <div class="cs-num active" aria-label="Step 2 current">2</div>
+      <span class="cs-label active">Payment</span>
+    </div>
+    <div class="cs-connector" aria-hidden="true"></div>
+    <div class="cs-step" role="listitem">
+      <div class="cs-num pending" aria-label="Step 3 upcoming">3</div>
+      <span class="cs-label pending">Confirm</span>
+    </div>
+  </div>
+
+  <!-- Payment form -->
+  <div class="cs-panel">
+    <div class="cs-panel-title">💳 Payment Details</div>
+    <div class="cs-row">
+      <input class="cs-input" type="text" placeholder="Card number"      inputmode="numeric" autocomplete="cc-number"   maxlength="19">
+      <input class="cs-input" type="text" placeholder="MM/YY"            inputmode="numeric" autocomplete="cc-exp"      maxlength="5">
+    </div>
+    <div class="cs-row">
+      <input class="cs-input" type="text" placeholder="Cardholder name"                      autocomplete="cc-name">
+      <input class="cs-input" type="password" placeholder="CVV"          inputmode="numeric" autocomplete="cc-csc"      maxlength="4">
+    </div>
+    <button class="cs-pay-btn">Pay $49.00 →</button>
+    <p class="cs-secure" aria-label="Secure payment">🔒 256-bit SSL encrypted · Powered by Stripe</p>
+  </div>
+</div>
+
+<style>
+.cs-wrap { width: 360px; }
+.cs-steps { display: flex; align-items: center; margin-bottom: 20px; }
+.cs-step  { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; }
+.cs-num   { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; }
+.cs-num.done    { background: linear-gradient(135deg,#10b981,#059669); color: #fff; }
+.cs-num.active  { background: linear-gradient(135deg,#7c3aed,#2563eb); color: #fff; box-shadow: 0 0 20px rgba(124,58,237,.4); }
+.cs-num.pending { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); color: rgba(255,255,255,.3); }
+.cs-label.done    { font-size: 10px; font-weight: 700; color: rgba(255,255,255,.45); }
+.cs-label.active  { font-size: 10px; font-weight: 700; color: #a78bfa; }
+.cs-label.pending { font-size: 10px; font-weight: 700; color: rgba(255,255,255,.25); }
+.cs-connector { flex: 1; height: 2px; background: rgba(255,255,255,.07); border-radius: 2px; margin: 0 6px 22px; }
+.cs-connector.done { background: linear-gradient(90deg,#10b981,#7c3aed); }
+.cs-panel { background: #0f1629; border: 1px solid rgba(255,255,255,.07); border-radius: 16px; padding: 20px; }
+.cs-panel-title { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 14px; }
+.cs-row   { display: flex; gap: 10px; margin-bottom: 10px; }
+.cs-input { flex: 1; padding: 10px 12px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.09); border-radius: 8px; color: #fff; font-size: 12px; font-family: inherit; outline: none; }
+.cs-input:focus { border-color: #7c3aed; box-shadow: 0 0 0 3px rgba(124,58,237,.15); }
+.cs-pay-btn { width: 100%; padding: 11px; background: linear-gradient(135deg,#7c3aed,#2563eb); border: none; border-radius: 10px; color: #fff; font-size: 13px; font-weight: 800; cursor: pointer; margin-top: 6px; }
+.cs-secure  { text-align: center; margin-top: 8px; font-size: 10px; color: rgba(255,255,255,.3); }
+</style>`
+  },
+
+  {
+    id: 'order-summary-card',
+    title: 'Order Summary',
+    category: 'checkout',
+    tags: ['order', 'summary', 'cart', 'pricing'],
+    desc: 'Sticky order summary card with line items, discounts and total breakdown.',
+    featured: false,
+    isNew: true,
+    preview: `
+      <style>
+        body{margin:0;display:flex;align-items:center;justify-content:center;
+          height:100vh;background:#0b0f1a;font-family:Inter,sans-serif;}
+        .order-card{width:280px;background:#0f1629;border:1px solid rgba(255,255,255,.08);
+          border-radius:16px;padding:20px;}
+        .oc-title{font-size:14px;font-weight:800;color:#fff;margin-bottom:16px;}
+        .oc-item{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:8px;}
+        .oc-item-img{width:36px;height:36px;border-radius:8px;flex-shrink:0;
+          background:linear-gradient(135deg,rgba(124,58,237,.2),rgba(37,99,235,.2));
+          border:1px solid rgba(124,58,237,.15);display:flex;align-items:center;justify-content:center;font-size:16px;}
+        .oc-item-info{flex:1;}
+        .oc-item-name{font-size:12px;font-weight:700;color:#fff;}
+        .oc-item-sub{font-size:10px;color:rgba(255,255,255,.35);margin-top:1px;}
+        .oc-item-price{font-size:13px;font-weight:800;color:#fff;}
+        .oc-divider{height:1px;background:rgba(255,255,255,.05);margin:12px 0;}
+        .oc-row{display:flex;justify-content:space-between;margin-bottom:6px;font-size:12px;}
+        .oc-row-label{color:rgba(255,255,255,.4);}
+        .oc-row-val{color:rgba(255,255,255,.75);font-weight:600;}
+        .oc-row-val.discount{color:#34d399;}
+        .oc-total{display:flex;justify-content:space-between;align-items:baseline;padding-top:10px;}
+        .oc-total-label{font-size:14px;font-weight:800;color:#fff;}
+        .oc-total-val{font-size:22px;font-weight:900;color:#fff;letter-spacing:-.03em;}
+        .oc-badge{display:inline-block;padding:2px 8px;font-size:10px;font-weight:700;
+          color:#34d399;background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.2);
+          border-radius:50px;margin-bottom:14px;}
+      </style>
+      <div class="order-card">
+        <div class="oc-title">Order Summary</div>
+        <div class="oc-item">
+          <div class="oc-item-img">✦</div>
+          <div class="oc-item-info"><div class="oc-item-name">AURA Pro Plan</div><div class="oc-item-sub">Annual · Up to 10 users</div></div>
+          <div class="oc-item-price">$348</div>
+        </div>
+        <div class="oc-item">
+          <div class="oc-item-img">🧩</div>
+          <div class="oc-item-info"><div class="oc-item-name">Component Pack</div><div class="oc-item-sub">One-time purchase</div></div>
+          <div class="oc-item-price">$49</div>
+        </div>
+        <div class="oc-divider"></div>
+        <div class="oc-badge">🎉 SAVE40 applied</div>
+        <div class="oc-row"><span class="oc-row-label">Subtotal</span><span class="oc-row-val">$397.00</span></div>
+        <div class="oc-row"><span class="oc-row-label">Discount (40%)</span><span class="oc-row-val discount">−$158.80</span></div>
+        <div class="oc-row"><span class="oc-row-label">Tax (18%)</span><span class="oc-row-val">$43.06</span></div>
+        <div class="oc-divider"></div>
+        <div class="oc-total"><span class="oc-total-label">Total</span><span class="oc-total-val">$281.26</span></div>
+      </div>`,
+    code: `<aside class="order-card" aria-label="Order summary">
+  <h2 class="oc-title">Order Summary</h2>
+
+  <!-- Line items -->
+  <div class="oc-item">
+    <div class="oc-item-img" aria-hidden="true">✦</div>
+    <div class="oc-item-info">
+      <div class="oc-item-name">AURA Pro Plan</div>
+      <div class="oc-item-sub">Annual · Up to 10 users</div>
+    </div>
+    <div class="oc-item-price">$348</div>
+  </div>
+
+  <div class="oc-divider" role="separator"></div>
+
+  <!-- Applied coupon -->
+  <div class="oc-badge" role="status">🎉 SAVE40 applied</div>
+
+  <!-- Price breakdown -->
+  <dl class="oc-breakdown">
+    <div class="oc-row"><dt class="oc-row-label">Subtotal</dt><dd class="oc-row-val">$397.00</dd></div>
+    <div class="oc-row"><dt class="oc-row-label">Discount (40%)</dt><dd class="oc-row-val discount">−$158.80</dd></div>
+    <div class="oc-row"><dt class="oc-row-label">Tax (18%)</dt><dd class="oc-row-val">$43.06</dd></div>
+  </dl>
+  <div class="oc-divider"></div>
+  <div class="oc-total">
+    <span class="oc-total-label">Total due</span>
+    <strong class="oc-total-val">$281.26</strong>
+  </div>
+</aside>
+
+<style>
+.order-card { width: 300px; background: #0f1629; border: 1px solid rgba(255,255,255,.08); border-radius: 16px; padding: 20px; }
+.oc-title   { font-size: 14px; font-weight: 800; color: #fff; margin-bottom: 16px; }
+.oc-item    { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.oc-item-img{ width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0; background: rgba(124,58,237,.15); border: 1px solid rgba(124,58,237,.15); display: flex; align-items: center; justify-content: center; }
+.oc-item-name { font-size: 12px; font-weight: 700; color: #fff; }
+.oc-item-sub  { font-size: 10px; color: rgba(255,255,255,.35); }
+.oc-item-price{ font-size: 13px; font-weight: 800; color: #fff; margin-left: auto; }
+.oc-divider { height: 1px; background: rgba(255,255,255,.05); margin: 12px 0; }
+.oc-row     { display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 12px; }
+.oc-row-label { color: rgba(255,255,255,.4); }
+.oc-row-val   { color: rgba(255,255,255,.75); font-weight: 600; }
+.oc-row-val.discount { color: #34d399; }
+.oc-total   { display: flex; justify-content: space-between; align-items: baseline; }
+.oc-total-label { font-size: 14px; font-weight: 800; color: #fff; }
+.oc-total-val   { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -.03em; }
+.oc-badge   { display: inline-block; padding: 2px 8px; font-size: 10px; font-weight: 700; color: #34d399; background: rgba(16,185,129,.12); border: 1px solid rgba(16,185,129,.2); border-radius: 50px; margin-bottom: 14px; }
+</style>`
+  },
+
+  {
+    id: 'coupon-input',
+    title: 'Coupon Field',
+    category: 'checkout',
+    tags: ['coupon', 'discount', 'input', 'promo'],
+    desc: 'Expand-on-click coupon input with loading state and success/error validation.',
+    featured: false,
+    isNew: true,
+    preview: `
+      <style>
+        @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;}}
+        body{margin:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+          gap:24px;height:100vh;background:#0b0f1a;font-family:Inter,sans-serif;}
+        .coupon-wrap{width:280px;}
+        .coupon-toggle{display:flex;align-items:center;gap:6px;cursor:pointer;
+          font-size:12px;font-weight:600;color:rgba(255,255,255,.45);user-select:none;
+          transition:color .2s;border:none;background:none;padding:0;}
+        .coupon-toggle:hover{color:rgba(255,255,255,.7);}
+        .coupon-toggle svg{transition:transform .25s;}
+        .coupon-toggle.open svg{transform:rotate(180deg);}
+        .coupon-field{display:flex;gap:8px;margin-top:10px;max-height:0;overflow:hidden;
+          transition:max-height .35s cubic-bezier(.4,0,.2,1),opacity .25s;}
+        .coupon-field.open{max-height:60px;opacity:1;}
+        .coupon-field{opacity:0;}
+        .c-input{flex:1;padding:10px 12px;background:rgba(255,255,255,.04);
+          border:1px solid rgba(255,255,255,.1);border-radius:8px;
+          color:#fff;font-size:12px;font-family:Inter,sans-serif;outline:none;
+          transition:border-color .2s;}
+        .c-input:focus{border-color:#7c3aed;}
+        .c-input.success{border-color:#10b981;color:#34d399;}
+        .c-input.error{border-color:#ef4444;}
+        .c-apply{padding:10px 14px;background:linear-gradient(135deg,#7c3aed,#2563eb);
+          border:none;border-radius:8px;color:#fff;font-size:12px;font-weight:700;
+          cursor:pointer;white-space:nowrap;transition:opacity .2s;}
+        .c-apply:hover{opacity:.85;}
+        .c-msg{margin-top:6px;font-size:11px;height:14px;transition:all .2s;}
+        .c-msg.success{color:#34d399;}
+        .c-msg.error{color:#f87171;}
+      </style>
+      <script>
+        function toggleCoupon(){
+          const f=document.getElementById('couponField');
+          const t=document.getElementById('couponToggle');
+          const open=f.classList.toggle('open');
+          t.classList.toggle('open',open);
+          if(open)document.getElementById('couponIn').focus();
+        }
+        function applyCoupon(){
+          const inp=document.getElementById('couponIn');
+          const msg=document.getElementById('couponMsg');
+          const btn=document.getElementById('couponBtn');
+          const v=inp.value.trim().toUpperCase();
+          btn.textContent='Checking…';btn.disabled=true;
+          setTimeout(()=>{
+            btn.textContent='Apply';btn.disabled=false;
+            if(v==='SAVE40'){
+              inp.classList.add('success');inp.classList.remove('error');
+              msg.textContent='🎉 40% off applied!';msg.className='c-msg success';
+            }else{
+              inp.classList.add('error');inp.classList.remove('success');
+              msg.textContent='Invalid code. Try SAVE40.';msg.className='c-msg error';
+            }
+          },900);
+        }
+      </script>
+      <div class="coupon-wrap">
+        <button class="coupon-toggle" id="couponToggle" onclick="toggleCoupon()" aria-expanded="false">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          Have a promo code?
+        </button>
+        <div class="coupon-field" id="couponField">
+          <input class="c-input" id="couponIn" placeholder="Enter code e.g. SAVE40" aria-label="Promo code" onkeydown="if(event.key==='Enter')applyCoupon()"/>
+          <button class="c-apply" id="couponBtn" onclick="applyCoupon()">Apply</button>
+        </div>
+        <div class="c-msg" id="couponMsg"></div>
+      </div>`,
+    code: `<div class="coupon-wrap">
+  <button class="coupon-toggle" id="couponToggle" onclick="toggleCoupon()" aria-expanded="false" aria-controls="couponField">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+    Have a promo code?
+  </button>
+  <div class="coupon-field" id="couponField" aria-hidden="true">
+    <input class="c-input" id="couponIn" type="text" placeholder="e.g. SAVE40" aria-label="Promo code" autocapitalize="characters">
+    <button class="c-apply" id="couponBtn" onclick="applyCoupon()">Apply</button>
+  </div>
+  <div class="c-msg" id="couponMsg" aria-live="polite"></div>
+</div>
+
+<style>
+@media (prefers-reduced-motion: reduce) { .coupon-field { transition: none; } }
+.coupon-toggle { display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 12px; font-weight: 600; color: rgba(255,255,255,.45); border: none; background: none; padding: 0; }
+.coupon-toggle svg { transition: transform .25s; }
+.coupon-toggle.open svg { transform: rotate(180deg); }
+.coupon-field { display: flex; gap: 8px; margin-top: 10px; max-height: 0; overflow: hidden; opacity: 0; transition: max-height .35s ease, opacity .25s; }
+.coupon-field.open { max-height: 60px; opacity: 1; }
+.c-input { flex: 1; padding: 10px 12px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1); border-radius: 8px; color: #fff; font-size: 12px; font-family: inherit; outline: none; transition: border-color .2s; }
+.c-input:focus { border-color: #7c3aed; box-shadow: 0 0 0 3px rgba(124,58,237,.15); }
+.c-input.success { border-color: #10b981; color: #34d399; }
+.c-input.error   { border-color: #ef4444; }
+.c-apply { padding: 10px 14px; background: linear-gradient(135deg,#7c3aed,#2563eb); border: none; border-radius: 8px; color: #fff; font-size: 12px; font-weight: 700; cursor: pointer; }
+.c-msg.success { color: #34d399; font-size: 11px; margin-top: 6px; }
+.c-msg.error   { color: #f87171; font-size: 11px; margin-top: 6px; }
+</style>
+
+<script>
+function toggleCoupon() {
+  const field  = document.getElementById('couponField');
+  const toggle = document.getElementById('couponToggle');
+  const isOpen = field.classList.toggle('open');
+  toggle.classList.toggle('open', isOpen);
+  toggle.setAttribute('aria-expanded', isOpen);
+  field.setAttribute('aria-hidden', !isOpen);
+  if (isOpen) document.getElementById('couponIn').focus();
+}
+function applyCoupon() {
+  const inp = document.getElementById('couponIn');
+  const msg = document.getElementById('couponMsg');
+  const btn = document.getElementById('couponBtn');
+  const code = inp.value.trim().toUpperCase();
+  btn.textContent = 'Checking…'; btn.disabled = true;
+  setTimeout(() => {
+    btn.textContent = 'Apply'; btn.disabled = false;
+    if (code === 'SAVE40') {
+      inp.className = 'c-input success';
+      msg.textContent = '🎉 40% discount applied!';
+      msg.className = 'c-msg success';
+    } else {
+      inp.className = 'c-input error';
+      msg.textContent = 'Invalid code. Try SAVE40.';
+      msg.className = 'c-msg error';
+    }
+  }, 900);
+}
+</script>`
+  },
+
+  {
+    id: 'checkout-success',
+    title: 'Order Confirmation',
+    category: 'checkout',
+    tags: ['success', 'confirmation', 'order', 'animated'],
+    desc: 'Animated order confirmation screen with confetti burst and order details.',
+    featured: true,
+    isNew: true,
+    preview: `
+      <style>
+        @media(prefers-reduced-motion:reduce){*{animation:none!important;}}
+        body{margin:0;display:flex;align-items:center;justify-content:center;
+          height:100vh;background:#0b0f1a;font-family:Inter,sans-serif;overflow:hidden;}
+        @keyframes successPop{0%{transform:scale(0);opacity:0;}60%{transform:scale(1.15);}100%{transform:scale(1);opacity:1;}}
+        @keyframes confettiDrop{0%{transform:translateY(-20px) rotate(0);opacity:1;}100%{transform:translateY(180px) rotate(720deg);opacity:0;}}
+        @keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+        .conf-wrap{position:relative;text-align:center;padding:20px;width:280px;}
+        .conf-piece{position:absolute;width:7px;height:7px;border-radius:2px;
+          animation:confettiDrop 1.4s ease-in forwards;}
+        .success-ring{width:70px;height:70px;border-radius:50%;
+          background:linear-gradient(135deg,rgba(16,185,129,.15),rgba(5,150,105,.1));
+          border:2px solid rgba(16,185,129,.3);display:flex;align-items:center;
+          justify-content:center;margin:0 auto 16px;
+          animation:successPop .5s cubic-bezier(.34,1.56,.64,1) .2s both;}
+        .success-check{font-size:30px;}
+        .success-title{font-size:20px;font-weight:900;color:#fff;margin-bottom:6px;
+          animation:fadeUp .4s ease .5s both;}
+        .success-sub{font-size:13px;color:rgba(255,255,255,.45);margin-bottom:18px;
+          animation:fadeUp .4s ease .6s both;}
+        .success-card{background:#0f1629;border:1px solid rgba(255,255,255,.07);border-radius:12px;
+          padding:14px 16px;margin-bottom:14px;animation:fadeUp .4s ease .7s both;}
+        .sc-row{display:flex;justify-content:space-between;font-size:12px;padding:4px 0;}
+        .sc-key{color:rgba(255,255,255,.4);}
+        .sc-val{color:#fff;font-weight:600;}
+        .success-btn{width:100%;padding:10px;background:linear-gradient(135deg,#7c3aed,#2563eb);
+          border:none;border-radius:10px;color:#fff;font-size:13px;font-weight:700;cursor:pointer;
+          animation:fadeUp .4s ease .8s both;}
+      </style>
+      <script>
+        document.addEventListener('DOMContentLoaded',()=>{
+          const colors=['#7c3aed','#2563eb','#10b981','#f59e0b','#06b6d4','#a78bfa'];
+          const wrap=document.querySelector('.conf-wrap');
+          for(let i=0;i<18;i++){
+            const el=document.createElement('div');
+            el.className='conf-piece';
+            el.style.cssText=\`left:\${10+Math.random()*80}%;top:20px;background:\${colors[i%colors.length]};
+              animation-delay:\${Math.random()*.6}s;animation-duration:\${1.2+Math.random()*.6}s;
+              transform:rotate(\${Math.random()*360}deg);\`;
+            wrap.appendChild(el);
+          }
+        });
+      </script>
+      <div class="conf-wrap">
+        <div class="success-ring"><span class="success-check">✓</span></div>
+        <div class="success-title">Order Confirmed!</div>
+        <p class="success-sub">Check your email for the receipt — you're all set.</p>
+        <div class="success-card">
+          <div class="sc-row"><span class="sc-key">Order #</span><span class="sc-val">AU-28491</span></div>
+          <div class="sc-row"><span class="sc-key">Plan</span><span class="sc-val">AURA Pro · Annual</span></div>
+          <div class="sc-row"><span class="sc-key">Amount</span><span class="sc-val">$281.26</span></div>
+          <div class="sc-row"><span class="sc-key">Email</span><span class="sc-val">you@example.com</span></div>
+        </div>
+        <button class="success-btn">Go to Dashboard →</button>
+      </div>`,
+    code: `<div class="conf-wrap" id="confWrap">
+  <div class="success-ring" aria-hidden="true"><span class="success-check">✓</span></div>
+  <h1 class="success-title">Order Confirmed!</h1>
+  <p  class="success-sub">Check your email for the receipt.</p>
+  <div class="success-card">
+    <dl>
+      <div class="sc-row"><dt class="sc-key">Order #</dt><dd class="sc-val">AU-28491</dd></div>
+      <div class="sc-row"><dt class="sc-key">Plan</dt><dd class="sc-val">AURA Pro · Annual</dd></div>
+      <div class="sc-row"><dt class="sc-key">Amount</dt><dd class="sc-val">$281.26</dd></div>
+    </dl>
+  </div>
+  <button class="success-btn">Go to Dashboard →</button>
+</div>
+
+<style>
+@keyframes successPop { 0% { transform: scale(0); opacity: 0; } 60% { transform: scale(1.15); } 100% { transform: scale(1); opacity: 1; } }
+@keyframes fadeUp     { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+@keyframes confDrop   { 0% { transform: translateY(-20px) rotate(0); opacity: 1; } 100% { transform: translateY(200px) rotate(720deg); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .success-ring, .success-title, .success-sub, .success-card, .success-btn, .conf-piece { animation: none; opacity: 1; transform: none; } }
+.conf-wrap    { position: relative; text-align: center; padding: 24px; overflow: hidden; }
+.conf-piece   { position: absolute; width: 7px; height: 7px; border-radius: 2px; animation: confDrop 1.4s ease-in forwards; }
+.success-ring { width: 70px; height: 70px; border-radius: 50%; background: rgba(16,185,129,.12); border: 2px solid rgba(16,185,129,.3); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; animation: successPop .5s cubic-bezier(.34,1.56,.64,1) .2s both; }
+.success-check{ font-size: 30px; }
+.success-title{ font-size: 22px; font-weight: 900; color: #fff; margin-bottom: 6px; animation: fadeUp .4s ease .5s both; }
+.success-sub  { font-size: 13px; color: rgba(255,255,255,.45); margin-bottom: 18px; animation: fadeUp .4s ease .6s both; }
+.success-card { background: #0f1629; border: 1px solid rgba(255,255,255,.07); border-radius: 12px; padding: 14px 16px; margin-bottom: 14px; animation: fadeUp .4s ease .7s both; }
+.sc-row { display: flex; justify-content: space-between; font-size: 12px; padding: 4px 0; }
+.sc-key { color: rgba(255,255,255,.4); }
+.sc-val { color: #fff; font-weight: 600; }
+.success-btn  { width: 100%; padding: 10px; background: linear-gradient(135deg,#7c3aed,#2563eb); border: none; border-radius: 10px; color: #fff; font-size: 13px; font-weight: 700; cursor: pointer; animation: fadeUp .4s ease .8s both; }
+</style>
+
+<script>
+// Confetti burst
+const colors = ['#7c3aed','#2563eb','#10b981','#f59e0b','#06b6d4'];
+if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const wrap = document.getElementById('confWrap');
+  for (let i = 0; i < 24; i++) {
+    const el = document.createElement('div');
+    el.className = 'conf-piece';
+    el.style.cssText = \`left:\${10+Math.random()*80}%;top:10px;background:\${colors[i%colors.length]};animation-delay:\${Math.random()*.6}s;animation-duration:\${1.2+Math.random()*.6}s;\`;
+    wrap.appendChild(el);
+  }
+}
+</script>`
+  },
+
+  {
+    id: 'pricing-toggle',
+    title: 'Billing Toggle',
+    category: 'checkout',
+    tags: ['pricing', 'toggle', 'billing', 'annual'],
+    desc: 'Monthly/Annual billing toggle with animated savings badge.',
+    featured: false,
+    isNew: true,
+    preview: `
+      <style>
+        @media(prefers-reduced-motion:reduce){*{transition:none!important;}}
+        body{margin:0;display:flex;align-items:center;justify-content:center;
+          height:100vh;background:#0b0f1a;font-family:Inter,sans-serif;}
+        .pt-wrap{text-align:center;}
+        .pt-toggle{display:inline-flex;align-items:center;gap:14px;
+          background:#0f1629;border:1px solid rgba(255,255,255,.08);
+          border-radius:50px;padding:6px 16px;margin-bottom:24px;}
+        .pt-label{font-size:13px;font-weight:600;cursor:pointer;padding:4px 0;
+          transition:color .2s;}
+        .pt-label.active{color:#fff;}
+        .pt-label.inactive{color:rgba(255,255,255,.3);}
+        .pt-pill{position:relative;width:44px;height:24px;background:linear-gradient(135deg,#7c3aed,#2563eb);
+          border-radius:12px;cursor:pointer;transition:opacity .2s;}
+        .pt-knob{position:absolute;top:3px;left:3px;width:18px;height:18px;
+          background:#fff;border-radius:50%;
+          transition:transform .3s cubic-bezier(.34,1.56,.64,1);}
+        .pt-knob.annual{transform:translateX(20px);}
+        .pt-save{display:inline-block;padding:3px 10px;font-size:10px;font-weight:700;
+          color:#34d399;background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.2);
+          border-radius:50px;opacity:0;transition:opacity .3s;}
+        .pt-save.visible{opacity:1;}
+        .pt-cards{display:flex;gap:12px;}
+        .pt-card{width:130px;background:#0f1629;border:1px solid rgba(255,255,255,.07);
+          border-radius:14px;padding:16px;text-align:center;transition:border-color .3s;}
+        .pt-card.selected{border-color:#7c3aed;box-shadow:0 0 30px rgba(124,58,237,.2);}
+        .pt-plan{font-size:12px;font-weight:700;color:rgba(255,255,255,.5);margin-bottom:8px;}
+        .pt-price{font-size:26px;font-weight:900;color:#fff;letter-spacing:-.03em;line-height:1;}
+        .pt-per{font-size:10px;color:rgba(255,255,255,.3);margin-top:3px;}
+        .pt-orig{font-size:11px;color:rgba(255,255,255,.25);text-decoration:line-through;margin-top:3px;}
+      </style>
+      <script>
+        let annual=true;
+        function toggleBilling(){
+          annual=!annual;
+          document.getElementById('ptKnob').classList.toggle('annual',annual);
+          document.getElementById('ptSave').classList.toggle('visible',annual);
+          document.getElementById('ptLblMonth').classList.toggle('active',!annual);
+          document.getElementById('ptLblMonth').classList.toggle('inactive',annual);
+          document.getElementById('ptLblYear').classList.toggle('active',annual);
+          document.getElementById('ptLblYear').classList.toggle('inactive',!annual);
+          document.getElementById('ptBasicPrice').textContent=annual?'$9':'$15';
+          document.getElementById('ptProPrice').textContent=annual?'$29':'$49';
+          document.getElementById('ptBasicPer').textContent=annual?'/mo billed yearly':'/month';
+          document.getElementById('ptProPer').textContent=annual?'/mo billed yearly':'/month';
+          document.getElementById('ptBasicOrig').style.display=annual?'block':'none';
+          document.getElementById('ptProOrig').style.display=annual?'block':'none';
+        }
+      </script>
+      <div class="pt-wrap">
+        <div class="pt-toggle">
+          <span class="pt-label inactive" id="ptLblMonth">Monthly</span>
+          <div class="pt-pill" onclick="toggleBilling()" role="switch" aria-checked="true">
+            <div class="pt-knob annual" id="ptKnob"></div>
+          </div>
+          <span class="pt-label active" id="ptLblYear">Annual</span>
+        </div>
+        <div style="margin-top:-16px;margin-bottom:20px;">
+          <span class="pt-save visible" id="ptSave">Save 40%</span>
+        </div>
+        <div class="pt-cards">
+          <div class="pt-card">
+            <div class="pt-plan">Starter</div>
+            <div class="pt-price" id="ptBasicPrice">$9</div>
+            <div class="pt-per" id="ptBasicPer">/mo billed yearly</div>
+            <div class="pt-orig" id="ptBasicOrig">$15/mo</div>
+          </div>
+          <div class="pt-card selected">
+            <div class="pt-plan">Pro ⭐</div>
+            <div class="pt-price" id="ptProPrice">$29</div>
+            <div class="pt-per" id="ptProPer">/mo billed yearly</div>
+            <div class="pt-orig" id="ptProOrig">$49/mo</div>
+          </div>
+        </div>
+      </div>`,
+    code: `<div class="pt-wrap">
+  <div class="pt-toggle">
+    <span class="pt-label inactive" id="ptLblMonth">Monthly</span>
+    <button class="pt-pill" id="ptSwitch" onclick="toggleBilling()"
+      role="switch" aria-checked="true" aria-label="Toggle annual billing">
+      <div class="pt-knob annual" id="ptKnob"></div>
+    </button>
+    <span class="pt-label active" id="ptLblYear">Annual</span>
+  </div>
+  <div class="pt-save-wrap">
+    <span class="pt-save visible" id="ptSave" aria-live="polite">Save 40%</span>
+  </div>
+  <div class="pt-cards">
+    <div class="pt-card">
+      <div class="pt-plan">Starter</div>
+      <div class="pt-price" id="ptBasicPrice">$9</div>
+      <div class="pt-per"   id="ptBasicPer">/mo billed yearly</div>
+      <div class="pt-orig"  id="ptBasicOrig">$15/mo</div>
+    </div>
+    <div class="pt-card selected">
+      <div class="pt-plan">Pro ⭐</div>
+      <div class="pt-price" id="ptProPrice">$29</div>
+      <div class="pt-per"   id="ptProPer">/mo billed yearly</div>
+      <div class="pt-orig"  id="ptProOrig">$49/mo</div>
+    </div>
+  </div>
+</div>
+
+<style>
+@media (prefers-reduced-motion: reduce) { .pt-knob, .pt-save { transition: none; } }
+.pt-toggle { display: inline-flex; align-items: center; gap: 14px; background: #0f1629; border: 1px solid rgba(255,255,255,.08); border-radius: 50px; padding: 6px 16px; }
+.pt-label  { font-size: 13px; font-weight: 600; cursor: pointer; }
+.pt-label.active   { color: #fff; }
+.pt-label.inactive { color: rgba(255,255,255,.3); }
+.pt-pill   { position: relative; width: 44px; height: 24px; background: linear-gradient(135deg,#7c3aed,#2563eb); border-radius: 12px; border: none; cursor: pointer; }
+.pt-knob   { position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; background: #fff; border-radius: 50%; transition: transform .3s cubic-bezier(.34,1.56,.64,1); }
+.pt-knob.annual { transform: translateX(20px); }
+.pt-save   { display: inline-block; padding: 3px 10px; font-size: 10px; font-weight: 700; color: #34d399; background: rgba(16,185,129,.12); border: 1px solid rgba(16,185,129,.2); border-radius: 50px; opacity: 0; transition: opacity .3s; }
+.pt-save.visible { opacity: 1; }
+.pt-cards  { display: flex; gap: 12px; }
+.pt-card   { flex: 1; background: #0f1629; border: 1px solid rgba(255,255,255,.07); border-radius: 14px; padding: 16px; text-align: center; transition: border-color .3s; }
+.pt-card.selected { border-color: #7c3aed; box-shadow: 0 0 30px rgba(124,58,237,.2); }
+.pt-plan   { font-size: 12px; font-weight: 700; color: rgba(255,255,255,.5); margin-bottom: 8px; }
+.pt-price  { font-size: 26px; font-weight: 900; color: #fff; letter-spacing: -.03em; }
+.pt-per    { font-size: 10px; color: rgba(255,255,255,.3); margin-top: 3px; }
+.pt-orig   { font-size: 11px; color: rgba(255,255,255,.25); text-decoration: line-through; }
+</style>
+
+<script>
+let annual = true;
+function toggleBilling() {
+  annual = !annual;
+  document.getElementById('ptSwitch').setAttribute('aria-checked', annual);
+  document.getElementById('ptKnob').classList.toggle('annual', annual);
+  document.getElementById('ptSave').classList.toggle('visible', annual);
+  ['ptLblMonth','ptLblYear'].forEach((id,i) => {
+    const isActive = annual ? i === 1 : i === 0;
+    document.getElementById(id).className = 'pt-label ' + (isActive ? 'active' : 'inactive');
+  });
+  document.getElementById('ptBasicPrice').textContent = annual ? '$9'  : '$15';
+  document.getElementById('ptProPrice').textContent   = annual ? '$29' : '$49';
+  document.getElementById('ptBasicPer').textContent   = annual ? '/mo billed yearly' : '/month';
+  document.getElementById('ptProPer').textContent     = annual ? '/mo billed yearly' : '/month';
+  ['ptBasicOrig','ptProOrig'].forEach(id => document.getElementById(id).style.display = annual ? 'block' : 'none');
+}
+</script>`
   }
 
 ];
@@ -2566,4 +4127,7 @@ const CATEGORIES = [
   { id: 'loader',       label: 'Loaders',       icon: '◌' },
   { id: 'toggle',       label: 'Toggles',       icon: '⇄' },
   { id: 'tooltip',      label: 'Tooltips',      icon: '💬'},
+  { id: 'onboarding',   label: 'Onboarding',    icon: '🚀'},
+  { id: 'checkout',     label: 'Checkout',      icon: '💳'},
+  { id: 'advanced',     label: 'Advanced',      icon: '⚙️'},
 ];

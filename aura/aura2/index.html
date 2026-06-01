@@ -8,9 +8,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+  <!-- Skip Navigation (Accessibility) -->
+  <a class="skip-link" href="#components">Skip to content</a>
 
   <!-- ═══ PAGE LOADER ═══ -->
   <div id="pageLoader" role="status" aria-label="Loading">
@@ -31,8 +35,7 @@
   <div class="noise-overlay" aria-hidden="true"></div>
 
   <!-- CURSOR -->
-  <div id="cursorRing" aria-hidden="true"></div>
-  <div id="cursorDot" aria-hidden="true"></div>
+
 
   <!-- ═══ NAVBAR ═══ -->
   <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
@@ -45,7 +48,7 @@
           </svg>
         </span>
         <span class="nav-logo-text">AURA <span>UI</span></span>
-        <span class="nav-badge">v3.0</span>
+        <span class="nav-badge">v4.0</span>
       </a>
 
       <ul class="nav-links" role="list">
@@ -98,7 +101,7 @@
     <div class="hero-content">
       <div class="hero-eyebrow">
         <span class="eyebrow-pulse" aria-hidden="true"></span>
-        <span>Open Source · Trusted by 50,000+ developers</span>
+          <span>Open Source · Trusted by 50,000+ developers · V4 Enterprise Edition</span>
         <span class="eyebrow-arrow" aria-hidden="true">→</span>
       </div>
 
@@ -134,12 +137,12 @@
 
       <div class="hero-stats" aria-label="Library statistics">
         <div class="hero-stat">
-          <span class="stat-num" data-target="60" id="heroComponentCount">0</span><span class="stat-suffix">+</span>
+          <span class="stat-num" data-target="100" id="heroComponentCount">0</span><span class="stat-suffix">+</span>
           <span class="stat-label">Components</span>
         </div>
         <div class="stat-sep"></div>
         <div class="hero-stat">
-          <span class="stat-num" data-target="6">0</span>
+          <span class="stat-num" data-target="20">0</span>
           <span class="stat-label">Categories</span>
         </div>
         <div class="stat-sep"></div>
@@ -415,6 +418,7 @@
   <!-- SCRIPTS -->
   <script src="data.js"></script>
   <script src="data-extra.js"></script>
+  <script src="data-v4.js"></script>
   <script src="app.js"></script>
   <script src="animations.js"></script>
 </body>

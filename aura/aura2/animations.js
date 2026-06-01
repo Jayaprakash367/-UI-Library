@@ -7,7 +7,7 @@
   'use strict';
 
   document.addEventListener('DOMContentLoaded', () => {
-    initCursor();
+
     initParticles();
     initTypewriter();
     initScrollReveal();
@@ -15,52 +15,6 @@
     initBentoGlow();
   });
 
-  /* ═══════════════════════════════════════════════════
-     CUSTOM CURSOR
-     ═══════════════════════════════════════════════════ */
-  function initCursor() {
-    const ring = document.getElementById('cursorRing');
-    const dot  = document.getElementById('cursorDot');
-    if (!ring || !dot) return;
-
-    // Only on devices with fine pointer
-    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-
-    let mx = 0, my = 0, rx = 0, ry = 0;
-
-    document.addEventListener('mousemove', e => {
-      mx = e.clientX;
-      my = e.clientY;
-      dot.style.left = mx + 'px';
-      dot.style.top  = my + 'px';
-    }, { passive: true });
-
-    function trackRing() {
-      rx += (mx - rx) * 0.15;
-      ry += (my - ry) * 0.15;
-      ring.style.left = rx + 'px';
-      ring.style.top  = ry + 'px';
-      requestAnimationFrame(trackRing);
-    }
-    trackRing();
-
-    // Hover effects
-    const interactives = 'a, button, input, [role="button"], .comp-card, .bento-card, .magnetic';
-    document.addEventListener('mouseover', e => {
-      if (e.target.closest(interactives)) {
-        ring.style.width = '50px';
-        ring.style.height = '50px';
-        ring.style.borderColor = 'rgba(167,139,250,.6)';
-      }
-    });
-    document.addEventListener('mouseout', e => {
-      if (e.target.closest(interactives)) {
-        ring.style.width = '36px';
-        ring.style.height = '36px';
-        ring.style.borderColor = '';
-      }
-    });
-  }
 
   /* ═══════════════════════════════════════════════════
      PARTICLE SYSTEM (Hero background)
