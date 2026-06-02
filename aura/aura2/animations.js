@@ -1,94 +1,87 @@
 /**
- * AURA UI — Animations Layer
- * animations.js · Particles · Cursor · Typewriter · Scroll reveals · Counters
+ * AURA UI — Clean Animations & Simulation Driver
+ * animations.js · Console Logs · Typewriter · Scroll Reveal · Counters
+ * Fully optimized for zero GPU rendering load.
  */
 
 (function () {
   'use strict';
 
   document.addEventListener('DOMContentLoaded', () => {
-
-    initParticles();
+    initCompilerTerminalLogs();
     initTypewriter();
     initScrollReveal();
     initCountUp();
     initBentoGlow();
+    initShowcase3DTilt();
+    initCard3DTilt();
   });
 
-
   /* ═══════════════════════════════════════════════════
-     PARTICLE SYSTEM (Hero background)
+     AWS-STYLE MONOSPACE COMPILER LOGGER SIMULATOR
      ═══════════════════════════════════════════════════ */
-  function initParticles() {
-    const canvas = document.getElementById('heroCanvas');
-    if (!canvas) return;
+  function initCompilerTerminalLogs() {
+    const container = document.getElementById('compilerLogs');
+    if (!container) return;
 
-    const ctx = canvas.getContext('2d');
-    let w, h;
-    const particles = [];
-    const PARTICLE_COUNT = 60;
+    const logs = [
+      '[info] Awaiting Figma webhook triggers...',
+      '[info] Sync token manifest version v4.0.2',
+      '[info] Figma tokens webhook trigger detected...',
+      '[info] Fetching tokens from source API...',
+      '[info] Successfully pulled 34 theme tokens.',
+      '[info] Compilation engine parsing token nodes...',
+      '[info] Generating layout templates: navigation, buttons, charts...',
+      '[success] Output compiled size: 2.14KB (gzipped).',
+      '[success] Synchronization complete. Live console active.',
+      '[info] Entering cooling stage (idle mode)...'
+    ];
 
-    function resize() {
-      w = canvas.width  = canvas.offsetWidth;
-      h = canvas.height = canvas.offsetHeight;
-    }
+    let currentLogIndex = 0;
+    container.innerHTML = '';
 
-    resize();
-    window.addEventListener('resize', resize, { passive: true });
-
-    // Create particles
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
-      particles.push({
-        x: Math.random() * w,
-        y: Math.random() * h,
-        vx: (Math.random() - 0.5) * 0.3,
-        vy: (Math.random() - 0.5) * 0.3,
-        r: Math.random() * 1.5 + 0.5,
-        alpha: Math.random() * 0.4 + 0.1,
-      });
-    }
-
-    function draw() {
-      ctx.clearRect(0, 0, w, h);
-
-      particles.forEach(p => {
-        p.x += p.vx;
-        p.y += p.vy;
-
-        // Wrap around
-        if (p.x < 0) p.x = w;
-        if (p.x > w) p.x = 0;
-        if (p.y < 0) p.y = h;
-        if (p.y > h) p.y = 0;
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(167, 139, 250, ${p.alpha})`;
-        ctx.fill();
-      });
-
-      // Draw connections
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-
-          if (dist < 120) {
-            ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(124, 58, 237, ${0.06 * (1 - dist / 120)})`;
-            ctx.lineWidth = 0.5;
-            ctx.stroke();
-          }
-        }
+    function printNextLog() {
+      if (currentLogIndex >= logs.length) {
+        // Pause at completion, then loop back
+        setTimeout(() => {
+          container.innerHTML = '';
+          currentLogIndex = 0;
+          printNextLog();
+        }, 5000);
+        return;
       }
 
-      requestAnimationFrame(draw);
+      const logText = logs[currentLogIndex];
+      const div = document.createElement('div');
+      div.className = 'log-line';
+      
+      if (logText.includes('[success]')) {
+        div.className = 'log-line success';
+      } else if (logText.includes('[warn]')) {
+        div.className = 'log-line warn';
+      }
+
+      div.textContent = logText;
+      container.appendChild(div);
+      
+      // Auto scroll terminal to bottom
+      container.scrollTop = container.scrollHeight;
+
+      currentLogIndex++;
+      
+      // Variable print speed for realism
+      let nextDelay = 800;
+      if (logText.includes('Fetching') || logText.includes('Compilation')) {
+        nextDelay = 1800;
+      } else if (logText.includes('success')) {
+        nextDelay = 1200;
+      }
+
+      setTimeout(printNextLog, nextDelay);
     }
 
-    draw();
+    // Start printing
+    printNextLog();
   }
 
   /* ═══════════════════════════════════════════════════
@@ -202,16 +195,102 @@
   }
 
   /* ═══════════════════════════════════════════════════
-     BENTO CARD GLOW (mouse tracking)
+     3D MOUSE PARALLAX FOR INTERACTIVE GALLERY
      ═══════════════════════════════════════════════════ */
-  function initBentoGlow() {
-    document.querySelectorAll('.bento-card').forEach(card => {
-      card.addEventListener('mousemove', e => {
-        const r = card.getBoundingClientRect();
-        card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-        card.style.setProperty('--my', (e.clientY - r.top) + 'px');
-      });
+  function initShowcase3DTilt() {
+    const showcase = document.getElementById('interactiveGallery');
+    const container = showcase ? showcase.querySelector('.gallery-container') : null;
+    if (!showcase || !container) return;
+
+    let requestRef;
+    let targetX = 0;
+    let targetY = 0;
+    let currentX = 0;
+    let currentY = 0;
+
+    showcase.addEventListener('mousemove', e => {
+      const rect = showcase.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      
+      // Calculate rotation angles (max 15 deg)
+      targetX = ((centerY - y) / centerY) * 15;
+      targetY = ((x - centerX) / centerX) * 15;
+      
+      if (!requestRef) {
+        requestRef = requestAnimationFrame(updateTransform);
+      }
     });
+
+    showcase.addEventListener('mouseleave', () => {
+      targetX = 0;
+      targetY = 0;
+      if (!requestRef) {
+        requestRef = requestAnimationFrame(updateTransform);
+      }
+    });
+
+    function updateTransform() {
+      // Lerp for smooth easing
+      currentX += (targetX - currentX) * 0.1;
+      currentY += (targetY - currentY) * 0.1;
+      
+      container.style.transform = `rotateX(${currentX}deg) rotateY(${currentY}deg)`;
+      
+      if (Math.abs(targetX - currentX) > 0.01 || Math.abs(targetY - currentY) > 0.01) {
+        requestRef = requestAnimationFrame(updateTransform);
+      } else {
+        requestRef = null;
+      }
+    }
+  }
+
+  /* ═══════════════════════════════════════════════════
+     3D CARD HOVER TILT (Event Delegation)
+     ═══════════════════════════════════════════════════ */
+  function initCard3DTilt() {
+    const grid = document.getElementById('compGrid');
+    if (!grid) return;
+
+    grid.addEventListener('mousemove', e => {
+      const card = e.target.closest('.comp-card');
+      if (!card) return;
+
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      // Subtle tilt of max 8 degrees
+      const rotateX = ((centerY - y) / centerY) * 8;
+      const rotateY = ((x - centerX) / centerX) * -8;
+
+      card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
+      card.style.boxShadow = `0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(255, 153, 0, 0.05)`;
+    });
+
+    grid.addEventListener('mouseout', e => {
+      const card = e.target.closest('.comp-card');
+      if (!card) return;
+      const related = e.relatedTarget;
+      if (!related || !card.contains(related)) {
+        resetCard(card);
+      }
+    });
+
+    function resetCard(card) {
+      card.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
+      card.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) translateY(0)';
+      card.style.boxShadow = '';
+      setTimeout(() => {
+        card.style.transition = '';
+      }, 550);
+    }
   }
 
 })();

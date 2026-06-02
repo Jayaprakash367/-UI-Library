@@ -14,13 +14,13 @@
   /* ─── CATEGORIES ────────────────────────────────── */
   if (typeof CATEGORIES === 'undefined') {
     window.CATEGORIES = [
-      { id: 'all',        label: 'All',         icon: '✦' },
-      { id: 'button',     label: 'Buttons',     icon: '◉' },
-      { id: 'card',       label: 'Cards',       icon: '▣' },
-      { id: 'animation',  label: 'Animations',  icon: '✧' },
-      { id: 'background', label: 'Backgrounds', icon: '◐' },
-      { id: 'input',      label: 'Inputs',      icon: '▤' },
-      { id: 'badge',      label: 'Badges',      icon: '◈' },
+      { id: 'all',        label: 'All Services',       icon: '📂' },
+      { id: 'button',     label: 'Buttons & Triggers',  icon: '⚡' },
+      { id: 'card',       label: 'Containers & Cards',  icon: '📦' },
+      { id: 'animation',  label: 'Effects & Motions',   icon: '📈' },
+      { id: 'background', label: 'Canvas Backdrops',    icon: '🖼️' },
+      { id: 'input',      label: 'Inputs & Controls',   icon: '🎛️' },
+      { id: 'badge',      label: 'Badges & Indicators', icon: '🏷️' },
     ];
   }
 
@@ -81,6 +81,46 @@
     }));
   }
 
+  /* ─── LIKES & ENGAGEMENT ────────────────────────── */
+  function getLikesCount(id) {
+    const likes = JSON.parse(localStorage.getItem('aura-likes') || '{}');
+    if (likes[id] === undefined) {
+      // Generate a stable pseudo-random like count between 40 and 250
+      let hash = 0;
+      for (let i = 0; i < id.length; i++) {
+        hash = id.charCodeAt(i) + ((hash << 5) - hash);
+      }
+      likes[id] = {
+        count: Math.abs(hash % 210) + 40,
+        liked: false
+      };
+      localStorage.setItem('aura-likes', JSON.stringify(likes));
+    }
+    return likes[id];
+  }
+
+  function toggleLike(id, btn) {
+    const likes = JSON.parse(localStorage.getItem('aura-likes') || '{}');
+    if (!likes[id]) return;
+    
+    if (likes[id].liked) {
+      likes[id].count--;
+      likes[id].liked = false;
+    } else {
+      likes[id].count++;
+      likes[id].liked = true;
+      showToast(`Added to favorites!`, 'success');
+    }
+    
+    localStorage.setItem('aura-likes', JSON.stringify(likes));
+    
+    if (btn) {
+      btn.querySelector('.like-heart').textContent = likes[id].liked ? '❤️' : '🤍';
+      btn.querySelector('.like-count').textContent = likes[id].count;
+      btn.classList.toggle('liked', likes[id].liked);
+    }
+  }
+
   /* ═══════════════════════════════════════════════════
      THEME
      ═══════════════════════════════════════════════════ */
@@ -88,6 +128,14 @@
     document.documentElement.setAttribute('data-theme', t);
     localStorage.setItem('aura-theme', t);
     state.theme = t;
+    // Propagate to iframes
+    document.querySelectorAll('.comp-preview iframe').forEach(iframe => {
+      try {
+        if (iframe.contentDocument && iframe.contentDocument.documentElement) {
+          iframe.contentDocument.documentElement.setAttribute('data-theme', t);
+        }
+      } catch (e) {}
+    });
   }
 
   function bindThemeToggle() {
@@ -394,16 +442,25 @@
       `<span class="comp-tag">${escHtml(t)}</span>`
     ).join('');
 
+    // Fetch likes status
+    const likeData = getLikesCount(comp.id);
+
     // Use lazy iframe loading — srcdoc set only when visible
     card.innerHTML = `
       ${badgesHtml}
       <div class="card-beam"></div>
       <div class="comp-preview">
+        <div class="mac-window-dots">
+          <span class="mac-dot mac-red"></span>
+          <span class="mac-dot mac-yellow"></span>
+          <span class="mac-dot mac-green"></span>
+        </div>
+        <div class="comp-preview-glow"></div>
         <div class="comp-preview-overlay"></div>
         <iframe title="${escHtml(comp.title)} preview"
-          data-srcdoc="${escAttr(buildPreviewDoc(comp.preview))}"
+          data-srcdoc="${escAttr(buildPreviewDoc(comp.preview, state.theme))}"
           loading="lazy"
-          sandbox="allow-scripts"></iframe>
+          sandbox="allow-scripts allow-same-origin"></iframe>
       </div>
       <div class="comp-body">
         <div class="comp-card-top">
@@ -414,6 +471,7 @@
         <div class="comp-tags">${tagsHtml}</div>
       </div>
       <div class="comp-footer">
+        <button class="btn-like ${likeData.liked ? 'liked' : ''}" data-id="${comp.id}" aria-label="Like component"><span class="like-heart">${likeData.liked ? '❤️' : '🤍'}</span> <span class="like-count">${likeData.count}</span></button>
         <button class="btn-copy" data-id="${comp.id}" aria-label="Copy code"><span>⎘</span> Copy</button>
         <button class="btn-code" data-id="${comp.id}" aria-label="View code"><span>&lt;/&gt;</span> Code</button>
       </div>
@@ -428,10 +486,16 @@
         <pre class="code-panel-pre" tabindex="0">${escHtml(comp.code)}</pre>
       </div>`;
 
+    // ─── Event: Like button
+    card.querySelector('.btn-like').addEventListener('click', e => {
+      e.stopPropagation();
+      toggleLike(comp.id, card.querySelector('.btn-like'));
+    });
+
     // ─── Event: Copy button
     card.querySelector('.btn-copy').addEventListener('click', e => {
       e.stopPropagation();
-      copyCode(comp, card.querySelector('.btn-copy'));
+      copyCode(comp, card.querySelector('.btn-copy'), card);
     });
 
     // ─── Event: Code toggle
@@ -469,7 +533,7 @@
     card.querySelector('.code-panel-copy-btn').addEventListener('click', e => {
       e.stopPropagation();
       const btn = card.querySelector('.code-panel-copy-btn');
-      copyCode(comp, btn);
+      copyCode(comp, btn, card);
       btn.textContent = '✓ Copied!';
       setTimeout(() => { btn.textContent = '⎘ Copy'; }, 2200);
     });
@@ -483,12 +547,36 @@
     return card;
   }
 
-  function buildPreviewDoc(bodyHtml) {
-    return `<!DOCTYPE html><html><head>
+  function buildPreviewDoc(bodyHtml, theme = 'dark') {
+    return `<!DOCTYPE html><html data-theme="${theme}"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-<style>*{box-sizing:border-box;margin:0;padding:0;}body{overflow:hidden;font-family:'Inter',sans-serif;}</style>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    color-scheme: dark light;
+  }
+  :root[data-theme="dark"] body {
+    background: transparent !important;
+    color: #ffffff;
+  }
+  :root[data-theme="light"] body {
+    background: transparent !important;
+    color: #0f172a;
+  }
+  body {
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background: transparent !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 10px;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+</style>
 </head><body>${bodyHtml}</body></html>`;
   }
 
@@ -502,23 +590,26 @@
 
     cardObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const card = entry.target;
+        const card = entry.target;
+        const iframe = card.querySelector('iframe[data-srcdoc]');
 
-          // Reveal animation
+        if (entry.isIntersecting) {
+          // Reveal animation (once)
           card.classList.add('visible');
 
-          // Lazy load iframe
-          const iframe = card.querySelector('iframe[data-srcdoc]');
+          // Dynamically mount/load iframe when it comes into view
           if (iframe && !iframe.srcdoc) {
             iframe.srcdoc = iframe.dataset.srcdoc;
           }
-
-          cardObserver.unobserve(card);
+        } else {
+          // Dynamically unload iframe when it leaves the viewport to save CPU/memory on mobile
+          if (iframe && iframe.srcdoc) {
+            iframe.srcdoc = '';
+          }
         }
       });
     }, {
-      threshold: 0.05,
+      threshold: 0.01,
       rootMargin: `0px 0px ${LAZY_THRESHOLD}px 0px`
     });
 
@@ -540,7 +631,7 @@
   /* ═══════════════════════════════════════════════════
      COPY CODE
      ═══════════════════════════════════════════════════ */
-  async function copyCode(comp, btn) {
+  async function copyCode(comp, btn, card = null) {
     try {
       await navigator.clipboard.writeText(comp.code);
     } catch {
@@ -558,6 +649,11 @@
     const origHTML = btn.innerHTML;
     btn.innerHTML = '<span>✓</span> Copied!';
     showToast(`Copied "${comp.title}"`, 'success');
+
+    if (card) {
+      card.classList.add('copy-flash');
+      setTimeout(() => { card.classList.remove('copy-flash'); }, 800);
+    }
 
     setTimeout(() => {
       btn.classList.remove('copied');
