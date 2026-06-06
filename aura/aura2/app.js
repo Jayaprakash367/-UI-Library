@@ -449,6 +449,7 @@
     card.innerHTML = `
       ${badgesHtml}
       <div class="card-beam"></div>
+      <div class="card-glare"></div>
       <div class="comp-preview">
         <div class="mac-window-dots">
           <span class="mac-dot mac-red"></span>

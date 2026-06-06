@@ -15,6 +15,8 @@
     initBentoGlow();
     initShowcase3DTilt();
     initCard3DTilt();
+    initScrollProgressBar();
+    initMagneticButtons();
   });
 
   /* ═══════════════════════════════════════════════════
@@ -54,7 +56,7 @@
       const logText = logs[currentLogIndex];
       const div = document.createElement('div');
       div.className = 'log-line';
-      
+
       if (logText.includes('[success]')) {
         div.className = 'log-line success';
       } else if (logText.includes('[warn]')) {
@@ -63,12 +65,12 @@
 
       div.textContent = logText;
       container.appendChild(div);
-      
+
       // Auto scroll terminal to bottom
       container.scrollTop = container.scrollHeight;
 
       currentLogIndex++;
-      
+
       // Variable print speed for realism
       let nextDelay = 800;
       if (logText.includes('Fetching') || logText.includes('Compilation')) {
@@ -199,98 +201,163 @@
      ═══════════════════════════════════════════════════ */
   function initShowcase3DTilt() {
     const showcase = document.getElementById('interactiveGallery');
-    const container = showcase ? showcase.querySelector('.gallery-container') : null;
+    const container = showcase ? showcase.querySelector('.iso-scene') : null;
     if (!showcase || !container) return;
 
-    let requestRef;
-    let targetX = 0;
-    let targetY = 0;
-    let currentX = 0;
-    let currentY = 0;
-
+    let targetX = 0, targetY = 0, currentX = 0, currentY = 0;
+    
     showcase.addEventListener('mousemove', e => {
       const rect = showcase.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
-      
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
-      
-      // Calculate rotation angles (max 15 deg)
-      targetX = ((centerY - y) / centerY) * 15;
-      targetY = ((x - centerX) / centerX) * 15;
-      
-      if (!requestRef) {
-        requestRef = requestAnimationFrame(updateTransform);
-      }
+
+      // Cinematic floating (max 10 deg)
+      targetX = ((centerY - y) / centerY) * 10;
+      targetY = ((x - centerX) / centerX) * 10;
     });
 
-    showcase.addEventListener('mouseleave', () => {
-      targetX = 0;
-      targetY = 0;
-      if (!requestRef) {
-        requestRef = requestAnimationFrame(updateTransform);
-      }
-    });
+    showcase.addEventListener('mouseleave', () => { targetX = 0; targetY = 0; });
 
-    function updateTransform() {
-      // Lerp for smooth easing
-      currentX += (targetX - currentX) * 0.1;
-      currentY += (targetY - currentY) * 0.1;
-      
-      container.style.transform = `rotateX(${currentX}deg) rotateY(${currentY}deg)`;
-      
-      if (Math.abs(targetX - currentX) > 0.01 || Math.abs(targetY - currentY) > 0.01) {
-        requestRef = requestAnimationFrame(updateTransform);
-      } else {
-        requestRef = null;
-      }
+    function tick() {
+      currentX += (targetX - currentX) * 0.05;
+      currentY += (targetY - currentY) * 0.05;
+      container.style.transform = `rotateX(${55 + currentX}deg) rotateZ(${-35 + currentY}deg)`;
+      requestAnimationFrame(tick);
     }
+    tick();
   }
 
   /* ═══════════════════════════════════════════════════
      3D CARD HOVER TILT (Event Delegation)
      ═══════════════════════════════════════════════════ */
   function initCard3DTilt() {
-    const grid = document.getElementById('compGrid');
-    if (!grid) return;
+    // We combine Bento and Comp Card tracking into one high-def loop
+    const trackables = document.querySelectorAll('.comp-card, .bento-card');
+    
+    trackables.forEach(card => {
+      let rect, targetX = 0, targetY = 0, currentX = 0, currentY = 0;
+      let targetMx = 50, targetMy = 50, currentMx = 50, currentMy = 50;
+      let isHovered = false;
 
-    grid.addEventListener('mousemove', e => {
-      const card = e.target.closest('.comp-card');
-      if (!card) return;
+      card.addEventListener('mouseenter', () => {
+        rect = card.getBoundingClientRect();
+        isHovered = true;
+      });
 
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+      card.addEventListener('mousemove', e => {
+        if (!rect) rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
 
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
+        targetX = ((centerY - y) / centerY) * 6; // Max 6 deg tilt
+        targetY = ((x - centerX) / centerX) * -6;
+        
+        targetMx = (x / rect.width) * 100;
+        targetMy = (y / rect.height) * 100;
+      });
 
-      // Subtle tilt of max 8 degrees
-      const rotateX = ((centerY - y) / centerY) * 8;
-      const rotateY = ((x - centerX) / centerX) * -8;
+      card.addEventListener('mouseleave', () => {
+        isHovered = false;
+        targetX = 0; targetY = 0;
+        targetMx = 50; targetMy = 50;
+      });
 
-      card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
-      card.style.boxShadow = `0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(255, 153, 0, 0.05)`;
-    });
+      function tick() {
+        currentX += (targetX - currentX) * 0.15;
+        currentY += (targetY - currentY) * 0.15;
+        currentMx += (targetMx - currentMx) * 0.15;
+        currentMy += (targetMy - currentMy) * 0.15;
 
-    grid.addEventListener('mouseout', e => {
-      const card = e.target.closest('.comp-card');
-      if (!card) return;
-      const related = e.relatedTarget;
-      if (!related || !card.contains(related)) {
-        resetCard(card);
+        // Apply properties to be used by CSS
+        card.style.setProperty('--rx', `${currentX}deg`);
+        card.style.setProperty('--ry', `${currentY}deg`);
+        card.style.setProperty('--mx', `${currentMx}%`);
+        card.style.setProperty('--my', `${currentMy}%`);
+
+        requestAnimationFrame(tick);
       }
+      tick();
     });
+  }
 
-    function resetCard(card) {
-      card.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
-      card.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) translateY(0)';
-      card.style.boxShadow = '';
-      setTimeout(() => {
-        card.style.transition = '';
-      }, 550);
-    }
+  function initBentoGlow() {
+    // Merged into initCard3DTilt for unified physics loop
+  }
+
+  /* ═══════════════════════════════════════════════════
+     SCROLL PROGRESS BAR
+     ═══════════════════════════════════════════════════ */
+  function initScrollProgressBar() {
+    const progressBar = document.getElementById('scrollProgress');
+    if (!progressBar) return;
+
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+      progressBar.style.width = `${progress}%`;
+    }, { passive: true });
+  }
+
+  /* ═══════════════════════════════════════════════════
+     MAGNETIC SNAPPING BUTTONS
+     ═══════════════════════════════════════════════════ */
+  function initMagneticButtons() {
+    const magneticElems = document.querySelectorAll('.magnetic');
+    if (!magneticElems.length) return;
+
+    magneticElems.forEach(el => {
+      let rect = null;
+      let targetX = 0, targetY = 0, currentX = 0, currentY = 0;
+      let isHovered = false;
+
+      el.addEventListener('mouseenter', () => {
+        rect = el.getBoundingClientRect();
+        isHovered = true;
+        el.style.transition = 'none'; // Disable CSS transition for JS physics
+      });
+
+      el.addEventListener('mousemove', e => {
+        if (!rect) return;
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        const relX = e.clientX - centerX;
+        const relY = e.clientY - centerY;
+
+        const maxDisplacement = 20;
+        targetX = Math.max(-maxDisplacement, Math.min(maxDisplacement, relX * 0.4));
+        targetY = Math.max(-maxDisplacement, Math.min(maxDisplacement, relY * 0.4));
+      });
+
+      el.addEventListener('mouseleave', () => {
+        isHovered = false;
+        targetX = 0; targetY = 0;
+      });
+
+      function tick() {
+        // High tension spring lerp
+        currentX += (targetX - currentX) * 0.25;
+        currentY += (targetY - currentY) * 0.25;
+        
+        if (Math.abs(currentX) > 0.01 || Math.abs(currentY) > 0.01) {
+          el.style.transform = `translate(${currentX}px, ${currentY}px)`;
+        } else {
+          el.style.transform = 'translate(0px, 0px)';
+        }
+        
+        if (!isHovered && Math.abs(currentX) < 0.1 && Math.abs(currentY) < 0.1) {
+          el.style.transform = '';
+          el.style.transition = 'transform var(--transition-spring)'; // Restore CSS
+        }
+        
+        requestAnimationFrame(tick);
+      }
+      tick();
+    });
   }
 
 })();
