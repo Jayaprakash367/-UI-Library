@@ -57,12 +57,7 @@
     bindKeyboard();
     bindViewToggle();
     bindInstallCopy();
-
-    // Hide loader
-    setTimeout(() => {
-      const loader = $('pageLoader');
-      if (loader) loader.classList.add('done');
-    }, 1000);
+    renderHorizontalShowcase();
   });
 
   /* ═══════════════════════════════════════════════════
@@ -798,6 +793,33 @@
 
   function escAttr(str) {
     return String(str).replace(/"/g, '&quot;');
+  }
+
+  /* ═══════════════════════════════════════════════════
+     HORIZONTAL SCROLL SHOWCASE (Featured/popular)
+     ═══════════════════════════════════════════════════ */
+  function renderHorizontalShowcase() {
+    const track = $('hscrollTrack');
+    if (!track || typeof COMPONENTS === 'undefined') return;
+
+    // Pick featured and popular components for the showcase
+    const featured = COMPONENTS.filter(c => c.featured || c.isNew).slice(0, 12);
+    const items = featured.length >= 4
+      ? featured
+      : COMPONENTS.slice(0, Math.min(12, COMPONENTS.length));
+
+    const frag = document.createDocumentFragment();
+    items.forEach(comp => {
+      const card = createCard(comp);
+      card.classList.add('visible');
+      frag.appendChild(card);
+    });
+    track.appendChild(frag);
+
+    // Observe for lazy iframe loading
+    if (cardObserver) {
+      track.querySelectorAll('.comp-card').forEach(c => cardObserver.observe(c));
+    }
   }
 
   // Expose for debugging

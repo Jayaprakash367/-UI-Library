@@ -1,33 +1,40 @@
 /* ═══════════════════════════════════════════════════════════════
-   AURA UI — Design Token System v1.0
+   AURA UI — Design Token System v2.0
    Single source of truth for all design decisions.
    Import BEFORE style.css.
    ═══════════════════════════════════════════════════════════════ */
 
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
 :root {
 
+  /* ─── TYPOGRAPHY: FONT FAMILIES ─────────────────── */
+  --font-display: 'Space Grotesk', 'Inter', sans-serif;
+  --font-body:    'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono:    'JetBrains Mono', 'Fira Code', monospace;
+
   /* ─── COLOR: BACKGROUNDS (AWS Console Slate) ──────── */
-  --color-bg-base:      #0b0f19; /* AWS deep charcoal base */
-  --color-bg-surface:   #0f172a; /* Slate dark canvas */
-  --color-bg-elevated:  #1e293b; /* Slate-800 elevated panels */
-  --color-bg-code:      #020617; /* Slate-950 deep editor code */
+  --color-bg-base:      #050816;
+  --color-bg-surface:   #0a0f1e;
+  --color-bg-elevated:  #111827;
+  --color-bg-code:      #020617;
 
   /* ─── COLOR: BRAND (AWS Signature Amber & Cloud Blue) ── */
-  --color-brand-violet:       #ff9900; /* AWS Orange */
+  --color-brand-violet:       #ff9900;
   --color-brand-violet-mid:   #ffaa22;
   --color-brand-violet-light: #ffbd59;
   --color-brand-violet-glow:  rgba(255, 153, 0, 0.15);
-  --color-brand-blue:         #00a1ec; /* AWS Cloud Blue */
+  --color-brand-blue:         #00a1ec;
   --color-brand-blue-light:   #38bdf8;
   --color-brand-cyan:         #06b6d4;
-  --color-brand-crimson:      #ff5500; /* AWS secondary orange-red */
+  --color-brand-crimson:      #ff5500;
   --color-brand-blue-deep:    #0f172a;
 
   /* ─── COLOR: TEXT (WCAG AA compliant on dark bg) ─── */
   --color-text-primary:   #ffffff;
-  --color-text-secondary: #94a3b8;   /* slate-400 */
-  --color-text-muted:     #64748b;   /* slate-500 */
-  --color-text-subtle:    #475569;   /* slate-600 */
+  --color-text-secondary: #94a3b8;
+  --color-text-muted:     #64748b;
+  --color-text-subtle:    #475569;
 
   /* ─── COLOR: SEMANTIC ────────────────────────────── */
   --color-success:       #10b981;
@@ -44,7 +51,7 @@
   --color-info-bg:       rgba(0,161,236,0.12);
 
   /* ─── COLOR: BORDERS ─────────────────────────────── */
-  --color-border:        #1e293b; /* Slate-800 crisp line */
+  --color-border:        #1e293b;
   --color-border-hover:  #ff9900;
   --color-border-active: #ff9900;
   --color-border-glass:  rgba(255,255,255,0.06);
@@ -63,6 +70,9 @@
   --gradient-success:     linear-gradient(135deg, #10b981, #059669);
   --gradient-danger:      linear-gradient(135deg, #ef4444, #dc2626);
   --gradient-cover:       linear-gradient(135deg, #ff9900, #ff5500, #00a1ec);
+  --gradient-mesh:        radial-gradient(at 20% 80%, rgba(255,153,0,0.15) 0%, transparent 50%),
+                          radial-gradient(at 80% 20%, rgba(0,161,236,0.12) 0%, transparent 50%),
+                          radial-gradient(at 50% 50%, rgba(139,92,246,0.08) 0%, transparent 50%);
 
   /* ─── TYPOGRAPHY: SIZE SCALE ─────────────────────── */
   --text-2xs:  10px;
@@ -77,6 +87,9 @@
   --text-4xl:  32px;
   --text-5xl:  38px;
   --text-6xl:  48px;
+  --text-7xl:  64px;
+  --text-8xl:  80px;
+  --text-9xl:  96px;
 
   /* ─── TYPOGRAPHY: WEIGHT SCALE ───────────────────── */
   --weight-regular:   400;
@@ -111,6 +124,7 @@
   --radius-lg:   10px;
   --radius-xl:   12px;
   --radius-2xl:  16px;
+  --radius-3xl:  24px;
   --radius-full: 9999px;
 
   /* ─── SHADOWS (Flat-design enterprise-clean) ─────── */
@@ -118,22 +132,21 @@
   --shadow-sm:        0 2px 4px rgba(0,0,0,0.20);
   --shadow-md:        0 4px 12px rgba(0,0,0,0.25);
   --shadow-lg:        0 12px 24px rgba(0,0,0,0.35);
+  --shadow-xl:        0 20px 40px rgba(0,0,0,0.45);
   --shadow-glow-sm:   0 0 10px rgba(255,153,0,0.10);
   --shadow-glow-md:   0 0 20px rgba(255,153,0,0.15);
   --shadow-glow-lg:   0 4px 20px rgba(255,153,0,0.25);
+  --shadow-glow-brand:0 0 60px rgba(255,153,0,0.20), 0 0 120px rgba(0,161,236,0.10);
   --shadow-card:      0 2px 8px rgba(0,0,0,0.20);
   --shadow-success:   0 0 10px rgba(16,185,129,0.10);
   --shadow-danger:    0 0 10px rgba(239,68,68,0.10);
   --shadow-3d-card:   0 10px 30px rgba(0,0,0,0.30);
 
-  /* ─── 3D & PERSPECTIVE (Conservative clean) ───────── */
+  /* ─── 3D & PERSPECTIVE ──────────────────────────── */
   --perspective-lg:   1000px;
   --perspective-md:   800px;
   --color-glow-brand: rgba(255, 153, 0, 0.08);
   --color-glow-cyan:  rgba(0, 161, 236, 0.08);
-  --transition-spring: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-  --ease-google-spring: cubic-bezier(0.16, 1, 0.3, 1);
-  --transition-google: transform 0.35s var(--ease-google-spring), opacity 0.35s ease;
 
   /* ─── ANIMATION: DURATIONS ───────────────────────── */
   --duration-instant: 80ms;
@@ -142,28 +155,49 @@
   --duration-slow:    400ms;
   --duration-slower:  600ms;
   --duration-crawl:  1000ms;
+  --duration-reveal:  1200ms;
+  --duration-epic:    1800ms;
 
   /* ─── ANIMATION: EASINGS ─────────────────────────── */
-  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-inout:  cubic-bezier(0.4, 0, 0.2, 1);
-  --ease-in:     cubic-bezier(0.4, 0, 1, 1);
+  --ease-out:       cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-inout:     cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-in:        cubic-bezier(0.4, 0, 1, 1);
+  --ease-expo-out:  cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-elastic:   cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --ease-smooth:    cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-power4:    cubic-bezier(0.76, 0, 0.24, 1);
+
+  /* ─── SCROLL & TRANSITION SPRINGS ───────────────── */
+  --transition-spring: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  --transition-google: transform 0.35s var(--ease-spring), opacity 0.35s ease;
+  --scroll-lerp:       0.08;
+  --parallax-slow:     0.3;
+  --parallax-mid:      0.6;
+  --parallax-fast:     1.0;
+
+  /* ─── CURSOR SYSTEM ─────────────────────────────── */
+  --cursor-size:       20px;
+  --cursor-size-hover: 60px;
+  --cursor-color:      rgba(255, 153, 0, 0.5);
+  --cursor-blend:      difference;
 
   /* ─── Z-INDEX SCALE ──────────────────────────────── */
-  --z-base:    1;
-  --z-raised:  10;
-  --z-sticky:  100;
-  --z-nav:     1000;
-  --z-modal:   2000;
-  --z-toast:   3000;
-  --z-loader:  4000;
+  --z-base:     1;
+  --z-raised:   10;
+  --z-sticky:   100;
+  --z-nav:      1000;
+  --z-cursor:   1500;
+  --z-modal:    2000;
+  --z-toast:    3000;
+  --z-loader:   4000;
+  --z-wipe:     5000;
 
   /* ─── LAYOUT ─────────────────────────────────────── */
-  --max-width:      1400px; /* AWS expansive screen max width */
-  --nav-height:     56px;
+  --max-width:      1400px;
+  --nav-height:     64px;
   --sidebar-width:  240px;
   --content-width:  800px;
-
 }
 
 /* ─── REDUCED MOTION — Global override ───────────────

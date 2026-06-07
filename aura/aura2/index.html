@@ -7,7 +7,7 @@
   <title>AURA UI — Premium Component Library | Copy & Paste UI</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="tokens.css">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -16,26 +16,37 @@
   <!-- Skip Navigation (Accessibility) -->
   <a class="skip-link" href="#components">Skip to content</a>
 
-  <!-- ═══ PAGE LOADER ═══ -->
-  <div id="pageLoader" role="status" aria-label="Loading">
-    <div class="loader-inner">
-      <div class="loader-hex">
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="url(#lg)" stroke-width="2">
-          <defs><linearGradient id="lg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#a78bfa"/><stop offset="100%" stop-color="#60a5fa"/></linearGradient></defs>
-          <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/>
-          <line x1="12" y1="22" x2="12" y2="15.5"/><line x1="22" y1="8.5" x2="12" y2="15.5"/><line x1="2" y1="8.5" x2="12" y2="15.5"/>
-        </svg>
+  <!-- ═══ PAGE LOADER (Docky-style percentage counter) ═══ -->
+  <div id="pageLoader" class="page-loader" role="status" aria-label="Loading">
+    <div class="loader-content">
+      <div class="loader-counter">
+        <span id="loaderPercent" class="loader-percent">0</span>
+        <span class="loader-percent-sign">%</span>
       </div>
-      <span class="loader-name">AURA UI</span>
-      <div class="loader-bar-wrap"><div class="loader-bar-fill"></div></div>
+      <div class="loader-track">
+        <div class="loader-bar" id="loaderBar"></div>
+      </div>
+      <span class="loader-brand">AURA UI</span>
     </div>
+  </div>
+
+  <!-- ═══ PAGE WIPE TRANSITION ═══ -->
+  <div id="pageWipe" class="page-wipe" aria-hidden="true">
+    <div class="wipe-layer wipe-layer-1"></div>
+    <div class="wipe-layer wipe-layer-2"></div>
   </div>
 
   <!-- NOISE OVERLAY -->
   <div class="noise-overlay" aria-hidden="true"></div>
 
-  <!-- CURSOR -->
+  <!-- ═══ CUSTOM CURSOR (Noomo/Bruut style) ═══ -->
+  <div id="customCursor" class="custom-cursor" aria-hidden="true">
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+  </div>
 
+  <!-- ═══ SCROLL PROGRESS BAR ═══ -->
+  <div id="scrollProgress" class="scroll-progress" aria-hidden="true"></div>
 
   <!-- ═══ NAVBAR ═══ -->
   <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
@@ -53,21 +64,21 @@
       </a>
 
       <ul class="nav-links" role="list">
-        <li><a href="#hero">Home</a></li>
-        <li><a href="#components">Components</a></li>
-        <li><a href="#showcase">Showcase</a></li>
-        <li><a href="#about">About</a></li>
+        <li><a href="#hero" data-magnetic>Home</a></li>
+        <li><a href="#components" data-magnetic>Components</a></li>
+        <li><a href="#showcase" data-magnetic>Showcase</a></li>
+        <li><a href="#about" data-magnetic>About</a></li>
       </ul>
 
       <div class="nav-actions">
-        <button id="themeToggle" class="nav-icon-btn" aria-label="Toggle theme">
+        <button id="themeToggle" class="nav-icon-btn" aria-label="Toggle theme" data-magnetic>
           <svg class="theme-icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
           <svg class="theme-icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
         </button>
-        <a href="https://github.com/Jayaprakash367/-UI-Library" class="nav-icon-btn" target="_blank" rel="noopener" aria-label="GitHub">
+        <a href="https://github.com/Jayaprakash367/-UI-Library" class="nav-icon-btn" target="_blank" rel="noopener" aria-label="GitHub" data-magnetic>
           <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
         </a>
-        <a href="#components" class="btn btn-primary btn-sm">
+        <a href="#components" class="btn btn-primary btn-sm" data-magnetic>
           Browse Library
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
         </a>
@@ -87,8 +98,9 @@
     <a href="#components" class="btn btn-primary btn-sm" style="width:100%;justify-content:center;margin-top:.5rem;">Browse Library</a>
   </nav>
 
-  <!-- ═══ HERO ═══ -->
+  <!-- ═══ HERO (Cinematic split-text reveal + particle canvas) ═══ -->
   <section class="hero" id="hero" aria-labelledby="heroTitle" data-magic-section="true">
+    <canvas id="particleCanvas" class="hero-particles" aria-hidden="true"></canvas>
 
     <div class="hero-aurora" aria-hidden="true">
       <div class="aurora-orb aurora-orb-1"></div>
@@ -100,43 +112,47 @@
 
     <div class="hero-container">
       <div class="hero-content">
-        <div class="hero-eyebrow">
+        <div class="hero-eyebrow reveal-up" data-reveal>
           <span class="eyebrow-pulse" aria-hidden="true"></span>
           <span>Open Source · Trusted by 50,000+ developers · V4 Enterprise Edition</span>
           <span class="eyebrow-arrow" aria-hidden="true">→</span>
         </div>
 
         <h1 class="hero-title" id="heroTitle">
-          <span class="hero-line">AURA Compile Engine</span>
-          <span class="hero-line hero-line-grad" style="background: linear-gradient(135deg, #ff9900, #00a1ec); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Web Interface Console</span>
+          <span class="hero-line text-reveal" data-reveal data-delay="100">
+            <span class="text-reveal-inner">AURA Compile Engine</span>
+          </span>
+          <span class="hero-line hero-line-grad text-reveal" data-reveal data-delay="200">
+            <span class="text-reveal-inner" style="background: linear-gradient(135deg, #ff9900, #00a1ec); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Web Interface Console</span>
+          </span>
         </h1>
 
-        <p class="hero-sub">
+        <p class="hero-sub reveal-up" data-reveal data-delay="300">
           A high-performance design-to-code compiler that builds WCAG-accessible, zero-runtime UI components. Sync tokens from Figma, compile, and deploy.
           <br>
           <span id="typewriterTarget" class="hero-sub-typed" style="color: #ff9900; font-weight: 600;" aria-live="polite">Zero dependencies, pure CSS layout execution.</span>
         </p>
 
-        <div class="hero-cta">
-          <a href="#components" class="btn btn-primary btn-hero magnetic">
+        <div class="hero-cta reveal-up" data-reveal data-delay="400">
+          <a href="#components" class="btn btn-primary btn-hero" data-magnetic>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
             Browse Components
           </a>
-          <a href="https://github.com/Jayaprakash367/-UI-Library" class="btn btn-outline btn-hero magnetic" target="_blank" rel="noopener">
+          <a href="https://github.com/Jayaprakash367/-UI-Library" class="btn btn-outline btn-hero" target="_blank" rel="noopener" data-magnetic>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
             Star on GitHub
           </a>
         </div>
 
         <!-- INSTALL COMMAND -->
-        <div class="hero-install">
+        <div class="hero-install reveal-up" data-reveal data-delay="500">
           <code id="installCmd">npx aura-ui@latest init</code>
           <button class="hero-install-copy" id="installCopyBtn" aria-label="Copy install command">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
           </button>
         </div>
 
-        <div class="hero-stats" aria-label="Library statistics">
+        <div class="hero-stats reveal-up" data-reveal data-delay="600" aria-label="Library statistics">
           <div class="hero-stat">
             <span class="stat-num" data-target="100" id="heroComponentCount">0</span><span class="stat-suffix">+</span>
             <span class="stat-label">Components</span>
@@ -162,7 +178,6 @@
       <!-- INTERACTIVE 3D COMPONENT GALLERY -->
       <div class="hero-showcase interactive-gallery" id="interactiveGallery">
         <div class="gallery-container">
-          
           <!-- Central Glass Card -->
           <div class="gallery-item item-main">
             <div class="glass-panel">
@@ -238,12 +253,33 @@
     </div>
   </div>
 
-  <!-- ═══ FEATURES BENTO ═══ -->
+  <!-- ═══ TEXT MASK REVEAL (Vibor-style oversized typography) ═══ -->
+  <section class="text-showcase" data-magic-section="true">
+    <div class="container">
+      <div class="text-showcase-inner">
+        <div class="text-mask" data-reveal>
+          <h2 class="text-showcase-heading text-reveal">
+            <span class="text-reveal-inner">Build <em>interfaces</em> that</span>
+          </h2>
+        </div>
+        <div class="text-mask" data-reveal data-delay="150">
+          <h2 class="text-showcase-heading text-reveal">
+            <span class="text-reveal-inner">feel <span class="grad-text">extraordinary</span></span>
+          </h2>
+        </div>
+        <p class="text-showcase-sub reveal-up" data-reveal data-delay="300">
+          100+ hand-crafted components. Zero dependencies. Every pixel considered.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FEATURES BENTO (Pinned scroll reveal — Docky style) ═══ -->
   <section class="features-section" id="showcase" aria-labelledby="featTitle" data-magic-section="true">
     <div class="container">
-      <div class="section-eyebrow">Engine Specs</div>
-      <h2 class="section-title-large" id="featTitle">Engineered for Enterprise<br><span class="grad-text">Performance &amp; Scale</span></h2>
-      <p class="section-desc">Every component is strictly compiled for speed, semantic accessibility, and visual precision, keeping site loads immediate.</p>
+      <div class="section-eyebrow reveal-up" data-reveal>Engine Specs</div>
+      <h2 class="section-title-large reveal-up" data-reveal data-delay="100" id="featTitle">Engineered for Enterprise<br><span class="grad-text">Performance &amp; Scale</span></h2>
+      <p class="section-desc reveal-up" data-reveal data-delay="200">Every component is strictly compiled for speed, semantic accessibility, and visual precision, keeping site loads immediate.</p>
 
       <div class="bento-wrapper">
         <div class="moving-blob blob-1"></div>
@@ -307,19 +343,16 @@
     </div>
   </section>
 
-  <!-- ═══ TRENDING / CINEMATIC ROW ═══ -->
-  <section class="trending-section" id="trendingShowcase" data-magic-section="true">
+  <!-- ═══ HORIZONTAL SCROLL SHOWCASE (Raven/Bruut style) ═══ -->
+  <section class="hscroll-section" id="trendingShowcase" data-magic-section="true">
     <div class="container">
-      <div class="section-eyebrow">Trending Now</div>
-      <h2 class="section-title-large">Cinematic Component Showcase</h2>
-      <p class="section-desc">Experience our most popular components with Netflix-style hover expansions and interactive previews.</p>
-      
-      <div class="trending-carousel-wrap">
-        <button class="carousel-nav-btn prev-btn" id="carouselPrev" aria-label="Previous components">⟨</button>
-        <div class="trending-carousel" id="trendingCarousel" role="list">
-          <!-- Rendered dynamically by app.js from featured / popular components -->
-        </div>
-        <button class="carousel-nav-btn next-btn" id="carouselNext" aria-label="Next components">⟩</button>
+      <div class="section-eyebrow reveal-up" data-reveal>Trending Now</div>
+      <h2 class="section-title-large reveal-up" data-reveal data-delay="100">Cinematic Component Showcase</h2>
+      <p class="section-desc reveal-up" data-reveal data-delay="200">Experience our most popular components with interactive previews and instant code copy.</p>
+    </div>
+    <div class="hscroll-wrap" id="hscrollWrap">
+      <div class="hscroll-track" id="hscrollTrack">
+        <!-- Rendered dynamically by app.js from featured / popular components -->
       </div>
     </div>
   </section>
@@ -376,11 +409,11 @@
   <section id="about" class="about-section" aria-labelledby="aboutTitle" data-magic-section="true">
     <div class="about-glow" aria-hidden="true"></div>
     <div class="container">
-      <div class="section-eyebrow">About AURA UI</div>
-      <h2 id="aboutTitle" class="section-title-large about-title">
+      <div class="section-eyebrow reveal-up" data-reveal>About AURA UI</div>
+      <h2 id="aboutTitle" class="section-title-large about-title reveal-up" data-reveal data-delay="100">
         Why developers choose<br><span class="grad-text">AURA UI</span>
       </h2>
-      <p class="section-desc" style="max-width:600px;margin:0 auto 2.5rem;">
+      <p class="section-desc reveal-up" data-reveal data-delay="200" style="max-width:600px;margin:0 auto 2.5rem;">
         A massively scalable collection of production-grade components built with vanilla HTML, CSS and JavaScript.
         Zero dependencies — grab the code and ship in seconds. Built to grow to millions of components.
       </p>
@@ -398,9 +431,9 @@
   <!-- ═══ ENTERPRISE TRUST & COMPLIANCE ═══ -->
   <section class="trust-section" aria-labelledby="trustTitle" data-magic-section="true">
     <div class="container">
-      <div class="section-eyebrow">Compliance &amp; SLAs</div>
-      <h2 id="trustTitle" class="section-title-large">Security, Performance &amp;<br><span class="grad-text">Compliance Specifications</span></h2>
-      <p class="section-desc">AURA UI is structurally audited, lightweight, and engineered to meet the demands of regulated production workloads.</p>
+      <div class="section-eyebrow reveal-up" data-reveal>Compliance &amp; SLAs</div>
+      <h2 id="trustTitle" class="section-title-large reveal-up" data-reveal data-delay="100">Security, Performance &amp;<br><span class="grad-text">Compliance Specifications</span></h2>
+      <p class="section-desc reveal-up" data-reveal data-delay="200">AURA UI is structurally audited, lightweight, and engineered to meet the demands of regulated production workloads.</p>
       
       <div class="trust-grid">
         <div class="trust-card will-animate">
@@ -428,20 +461,21 @@
     </div>
   </section>
 
-  <!-- ═══ CTA ═══ -->
+  <!-- ═══ CTA (Full-viewport gradient mesh) ═══ -->
   <section class="cta-section" aria-label="Call to action" data-magic-section="true">
+    <div class="cta-mesh" aria-hidden="true"></div>
     <div class="cta-beams" aria-hidden="true"></div>
     <div class="container cta-inner">
-      <h2 class="cta-title">Start building something<br><span class="grad-text">extraordinary today</span></h2>
-      <p class="cta-sub">The most powerful component library on the web — copy, paste, ship.</p>
-      <div class="cta-actions">
-        <a href="#components" class="btn btn-primary btn-lg magnetic">Browse Components</a>
-        <a href="https://github.com/Jayaprakash367/-UI-Library" class="btn btn-outline btn-lg magnetic" target="_blank" rel="noopener">View on GitHub</a>
+      <h2 class="cta-title reveal-up" data-reveal>Start building something<br><span class="grad-text">extraordinary today</span></h2>
+      <p class="cta-sub reveal-up" data-reveal data-delay="150">The most powerful component library on the web — copy, paste, ship.</p>
+      <div class="cta-actions reveal-up" data-reveal data-delay="300">
+        <a href="#components" class="btn btn-primary btn-lg" data-magnetic>Browse Components</a>
+        <a href="https://github.com/Jayaprakash367/-UI-Library" class="btn btn-outline btn-lg" target="_blank" rel="noopener" data-magnetic>View on GitHub</a>
       </div>
     </div>
   </section>
 
-  <!-- ═══ FOOTER ═══ -->
+  <!-- ═══ FOOTER (Oversized reveal) ═══ -->
   <footer role="contentinfo" data-magic-section="true">
     <div class="footer-glow" aria-hidden="true"></div>
     <div class="footer-wrap">
