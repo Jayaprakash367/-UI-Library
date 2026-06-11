@@ -22,7 +22,6 @@
   });
 
   function bootAnimations() {
-    initCustomCursor();
     initScrollProgress();
     initTextReveal();
     initScrollReveal();
@@ -85,55 +84,6 @@
 
     document.body.style.overflow = 'hidden';
     requestAnimationFrame(updateLoader);
-  }
-
-  /* ═══════════════════════════════════════════════════
-     CUSTOM CURSOR (Noomo/Bruut style)
-     ═══════════════════════════════════════════════════ */
-  function initCustomCursor() {
-    if (isMobile()) return;
-
-    const cursor = document.getElementById('customCursor');
-    if (!cursor) return;
-    const dot = cursor.querySelector('.cursor-dot');
-    const ring = cursor.querySelector('.cursor-ring');
-
-    let mouseX = 0, mouseY = 0;
-    let dotX = 0, dotY = 0;
-    let ringX = 0, ringY = 0;
-
-    document.addEventListener('mousemove', e => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-    }, { passive: true });
-
-    // Detect hoverable elements
-    const hoverSelector = 'a, button, [data-magnetic], .comp-card, .bento-card, .filter-pill, .tag-item, input';
-    document.addEventListener('mouseover', e => {
-      if (e.target.closest(hoverSelector)) {
-        cursor.classList.add('hovering');
-      }
-    }, { passive: true });
-    document.addEventListener('mouseout', e => {
-      if (e.target.closest(hoverSelector)) {
-        cursor.classList.remove('hovering');
-      }
-    }, { passive: true });
-
-    function tick() {
-      // Dot follows closely (high lerp)
-      dotX += (mouseX - dotX) * 0.25;
-      dotY += (mouseY - dotY) * 0.25;
-      dot.style.transform = `translate(${dotX - 4}px, ${dotY - 4}px)`;
-
-      // Ring follows loosely (low lerp for elastic feel)
-      ringX += (mouseX - ringX) * 0.12;
-      ringY += (mouseY - ringY) * 0.12;
-      ring.style.transform = `translate(${ringX - 20}px, ${ringY - 20}px)`;
-
-      requestAnimationFrame(tick);
-    }
-    tick();
   }
 
   /* ═══════════════════════════════════════════════════

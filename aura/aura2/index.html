@@ -39,12 +39,6 @@
   <!-- NOISE OVERLAY -->
   <div class="noise-overlay" aria-hidden="true"></div>
 
-  <!-- ═══ CUSTOM CURSOR (Noomo/Bruut style) ═══ -->
-  <div id="customCursor" class="custom-cursor" aria-hidden="true">
-    <div class="cursor-dot"></div>
-    <div class="cursor-ring"></div>
-  </div>
-
   <!-- ═══ SCROLL PROGRESS BAR ═══ -->
   <div id="scrollProgress" class="scroll-progress" aria-hidden="true"></div>
 
@@ -175,49 +169,61 @@
         </div>
       </div>
 
-      <!-- INTERACTIVE 3D COMPONENT GALLERY -->
-      <div class="hero-showcase interactive-gallery" id="interactiveGallery">
-        <div class="gallery-container">
-          <!-- Central Glass Card -->
-          <div class="gallery-item item-main">
-            <div class="glass-panel">
-              <div class="panel-header">
-                <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-              </div>
-              <div class="panel-body">
-                <div class="mock-avatar"></div>
-                <div class="mock-lines">
-                  <div class="mock-line w-full"></div>
-                  <div class="mock-line w-3-4"></div>
+      <!-- INTERACTIVE 3D FORMAT ENGINE -->
+      <div class="hero-showcase interactive-gallery format-stage reveal-up" id="interactiveGallery" data-reveal data-delay="450">
+        <div class="format-scene-shell">
+          <canvas id="formatScene" class="format-scene" aria-label="Animated 3D format engine preview"></canvas>
+          <div class="format-visual hd-visual" id="formatVisual" data-mode="flow" aria-hidden="true">
+            <div class="hd-scene">
+              <div class="hd-glow"></div>
+              <div class="hd-ring hd-ring-one"></div>
+              <div class="hd-ring hd-ring-two"></div>
+              <div class="hd-panel-stack">
+                <div class="hd-panel hd-panel-back">
+                  <span class="hd-panel-line w-70"></span>
+                  <span class="hd-panel-line w-45"></span>
+                  <div class="hd-panel-grid"></div>
                 </div>
-                <button class="mock-btn">Follow</button>
+                <div class="hd-panel hd-panel-mid">
+                  <div class="hd-chart">
+                    <span></span><span></span><span></span><span></span>
+                  </div>
+                  <div class="hd-chip-row">
+                    <span></span><span></span><span></span>
+                  </div>
+                </div>
+                <div class="hd-panel hd-panel-front">
+                  <div class="hd-orb"></div>
+                  <div class="hd-ui-lines">
+                    <span></span><span></span><span></span>
+                  </div>
+                </div>
+              </div>
+              <div class="hd-cube" id="hdCube">
+                <span class="hd-cube-face face-front"></span>
+                <span class="hd-cube-face face-back"></span>
+                <span class="hd-cube-face face-right"></span>
+                <span class="hd-cube-face face-left"></span>
+                <span class="hd-cube-face face-top"></span>
+                <span class="hd-cube-face face-bottom"></span>
+              </div>
+              <div class="hd-particles">
+                <span></span><span></span><span></span><span></span><span></span><span></span>
               </div>
             </div>
           </div>
-
-          <!-- Floating Elements -->
-          <div class="gallery-item item-float-1">
-            <div class="float-pill">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="color: #a78bfa;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-              <span>Synced</span>
-            </div>
+          <div class="format-hud format-hud-top">
+            <span class="format-live-dot" aria-hidden="true"></span>
+            <span>Realtime 3D format</span>
           </div>
-          
-          <div class="gallery-item item-float-2">
-            <div class="neon-switch">
-              <div class="switch-track"><div class="switch-thumb"></div></div>
-            </div>
+          <div class="format-hud format-hud-bottom">
+            <button class="format-mode active" data-format-mode="flow" aria-label="Flow animation mode">Flow</button>
+            <button class="format-mode" data-format-mode="orbit" aria-label="Orbit animation mode">Orbit</button>
+            <button class="format-mode" data-format-mode="build" aria-label="Build animation mode">Build</button>
           </div>
-
-          <div class="gallery-item item-float-3">
-            <div class="glass-widget">
-              <div class="widget-chart">
-                <div class="bar h-1"></div><div class="bar h-2"></div><div class="bar h-3"></div><div class="bar h-4"></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="gallery-glow"></div>
+        </div>
+        <div class="format-caption">
+          <span>HD Panels</span><span>Glass Depth</span><span>Fluid Motion</span><span>Modern UI</span>
         </div>
       </div>
     </div>
@@ -569,5 +575,6 @@
   <script src="data-v4.js"></script>
   <script src="app.js"></script>
   <script src="animations.js"></script>
+  <script src="format-scene.js"></script>
 </body>
 </html>
