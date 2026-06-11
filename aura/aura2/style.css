@@ -569,8 +569,10 @@ footer{position:relative;border-top:1px solid var(--border)}
 .format-scene-shell{position:relative;min-height:540px;aspect-ratio:1/1;border:1px solid rgba(15,23,42,.08);border-radius:22px;background:radial-gradient(circle at 56% 31%,rgba(0,161,236,.18),transparent 25%),radial-gradient(circle at 30% 72%,rgba(255,153,0,.14),transparent 28%),linear-gradient(145deg,#fff,#f4f8fc 54%,#edf6ff);box-shadow:0 30px 90px rgba(15,23,42,.14),inset 0 1px 0 rgba(255,255,255,.92);overflow:hidden;isolation:isolate}
 .format-scene-shell::before{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background-image:linear-gradient(rgba(15,23,42,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(15,23,42,.035) 1px,transparent 1px);background-size:40px 40px;mask-image:radial-gradient(circle at 50% 46%,black,transparent 76%);-webkit-mask-image:radial-gradient(circle at 50% 46%,black,transparent 76%)}
 .format-scene-shell::after{content:'';position:absolute;left:18%;right:18%;bottom:96px;height:72px;z-index:1;pointer-events:none;border-radius:50%;background:radial-gradient(ellipse,rgba(15,23,42,.22),rgba(15,23,42,.07) 42%,transparent 74%);filter:blur(18px);transform:none}
-.format-scene{position:absolute;inset:0;width:100%;height:100%;display:none}
-.format-visual{position:absolute;inset:0;z-index:2;overflow:hidden;perspective:1200px;--tilt-x:0deg;--tilt-y:0deg}
+.format-scene{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity 0.8s ease;z-index:3;pointer-events:none}
+.format-visual{position:absolute;inset:0;z-index:2;overflow:hidden;perspective:1200px;--tilt-x:0deg;--tilt-y:0deg;opacity:1;transition:opacity 0.8s ease}
+.format-scene-shell.webgl-active .format-scene{opacity:1;pointer-events:auto;display:block}
+.format-scene-shell.webgl-active .format-visual{opacity:0;pointer-events:none}
 .hd-scene{position:absolute;inset:68px 30px 96px;transform-style:preserve-3d}
 .hd-glow{position:absolute;inset:7% 9% 14%;border-radius:40px;background:radial-gradient(circle at 50% 40%,rgba(0,161,236,.2),transparent 36%),radial-gradient(circle at 32% 68%,rgba(255,153,0,.14),transparent 32%);filter:blur(18px);animation:hdGlow 6s ease-in-out infinite}
 .hd-ring{position:absolute;left:50%;top:47%;border-radius:50%;border:1px solid rgba(0,161,236,.22);transform-style:preserve-3d;box-shadow:0 0 36px rgba(0,161,236,.1)}
