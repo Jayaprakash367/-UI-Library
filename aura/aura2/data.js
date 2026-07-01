@@ -12,9 +12,7 @@
  *   preview   — complete HTML string rendered live inside an iframe
  *   code      — the snippet copied to clipboard
  */
-
 const COMPONENTS = [
-
   /* ───────────────────────── BUTTONS ───────────────────────── */
   {
     id: 'shimmer-button',
